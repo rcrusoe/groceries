@@ -24,13 +24,45 @@ class Recipe < ApplicationRecord
         '.post-thumbnail-container > img',
         '.jetpack-recipe-ingredient'
       )
+    when link.include?("allrecipes.com")
+      self.get_recipe_details(
+        '.recipe-summary__h1',
+        '.rec-photo',
+        '.recipe-ingred_txt'
+      )
+    when link.include?("epicurious.com/recipes")
+      self.get_recipe_details(
+        'h1',
+        'picture',
+        '.ingredient-item'
+      )
+    when link.include?("delish.com/cooking/recipe-ideas")
+      self.get_recipe_details(
+        'h1.content-hed.recipe-hed',
+        'img',
+        '.ingredient-item'
+      )
+    when link.include?("myrecipes.com/recipe")
+      self.get_recipe_details(
+        'h1.headline',
+        nil,
+        '.ingredients li'
+      )
+    when link.include?("geniuskitchen.com/recipe")
+      self.get_recipe_details(
+        '.recipe-header h1',
+        nil,
+        '.ingredient-list li'
+      )
     end
   end
 
   def get_recipe_details(name, image, ingredient)
     self.ingredients = []
     self.name = @doc.css(name).text
-    self.image_url = @doc.css(image).first.attr('src')
+    if image
+      self.image_url = @doc.css(image).first.attr('src')
+    end
     ingredients = @doc.css(ingredient)
     ingredients.each do |ingredient|
       self.ingredients << ingredient.text
