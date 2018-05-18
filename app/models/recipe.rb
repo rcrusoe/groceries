@@ -54,6 +54,18 @@ class Recipe < ApplicationRecord
         nil,
         '.ingredient-list li'
       )
+    when link.include?("tasty.co/recipe")
+      self.get_recipe_details(
+        'h1.recipe-name',
+        nil,
+        '.ingredients__section li'
+      )
+    when link.include?("thepioneerwoman.com/cooking")
+      self.get_recipe_details(
+        'h2.entry-title',
+        '.featured-image img',
+        '.list-ingredients li'
+      )
     end
   end
 
