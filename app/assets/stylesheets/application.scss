@@ -71,20 +71,20 @@ img {
 }
 
 .checkbox {
-  display: block;
-  height: 2rem;
-  width: 2rem;
   border: 2px solid $gray-2;
+  box-sizing: border-box;
   border-radius: 100%;
+  display: block;
   flex: 0 0 20px;
+  height: 2rem;
   margin-right: 2rem;
-  transition: $transition
+  transition: $transition;
+  width: 2rem;
 }
 
 .ingredient--checked {
   h2 {
     color: $gray-2;
-    font-weight: $light;
     text-decoration: line-through;
   }
 

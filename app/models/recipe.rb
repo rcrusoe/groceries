@@ -1,45 +1,37 @@
 class Recipe < ApplicationRecord
-  before_save :get_recipe_details
+  before_save :identify_source
 
-  def get_recipe_details
+  def identify_source
     require 'open-uri'
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
 
     case
     when link.include?("minimalistbaker.com")
-      self.minimalist_baker
+      self.get_recipe_details(
+        'h1.entry-title',
+        '.entry-content img',
+        '.ingredient'
+      )
     when link.include?("halfbakedharvest.com")
-      self.half_baked_harvest
+      self.get_recipe_details(
+        'h1.post-title',
+        '.post-content img',
+        '.wprm-recipe-ingredient'
+      )
     when link.include?("smittenkitchen.com")
-      self.smitten_kitchen
+      self.get_recipe_details(
+        'h1.entry-title > a',
+        '.post-thumbnail-container > img',
+        '.jetpack-recipe-ingredient'
+      )
     end
   end
 
-  def minimalist_baker
+  def get_recipe_details(name, image, ingredient)
     self.ingredients = []
-    self.name = @doc.css('h1.entry-title').text
-    self.image_url = @doc.css('.entry-content img').first.attr('src')
-    ingredients = @doc.css('.ingredient')
-    ingredients.each do |ingredient|
-      self.ingredients << ingredient.text
-    end
-  end
-
-  def half_baked_harvest
-    self.ingredients = []
-    self.name = @doc.css('h1.post-title').text
-    self.image_url = @doc.css('.post-content img').first.attr('src')
-    ingredients = @doc.css('.wprm-recipe-ingredient')
-    ingredients.each do |ingredient|
-      self.ingredients << ingredient.text
-    end
-  end
-
-  def smitten_kitchen
-    self.ingredients = []
-    self.name = @doc.css('h1.entry-title > a').text
-    self.image_url = @doc.css('.post-thumbnail-container > img').attr('src')
-    ingredients = @doc.css('.jetpack-recipe-ingredient')
+    self.name = @doc.css(name).text
+    self.image_url = @doc.css(image).first.attr('src')
+    ingredients = @doc.css(ingredient)
     ingredients.each do |ingredient|
       self.ingredients << ingredient.text
     end
