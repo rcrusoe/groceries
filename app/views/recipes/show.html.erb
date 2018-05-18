@@ -1,23 +1,19 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @recipe.name %>
-</p>
-
-<p>
-  <strong>Link:</strong>
-  <%= @recipe.link %>
-</p>
-
-<p>
-  <strong>Ingredients:</strong>
-  <%= @recipe.ingredients %>
-</p>
+<h1><%= @recipe.name %></h1>
+<p><a href="<%= @recipe.link %>">View Recipe</a></p>
 
 <% if @recipe.image_url %>
   <img src="<%= @recipe.image_url %>" alt="">
 <% end %>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<% @recipe.ingredients.each do |ingredient| %>
+  <div class="ingredient">
+    <div class="checkbox"></div>
+    <h2><%= ingredient %></h2>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $('.ingredient').on('click', function() {
+    $(this).toggleClass('ingredient--checked');
+  })
+</script>

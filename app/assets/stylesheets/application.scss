@@ -1,0 +1,107 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: auto;
+  max-width: 450px;
+  padding: 2rem;
+}
+
+$light: 300;
+$semi-bold: 600;
+
+$gray-1: #eaedf1;
+$gray-2: #b3bfca;
+$gray-3: #65707a;
+$gray-4: #353a3f;
+
+$transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+h1 {
+  font-size: 3rem;
+  font-weight: $semi-bold;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: $semi-bold;
+  line-height: 1.2;
+  transition: $transition;
+}
+
+p {
+  font-size: 1.6rem;
+  font-weight: $light;
+}
+
+img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.ingredient {
+  align-items: center;
+  border-bottom: 1px solid $gray-1;
+  display: flex;
+  padding: 1rem;
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.checkbox {
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid $gray-2;
+  border-radius: 100%;
+  flex: 0 0 20px;
+  margin-right: 2rem;
+  transition: $transition
+}
+
+.ingredient--checked {
+  h2 {
+    color: $gray-2;
+    font-weight: $light;
+    text-decoration: line-through;
+  }
+
+  .checkbox{
+    border: none;
+    display: flex;
+    justify-content: center;
+
+    &:after{
+      align-self: center;
+      content: '';
+      display: block;
+      width: 6px;
+      height: 12px;
+      border: solid $gray-2;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+}
