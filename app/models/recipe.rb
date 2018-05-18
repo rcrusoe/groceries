@@ -66,6 +66,36 @@ class Recipe < ApplicationRecord
         '.featured-image img',
         '.list-ingredients li'
       )
+    when link.include?("thekitchn.com")
+      self.get_recipe_details(
+        'h1.PostHeader__headline',
+        '.PostPicture__picture img',
+        '.PostRecipeIngredientGroup__ingredient'
+      )
+    when link.include?("foodnetwork.com/recipes")
+      self.get_recipe_details(
+        'h1.o-AssetTitle__a-Headline',
+        nil,
+        '.o-Ingredients__a-ListItemText'
+      )
+    when link.include?("food52.com/recipes")
+      self.get_recipe_details(
+        'h1.article-header-title',
+        '#recipe-gallery-frame img',
+        '.recipe-list li'
+      )
+    when link.include?("yummly.com/recipe")
+      self.get_recipe_details(
+        '.primary-info-text h1',
+        nil,
+        '.IngredientLine'
+      )
+    when link.include?("chowhound.com/recipes")
+      self.get_recipe_details(
+        'h1',
+        nil,
+        'li[itemprop="ingredients"]'
+      )
     end
   end
 
