@@ -1,22 +1,8 @@
 <%= form_with(model: recipe, local: true) do |form| %>
-  <% if recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-
-      <ul>
-      <% recipe.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :link %>
-    <%= form.text_field :link, id: :recipe_link %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="ui massive action input">
+    <%= form.text_field :link, id: :recipe_link, placeholder: "Paste a recipe link" %>
+    <button class="ui icon button" type="submit">
+      <i class="search icon"></i>
+    </button>
   </div>
 <% end %>

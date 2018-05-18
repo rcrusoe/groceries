@@ -1,16 +1,18 @@
-<h1><%= @recipe.name %></h1>
-<p><a href="<%= @recipe.link %>">View Recipe</a></p>
+<div class="container">
+  <h1><%= @recipe.name %></h1>
+  <p><a href="<%= @recipe.link %>">View Recipe</a></p>
 
-<% if @recipe.image_url %>
-  <img src="<%= @recipe.image_url %>" alt="">
-<% end %>
+  <% if @recipe.image_url %>
+    <img src="<%= @recipe.image_url %>" alt="">
+  <% end %>
 
-<% @recipe.ingredients.each do |ingredient| %>
-  <div class="ingredient">
-    <div class="checkbox"></div>
-    <h2><%= ingredient %></h2>
-  </div>
-<% end %>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <div class="ingredient">
+      <div class="checkbox"></div>
+      <h2><%= ingredient %></h2>
+    </div>
+  <% end %>
+</div>
 
 <script type="text/javascript">
   $('.ingredient').on('click', function() {

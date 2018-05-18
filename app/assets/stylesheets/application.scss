@@ -14,26 +14,34 @@
  *= require_self
  */
 
+ $font-family: 'Barlow Condensed', sans-serif;
+ $light: 300;
+ $semi-bold: 600;
+
+ $white: #fff;
+ $gray-1: #eaedf1;
+ $gray-2: #b3bfca;
+ $gray-3: #65707a;
+ $gray-4: #353a3f;
+
+ $transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+ @import "semantic-ui/elements/icon";
+ @import "semantic-ui/elements/input";
+
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: $font-family;
   margin: auto;
   max-width: 450px;
-  padding: 2rem;
 }
 
-$light: 300;
-$semi-bold: 600;
-
-$gray-1: #eaedf1;
-$gray-2: #b3bfca;
-$gray-3: #65707a;
-$gray-4: #353a3f;
-
-$transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.container {
+  padding: 2rem;
+}
 
 h1 {
   font-size: 3rem;
@@ -104,4 +112,38 @@ img {
       transform: rotate(45deg);
     }
   }
+}
+
+.homepage {
+  background-image: url(asset_path('pineapple.jpg'));
+  background-position: center center;
+  background-size: cover;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+
+  h1 {
+    font-size: 6rem;
+  }
+}
+
+.ui.input {
+  width: 100%;
+}
+
+input#recipe_link {
+  border: none;
+}
+
+.ui.input > input {
+  padding: 2rem 1rem;
+  font-size: 2rem;
+}
+
+button.ui.icon.button {
+  background-color: $white !important;
+  border: none;
+  color: $gray-2;
+  font-size: 2rem;
+  padding: 2rem !important;
 }
