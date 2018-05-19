@@ -96,6 +96,60 @@ class Recipe < ApplicationRecord
         nil,
         'li[itemprop="ingredients"]'
       )
+    when link.include?("simplyrecipes.com/recipes")
+      self.get_recipe_details(
+        'h1.entry-title',
+        '.featured-image img',
+        'li.ingredient'
+      )
+    when link.include?("cookinglight.com/recipes")
+      self.get_recipe_details(
+        'h1.headline',
+        '.image-container img',
+        '.ingredients li'
+      )
+    when link.include?("bettycrocker.com/recipes")
+      self.get_recipe_details(
+        '.recipePartTitle h1',
+        '.recipePartRecipeImage img',
+        '.recipePartIngredient'
+      )
+    when link.include?("myrecipes.com/recipe")
+      self.get_recipe_details(
+        'h1.headline',
+        '.image-container img',
+        '.ingredients li'
+      )
+    when link.include?("eatingwell.com/recipe")
+      self.get_recipe_details(
+        '.recipeDetailSummaryDetails h3.recipeDetailHeader',
+        'img.recipeDetailSummaryImageMain',
+        'span[itemprop="ingredients"]'
+      )
+    when link.include?("cooks.com/recipe")
+      self.get_recipe_details(
+        '.title',
+        nil,
+        '.ingredient'
+      )
+    when link.include?("kraftrecipes.com/recipes")
+      self.get_recipe_details(
+        'h1#khMainTitle',
+        nil,
+        'span[itemprop="recipeIngredient"]'
+      )
+    when link.include?("seriouseats.com/recipes")
+      self.get_recipe_details(
+        'h1.recipe-title',
+        '.recipe-main-photo img',
+        '.ingredient'
+      )
+    when link.include?("lowcarbyum.com")
+      self.get_recipe_details(
+        '.entry-header h1.entry-title',
+        '.entry-content img',
+        '.wprm-recipe-ingredient'
+      )
     end
   end
 
