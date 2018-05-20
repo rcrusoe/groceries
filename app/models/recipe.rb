@@ -150,6 +150,36 @@ class Recipe < ApplicationRecord
         '.entry-content img',
         '.wprm-recipe-ingredient'
       )
+    when link.include?("ifoodreal.com")
+      self.get_recipe_details(
+        'h1.entry-title',
+        '.entry-content img',
+        '.ifoodreal-recipe-ingredients li'
+      )
+    when link.include?("ambitiouskitchen.com")
+      self.get_recipe_details(
+        'h1.entry-title',
+        '.entry_content p img',
+        '.ERSIngredients li'
+      )
+    when link.include?("dinneratthezoo.com")
+      self.get_recipe_details(
+        'h1.entry-title',
+        '.entry-content p img',
+        '.wprm-recipe-ingredient'
+      )
+    when link.include?("damndelicious.net")
+      self.get_recipe_details(
+        '.post-title h1',
+        '.post p img',
+        '.ingredient'
+      )
+    when link.include?("thegirlonbloor.com")
+      self.get_recipe_details(
+        'h1.entry-title',
+        '.entry-content p img',
+        '.wpurp-responsive-desktop .wpurp-recipe-ingredient-container .wpurp-recipe-ingredient'
+      )
     end
   end
 
