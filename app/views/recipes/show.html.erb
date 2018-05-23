@@ -1,15 +1,22 @@
-<div class="container">
-  <h1><%= @recipe.name %></h1>
-  <p><a href="<%= @recipe.link %>">View Recipe</a></p>
-
-  <% if @recipe.image_url %>
-    <img src="<%= @recipe.image_url %>" alt="">
+<div class="hero hero--recipe">
+  <%= link_to recipes_path, class: "ui icon button" do %>
+    <i class="arrow left icon"></i>
   <% end %>
+  <h1><%= @recipe.name %></h1>
+</div>
+<div class="container container--recipe">
+  <% if @recipe.image_url %>
+    <div class="recipe__image" style="background-image: url(<%= @recipe.image_url %>)"></div>
+  <% end %>
+  <div class="recipe__subheader">
+    <h2>Ingredients</h2>
+    <p><a href="<%= @recipe.link %>">View Recipe</a></p>
+  </div>
 
   <% @recipe.ingredients.each do |ingredient| %>
     <div class="ingredient">
       <div class="checkbox"></div>
-      <h2><%= ingredient %></h2>
+      <p><%= ingredient %></p>
     </div>
   <% end %>
 </div>

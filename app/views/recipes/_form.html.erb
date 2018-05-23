@@ -1,8 +1,8 @@
 <%= form_with(model: recipe, local: true) do |form| %>
-  <div class="ui massive action input">
+  <div class="ui large input">
     <%= form.text_field :link, id: :recipe_link, placeholder: "Paste a recipe link" %>
-    <button class="ui icon button" type="submit">
-      <i class="search icon"></i>
-    </button>
   </div>
+  <button class="ui icon button" type="submit">
+    <i class="arrow right icon"></i>
+  </button>
 <% end %>

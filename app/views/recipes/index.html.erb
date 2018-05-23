@@ -1,31 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Recipes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Link</th>
-      <th>Ingredients</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="hero hero--home">
+  <div class="hero__copy">
+    <h1>Paste a recipe link, get a grocery list</h1>
+    <p class="m-hidden">Create a simple grocery checklist by pasting a link to a recipe on one of 100+ different recipe websites.</p>
+  </div>
+  <%= render 'form', recipe: @recipe %>
+</div>
+<div class="container">
+  <h2>Recently Used</h2>
+  <div class="recipe-carousel">
     <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.name %></td>
-        <td><%= recipe.link %></td>
-        <td><%= recipe.ingredients %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= link_to recipe_path(recipe), class: "recipe-card--large" do %>
+        <% if recipe.image_url %>
+          <div style="background-image: url(<%= recipe.image_url %>)"></div>
+        <% end %>
+        <h3><%= recipe.name %></h3>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Recipe', new_recipe_path %>
+  </div>
+</div>
