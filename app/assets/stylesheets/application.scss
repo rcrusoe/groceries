@@ -29,6 +29,17 @@ body {
   margin: 0;
 }
 
+.nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+
+  @media (min-width: $desktop) {
+    padding: 3rem 12rem;
+  }
+}
+
 .hero {
   background-color: $yellow;
   display: flex;

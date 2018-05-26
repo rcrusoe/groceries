@@ -52,3 +52,9 @@ a {
     color: inherit;
   }
 }
+
+a.simple-link {
+  color: $green-light;
+  font-size: 1.6rem;
+  font-weight: $bold;
+}

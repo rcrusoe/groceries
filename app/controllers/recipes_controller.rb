@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.take(4)
     @recipe = Recipe.new
+    @user = session[:userinfo]
   end
 
   def show
