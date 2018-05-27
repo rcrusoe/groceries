@@ -1,0 +1,45 @@
+<div class="hero hero--groceries">
+  <%= link_to recipes_path, class: "ui icon button" do %>
+    <i class="arrow left icon"></i>
+  <% end %>
+  <div class="grocery-list-header">
+    <h1>Grocery List</h1>
+    <div class="ingredient-count">
+      <span class="checked-ingredients">0</span>
+      of <%= @ingredient_count %>
+    </div>
+  </div>
+</div>
+<div class="container container--recipe">
+  <% @recipes.each do |recipe| %>
+    <div class="ingredient-group">
+      <div class="recipe__subheader">
+        <% if recipe.image_url %>
+          <div class="recipe__image" style="background-image: url(<%= recipe.image_url %>)"></div>
+        <% end %>
+        <%= link_to recipe do %>
+          <h2><%= recipe.name %></h2>
+        <% end %>
+      </div>
+      <% recipe.ingredients.each do |ingredient| %>
+        <div class="ingredient">
+          <div class="checkbox"></div>
+          <p><%= ingredient %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $('.ingredient').on('click', function() {
+    var checkedIngredients = $('.checked-ingredients').text();
+    if ($(this).hasClass('ingredient--checked')) {
+      checkedIngredients--
+    } else {
+      checkedIngredients++
+    }
+    $(this).toggleClass('ingredient--checked');
+    $('.checked-ingredients').text(checkedIngredients);
+  })
+</script>

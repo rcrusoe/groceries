@@ -65,7 +65,8 @@ body {
   }
 }
 
-.hero--recipe {
+.hero--recipe,
+.hero--groceries {
   padding: 2rem 2rem;
 
   @media (min-width: $desktop) {
@@ -74,9 +75,7 @@ body {
   }
 
   .ui.button {
-    background-color: $green-dark !important;
     border-radius: 0 $border-radius-s $border-radius-s 0;
-    color: $white;
     font-size: 2.1rem;
     position: absolute;
     top: 2rem;
@@ -93,6 +92,46 @@ body {
       margin-left: auto;
       margin-right: auto;
       width: 450px;
+    }
+  }
+}
+
+.hero--recipe {
+
+  .ui.button {
+    background-color: $green-dark !important;
+    color: $white;
+  }
+}
+
+.hero--groceries {
+  background-color: $green-dark;
+
+  h1 {
+    color: $white;
+    margin: 0;
+  }
+
+  .ui.button {
+    background-color: $yellow;
+    color: $green-dark;
+  }
+
+  .grocery-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 7rem;
+    width: 100%;
+
+    .ingredient-count {
+      color: $white;
+      border: 2px solid $green-light;
+      border-radius: $border-radius-s;
+      font-size: 1.8rem;
+      font-weight: $bold;
+      line-height: 2.4rem;
+      padding: 1.3rem 2rem;
     }
   }
 }
@@ -258,5 +297,64 @@ button.ui.icon.button {
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
+  }
+}
+
+#grocery_list_button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+
+  @media (min-width: $desktop) {
+    right: 12rem;
+  }
+}
+
+#grocery_list_button input[type="submit"],
+#grocery_list_button span {
+  color: $white;
+  font-family: $font-family;
+  font-size: 1.8rem;
+  font-weight: $bold;
+  line-height: 2.4rem;
+  box-shadow: 0 4px 8px 0 $green-dark;
+}
+
+#grocery_list_button input[type="submit"] {
+  background: $green-light;
+  border: none;
+  border-radius: 25px;
+  padding: 1.3rem 7rem 1.3rem 2rem;
+}
+
+#grocery_list_button span {
+  background: $green-dark;
+  border-radius: 25px;
+  margin-left: -5rem;
+  padding: 1.3rem 0;
+  text-align: center;
+  width: 50px;
+}
+
+#grocery_list_button input[type="submit"] + span {
+  box-shadow: none;
+}
+
+.ingredient-group {
+
+  &:not(:last-of-type) {
+    margin-bottom: 4rem;
+  }
+
+  .recipe__subheader {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .recipe__image {
+    flex: 0 0 9rem;
+    height: 9rem;
+    margin: 0 1rem 0 0;
   }
 }

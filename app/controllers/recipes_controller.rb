@@ -8,6 +8,9 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @meal_plans = @recipe.meal_plans
+    ingredient_count
+    is_current_recipe_on_list
   end
 
   def new
@@ -59,6 +62,9 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :link, :ingredients, :image_url)
+      params.require(:recipe).permit(
+        :name, :link, :ingredients, :image_url,
+        meal_plans_params: [:recipe_id, :user_id, :status]
+      )
     end
 end
