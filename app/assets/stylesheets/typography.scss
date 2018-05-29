@@ -57,4 +57,25 @@ a.simple-link {
   color: $green-light;
   font-size: 1.6rem;
   font-weight: $bold;
+  position: relative;
+  transition: $transition;
+
+  &:hover {
+
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &:before {
+    background-color: $green-light;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    -webkit-transition: $transition;
+    transition: $transition;
+    width: 0%;
+  }
 }

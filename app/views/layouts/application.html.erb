@@ -11,6 +11,38 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="ui sidebar vertical right menu">
+      <%= link_to "Recipes", recipes_path, class: "simple-link" %>
+      <% if current_user %>
+          <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
+          <%= link_to "Logout", auth_logout_path, class: "simple-link" %>
+      <% else %>
+        <%= link_to "Login", "/auth/auth0", class: "simple-link" %>
+      <% end %>
+    </div>
+    <div class="pusher">
+      <div class="nav">
+        <%= link_to "Sunday Pizza", root_path, class: "simple-link" %>
+        <div class="nav__right m-hidden">
+          <%= link_to "Recipes", recipes_path, class: "simple-link" %>
+          <% if current_user %>
+              <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
+              <%= link_to "Logout", auth_logout_path, class: "simple-link" %>
+          <% else %>
+            <%= link_to "Login", "/auth/auth0", class: "simple-link" %>
+          <% end %>
+        </div>
+        <a class="open m-only">
+          <i class="bars icon"></i>
+        </a>
+      </div>
+      <%= yield %>
+    </div>
   </body>
 </html>
+
+<script type="text/javascript">
+  $('.ui.sidebar')
+    .sidebar('attach events', '.open', 'show')
+    .sidebar('setting', 'transition', 'push');
+</script>

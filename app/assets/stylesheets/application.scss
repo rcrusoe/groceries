@@ -18,6 +18,7 @@
 @import 'typography.scss';
 @import "semantic-ui/elements/icon";
 @import "semantic-ui/elements/input";
+@import "semantic-ui/modules/sidebar";
 
 html {
   font-size: 62.5%;
@@ -29,6 +30,35 @@ body {
   margin: 0;
 }
 
+body.pushable {
+  background-color: $white !important;
+}
+
+.pushable > .pusher {
+  overflow: visible;
+}
+
+.open {
+  color: $green-light;
+  font-size: 1.6rem;
+}
+
+.ui.sidebar.vertical.right.menu.uncover.visible {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  & > * {
+    padding: 2rem 0;
+    border-bottom: 1px solid $gray-dark;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+  }
+}
+
 .nav {
   align-items: center;
   display: flex;
@@ -38,6 +68,10 @@ body {
   @media (min-width: $desktop) {
     padding: 3rem 12rem;
   }
+}
+
+.nav__right .simple-link:not(:last-of-type) {
+  margin-right: 2rem;
 }
 
 .hero {
@@ -91,7 +125,7 @@ body {
       margin-top: 0.5rem;
       margin-left: auto;
       margin-right: auto;
-      width: 450px;
+      max-width: 450px;
     }
   }
 }
@@ -106,6 +140,8 @@ body {
 
 .hero--groceries {
   background-color: $green-dark;
+  position: sticky;
+  top: 0;
 
   h1 {
     color: $white;
@@ -121,7 +157,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 7rem;
+    margin: 0 auto;
+    max-width: 450px;
     width: 100%;
 
     .ingredient-count {
@@ -132,6 +169,7 @@ body {
       font-weight: $bold;
       line-height: 2.4rem;
       padding: 1.3rem 2rem;
+      white-space: nowrap;
     }
   }
 }
@@ -178,10 +216,16 @@ button.ui.icon.button {
 }
 
 .m-hidden {
-  display: none;
+
+  @media (max-width: $desktop) {
+    display: none;
+  }
+}
+
+.m-only {
 
   @media (min-width: $desktop) {
-    display: inherit;
+    display: none;
   }
 }
 
@@ -205,7 +249,7 @@ button.ui.icon.button {
 .recipe-carousel {
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   & > * {
 
