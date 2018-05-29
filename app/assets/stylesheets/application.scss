@@ -141,6 +141,10 @@ body.pushable {
 .hero--groceries {
   background-color: $green-dark;
   position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
   top: 0;
 
   h1 {
