@@ -35,16 +35,16 @@ p {
   margin: 0;
 
   &.minor {
-    color: $gray-dark;
+    color: $gray-3;
   }
 }
 
 a {
   text-decoration: none;
-  color: $black;
+  color: $gray-4;
 
   &:visited {
-    color: $black;
+    color: $gray-4;
   }
 
   &:hover {
@@ -54,7 +54,7 @@ a {
 }
 
 a.simple-link {
-  color: $green-light;
+  color: $green;
   font-size: 1.6rem;
   font-weight: $bold;
   position: relative;
@@ -68,7 +68,7 @@ a.simple-link {
   }
 
   &:before {
-    background-color: $green-light;
+    background-color: $green;
     bottom: 0;
     content: "";
     height: 2px;

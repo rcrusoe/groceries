@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  color: $black;
+  color: $gray-4;
   font-family: $font-family;
   margin: 0;
 }
@@ -39,7 +39,7 @@ body.pushable {
 }
 
 .open {
-  color: $green-light;
+  color: $green;
   font-size: 1.6rem;
 }
 
@@ -51,7 +51,7 @@ body.pushable {
 
   & > * {
     padding: 2rem 0;
-    border-bottom: 1px solid $gray-dark;
+    border-bottom: 1px solid $gray-3;
 
     &:first-of-type {
       padding-top: 0;
@@ -75,7 +75,7 @@ body.pushable {
 }
 
 .hero {
-  background-color: $yellow;
+  background-color: $gray-2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -132,13 +132,13 @@ body.pushable {
 .hero--recipe {
 
   .ui.button {
-    background-color: $green-dark !important;
+    background-color: $green !important;
     color: $white;
   }
 }
 
 .hero--groceries {
-  background-color: $green-dark;
+  background-color: $green;
   position: sticky;
   position: -webkit-sticky;
   position: -moz-sticky;
@@ -153,7 +153,7 @@ body.pushable {
 
   .ui.button {
     background-color: $yellow;
-    color: $green-dark;
+    color: $green;
   }
 
   .grocery-list-header {
@@ -166,7 +166,7 @@ body.pushable {
 
     .ingredient-count {
       color: $white;
-      border: 2px solid $green-light;
+      border: 2px solid $gray-2;
       border-radius: $border-radius-s;
       font-size: 1.8rem;
       font-weight: $bold;
@@ -210,7 +210,7 @@ form {
 }
 
 button.ui.icon.button {
-  background-color: $green-dark !important;
+  background-color: $green !important;
   border: none;
   border-radius: $border-radius-s;
   color: $white;
@@ -306,12 +306,12 @@ button.ui.icon.button {
   }
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-2;
   }
 }
 
 .checkbox {
-  border: 2px solid $gray-dark;
+  border: 2px solid $gray-3;
   box-sizing: border-box;
   border-radius: 100%;
   display: block;
@@ -325,7 +325,7 @@ button.ui.icon.button {
 .ingredient--checked {
 
   p {
-    color: $gray-dark;
+    color: $gray-3;
     text-decoration: line-through;
   }
 
@@ -340,7 +340,7 @@ button.ui.icon.button {
       display: block;
       width: 6px;
       height: 12px;
-      border: solid $gray-dark;
+      border: solid $gray-3;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
@@ -365,18 +365,18 @@ button.ui.icon.button {
   font-size: 1.8rem;
   font-weight: $bold;
   line-height: 2.4rem;
-  box-shadow: 0 4px 8px 0 $green-dark;
+  box-shadow: 0 4px 8px 0 $green;
 }
 
 #grocery_list_button input[type="submit"] {
-  background: $green-light;
+  background: $green;
   border: none;
   border-radius: 25px;
   padding: 1.3rem 7rem 1.3rem 2rem;
 }
 
 #grocery_list_button span {
-  background: $green-dark;
+  background: $green;
   border-radius: 25px;
   margin-left: -5rem;
   padding: 1.3rem 0;

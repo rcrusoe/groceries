@@ -8,5 +8,11 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :meal_plans
   end
+
+  resources :meal_plans do
+    member do
+      get "archive", to: "meal_plans#archive"
+    end
+  end
   root :to => "recipes#index"
 end

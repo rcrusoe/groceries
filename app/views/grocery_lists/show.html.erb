@@ -8,17 +8,18 @@
   </div>
 </div>
 <div class="container container--recipe">
-  <% @recipes.each do |recipe| %>
+  <% @meal_plans.each do |meal_plan| %>
     <div class="ingredient-group">
       <div class="recipe__subheader">
-        <% if recipe.image_url %>
-          <div class="recipe__image" style="background-image: url(<%= recipe.image_url %>)"></div>
+        <% if meal_plan.recipe.image_url %>
+          <div class="recipe__image" style="background-image: url(<%= meal_plan.recipe.image_url %>)"></div>
         <% end %>
-        <%= link_to recipe do %>
-          <h2><%= recipe.name %></h2>
+        <%= link_to meal_plan.recipe do %>
+          <h2><%= meal_plan.recipe.name %></h2>
+          <%= link_to "Remove", archive_meal_plan_path(meal_plan) %>
         <% end %>
       </div>
-      <% recipe.ingredients.each do |ingredient| %>
+      <% meal_plan.recipe.ingredients.each do |ingredient| %>
         <div class="ingredient">
           <div class="checkbox"></div>
           <p><%= ingredient %></p>
