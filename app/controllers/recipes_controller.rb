@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
   def show
     @meal_plans = @recipe.meal_plans
     @likes = @recipe.likes
+    @like = Like.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
     ingredient_count
     is_current_recipe_on_list
   end

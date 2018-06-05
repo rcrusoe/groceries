@@ -1,12 +1,13 @@
 <div class="hero hero--recipe">
-  <h1><%= @recipe.name %></h1>
+  <div class="hero__content">
+    <h1><%= @recipe.name %></h1>
+    <% if current_user && @like %>
+      <%= render 'unlike' %>
+    <% elsif current_user %>
+      <%= render 'like' %>
+    <% end %>
+  </div>
 </div>
-<% if current_user %>
-  <%= form_for([@recipe, @recipe.likes.build]) do |f| %>
-    <%= f.hidden_field :user_id, value: current_user["uid"] %>
-    <%= f.submit "Like" %>
-  <% end %>
-<% end %>
 <div class="container container--recipe">
   <% if @recipe.image_url %>
     <div class="recipe__image" style="background-image: url(<%= @recipe.image_url %>)"></div>
@@ -46,5 +47,9 @@
 <script type="text/javascript">
   $('#add-to-list-button').on('click', function() {
     $(this).closest('form').submit()
+  })
+
+  $('#like-recipe').on('click', function() {
+    $(this).siblings('form').submit();
   })
 </script>

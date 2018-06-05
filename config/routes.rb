@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :likes
   end
 
+  resources :likes
+
   resources :meal_plans do
     member do
       get "archive", to: "meal_plans#archive"
