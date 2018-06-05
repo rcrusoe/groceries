@@ -13,7 +13,7 @@ module Auth0Helper
     if user_signed_in?
       @current_user = session[:userinfo]
     else
-      redirect_to login_path
+      redirect_to auth_login_path
     end
   end
 
@@ -21,10 +21,5 @@ module Auth0Helper
   # @return [Hash]
   def current_user
     @current_user = session[:userinfo]
-  end
-
-  # @return the path to the login page
-  def login_path
-    root_path
   end
 end

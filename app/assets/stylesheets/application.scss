@@ -285,7 +285,7 @@ button.ui.icon.button {
   background-size: cover;
   border-radius: $border-radius-m;
   height: 20rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   margin-top: -15.5rem;
   width: 100%;
 }
@@ -294,6 +294,7 @@ button.ui.icon.button {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .remove-link {
@@ -420,4 +421,27 @@ button.ui.icon.button {
 
 .ingredient-group--meal-plan .recipe__subheader {
   margin-bottom: 2rem;
+}
+
+.sign-in-cta {
+  margin: 0 0 2rem;
+  padding: 2rem;
+  background-color: $gray-2;
+  border-radius: $border-radius-m;
+
+  a {
+    white-space: nowrap;
+    background-color: $yellow;
+    border-radius: $border-radius-s;
+    padding: 1rem;
+    font-size: 1.6rem;
+    font-weight: $bold;
+    margin-left: 2rem;
+    transition: $transition;
+
+    &:hover {
+      box-shadow: 0 3px 0 0 darken($yellow, 10%);
+      transform: translateY(-3px);
+    }
+  }
 }

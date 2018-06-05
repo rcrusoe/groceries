@@ -1,9 +1,15 @@
 # app/controllers/auth0_controller.rb
 class Auth0Controller < ApplicationController
+
   include LogoutHelper
+  def login()
+    cookies[:redirect_url] = params[:redirect_url]
+    redirect_to "/auth/auth0"
+  end
+
   def logout
-      reset_session
-      redirect_to logout_url.to_s
+    reset_session
+    redirect_to logout_url.to_s
   end
 
   def callback
@@ -12,7 +18,7 @@ class Auth0Controller < ApplicationController
     session[:userinfo] = request.env['omniauth.auth']
 
     # Redirect to the URL you want after successful auth
-    redirect_to root_url
+    redirect_to cookies[:redirect_url] || root_url
   end
 
   def failure

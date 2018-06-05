@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "/auth/oauth2/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
   get "/auth/logout" => "auth0#logout"
+  get "/auth/login" => "auth0#login"
   get "/groceries" => "grocery_lists#show"
 
   resources :recipes do

@@ -3,5 +3,5 @@
     <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
     <%= link_to "Logout", auth_logout_path, class: "simple-link" %>
 <% else %>
-  <%= link_to "Login", "/auth/auth0", class: "simple-link" %>
+  <%= link_to "Sign In", auth_login_path, class: "simple-link" %>
 <% end %>
