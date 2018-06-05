@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
 
   def show
     @meal_plans = @recipe.meal_plans
+    @likes = @recipe.likes
     ingredient_count
     is_current_recipe_on_list
   end
@@ -65,7 +66,8 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(
         :name, :link, :ingredients, :image_url,
-        meal_plans_params: [:recipe_id, :user_id, :status]
+        meal_plans_params: [:recipe_id, :user_id, :status],
+        likes_params: [:recipe_id, :user_id]
       )
     end
 end

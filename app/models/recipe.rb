@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   before_save :identify_source
   has_many :meal_plans, :dependent => :destroy
+  has_many :likes, :dependent => :destroy
   accepts_nested_attributes_for :meal_plans
 
   def identify_source

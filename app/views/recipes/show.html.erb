@@ -1,6 +1,12 @@
 <div class="hero hero--recipe">
   <h1><%= @recipe.name %></h1>
 </div>
+<% if current_user %>
+  <%= form_for([@recipe, @recipe.likes.build]) do |f| %>
+    <%= f.hidden_field :user_id, value: current_user["uid"] %>
+    <%= f.submit "Like" %>
+  <% end %>
+<% end %>
 <div class="container container--recipe">
   <% if @recipe.image_url %>
     <div class="recipe__image" style="background-image: url(<%= @recipe.image_url %>)"></div>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :meal_plans
   get "/auth/oauth2/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
   get "/auth/logout" => "auth0#logout"
@@ -8,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :recipes do
     resources :meal_plans
+    resources :likes
   end
 
   resources :meal_plans do
