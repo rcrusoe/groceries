@@ -265,6 +265,7 @@ button.ui.icon.button {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 
   & > * {
 
