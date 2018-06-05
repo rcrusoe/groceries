@@ -125,6 +125,7 @@ body.pushable {
       margin-left: auto;
       margin-right: auto;
       max-width: 450px;
+      width: 100%;
     }
   }
 }
@@ -366,24 +367,29 @@ button.ui.icon.button {
 
 #grocery_list_button input[type="submit"],
 #grocery_list_button span {
-  color: $white;
   font-family: $font-family;
   font-size: 1.8rem;
   font-weight: $bold;
   line-height: 2.4rem;
-  box-shadow: 0 4px 8px 0 $green;
+  box-shadow: 0 4px 8px 0 $gray-2;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #grocery_list_button input[type="submit"] {
-  background: $green;
+  background: $yellow;
   border: none;
   border-radius: 25px;
+  color: $gray-4;
   padding: 1.3rem 7rem 1.3rem 2rem;
 }
 
 #grocery_list_button span {
   background: $green;
   border-radius: 25px;
+  color: $white;
   margin-left: -5rem;
   padding: 1.3rem 0;
   text-align: center;

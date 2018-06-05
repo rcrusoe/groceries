@@ -7,7 +7,7 @@
   <% end %>
   <div class="recipe__subheader">
     <h2>Ingredients</h2>
-    <%= link_to "View Recipe", @recipe.link, class: "simple-link" %>
+    <a href="<%= @recipe.link %>?utm_source=mealprepday.co&utm_medium=referral" class="simple-link">View Recipe</a>
   </div>
 
   <% @recipe.ingredients.each do |ingredient| %>
