@@ -264,7 +264,7 @@ button.ui.icon.button {
 .recipe-carousel {
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+  overflow-x: scroll;
 
   & > * {
 
@@ -275,7 +275,7 @@ button.ui.icon.button {
 }
 
 .recipe-card--large {
-  flex: 1;
+  flex: 0 0 25%;
 
   div {
     background-position: center center;

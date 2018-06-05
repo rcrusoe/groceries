@@ -5,6 +5,7 @@ class RecipesController < ApplicationController
     @recipes = Recipe.take(4)
     @recipe = Recipe.new
     @user = session[:userinfo]
+    liked_recipes
     ingredient_count
   end
 

@@ -6,6 +6,19 @@
   <%= render 'form', recipe: @recipe %>
 </div>
 <div class="container">
+  <h2>My Recipes</h2>
+  <div class="recipe-carousel">
+    <% @liked_recipes.each do |recipe| %>
+      <%= link_to recipe_path(recipe), class: "recipe-card--large" do %>
+        <% if recipe.image_url %>
+          <div style="background-image: url(<%= recipe.image_url %>)"></div>
+        <% end %>
+        <h3><%= recipe.name %></h3>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="container">
   <h2>Recently Used</h2>
   <div class="recipe-carousel">
     <% @recipes.each do |recipe| %>
