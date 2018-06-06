@@ -33,7 +33,7 @@
     <h2>More from <%= @recipe_source.name %></h2>
     <div class="recipe-carousel">
       <% @recipe_source.recipes.each do |recipe| %>
-        <% unless recipe = @recipe %>
+        <% unless recipe == @recipe %>
           <%= render 'recipe_card_large', recipe: recipe %>
         <% end %>
       <% end %>
