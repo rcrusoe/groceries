@@ -306,7 +306,6 @@ button.ui.icon.button {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 0 2rem;
 }
 
 .remove-link {
@@ -317,7 +316,7 @@ button.ui.icon.button {
 .ingredient {
   align-items: center;
   display: flex;
-  padding: 2rem;
+  padding: 2rem 0;
   transition: $transition;
 
   &:not(:last-of-type) {
@@ -337,7 +336,7 @@ button.ui.icon.button {
   display: block;
   flex: 0 0 20px;
   height: 2rem;
-  margin-right: 2rem;
+  margin: 0 2rem;
   transition: $transition;
   width: 2rem;
 }
