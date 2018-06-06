@@ -34,19 +34,20 @@
     <span><%= @ingredient_count %></span>
   <% end %>
 <% elsif current_user %>
-  <%= form_for([@recipe, @recipe.meal_plans.build]) do |f| %>
+  <button class="ui icon button" name="bookmark-this-recipe" id="grocery_list_button">
+    Add to Grocery List
+    <span><%= @ingredient_count %></span>
+  </button>
+  <%= form_for([@recipe, @recipe.meal_plans.build], html: {class: "d-none"}) do |f| %>
     <%= f.hidden_field :status, value: "Upcoming" %>
     <%= f.hidden_field :user_id, value: current_user["uid"] %>
-    <div id="grocery_list_button">
-      <%= f.submit "Add to Grocery List", id: "add-to-list" %>
-      <span><%= @ingredient_count %></span>
-    </div>
+    <%= f.submit "Add to Grocery List", id: "add-to-list" %>
   <% end %>
 <% end %>
 
 <script type="text/javascript">
-  $('#add-to-list-button').on('click', function() {
-    $(this).closest('form').submit()
+  $('#grocery_list_button').on('click', function() {
+    $(this).siblings('form').submit()
   })
 
   $('#like-recipe').on('click', function() {
