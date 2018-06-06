@@ -269,14 +269,7 @@ button.ui.icon.button {
   flex-direction: row;
   overflow-x: scroll;
   overflow-y: hidden;
-  -webkit-scroll-snap-points-x: repeat(225px);
-  -ms-scroll-snap-points-x: repeat(225px);
-  scroll-snap-points-x: repeat(225px);
-  -webkit-scroll-snap-type: mandatory;
-  -ms-scroll-snap-type: mandatory;
-  scroll-snap-type: mandatory;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
 
   & > * {
 
@@ -288,6 +281,7 @@ button.ui.icon.button {
 
 .recipe-card--large {
   flex: 0 0 25%;
+  scroll-behavior: smooth;
 
   div {
     background-position: center center;
