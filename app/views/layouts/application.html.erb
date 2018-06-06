@@ -29,9 +29,12 @@
         <div class="nav__right m-hidden">
           <%= render 'shared/nav_links' %>
         </div>
-        <a class="open m-only">
-          <i class="bars icon"></i>
-        </a>
+        <div class="m-only">
+          <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
+          <a class="open">
+            <i class="bars icon"></i>
+          </a>
+        </div>
       </div>
       <%= yield %>
     </div>

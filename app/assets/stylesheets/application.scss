@@ -41,6 +41,7 @@ body.pushable {
 .open {
   color: $green;
   font-size: 1.6rem;
+  margin-left: 1rem;
 }
 
 .ui.sidebar.vertical.right.menu.uncover.visible {
@@ -149,6 +150,7 @@ body.pushable {
   position: -ms-sticky;
   position: -o-sticky;
   top: 0;
+  z-index: 10;
 
   h1 {
     color: $gray-4;
@@ -297,7 +299,7 @@ button.ui.icon.button {
   background-size: cover;
   border-radius: $border-radius-m;
   height: 20rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   margin-top: -15.5rem;
   width: 100%;
 }

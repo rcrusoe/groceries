@@ -1,6 +1,6 @@
 <%= link_to "Recipes", recipes_path, class: "simple-link" %>
 <% if current_user %>
-    <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
+    <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link m-hidden" %>
     <%= link_to "Logout", auth_logout_path, class: "simple-link" %>
 <% else %>
   <%= link_to "Sign In", auth_login_path, class: "simple-link" %>
