@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.where(link: recipe_params[:link]).first_or_initialize(recipe_params)
 
     respond_to do |format|
       if @recipe.save
