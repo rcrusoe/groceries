@@ -30,7 +30,9 @@
           <%= render 'shared/nav_links' %>
         </div>
         <div class="m-only">
-          <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
+          <% if current_user %>
+            <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link" %>
+          <% end %>
           <a class="open">
             <i class="bars icon"></i>
           </a>
