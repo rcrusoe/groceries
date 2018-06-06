@@ -26,6 +26,8 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.where(link: recipe_params[:link]).first_or_initialize(recipe_params)
+    like = @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+    like.save
 
     respond_to do |format|
       if @recipe.save
