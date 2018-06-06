@@ -28,6 +28,18 @@
     </div>
   <% end %>
 </div>
+<% if @recipe_source.recipes.count > 3 %>
+  <div class="container container--recipe">
+    <h2>More from <%= @recipe_source.name %></h2>
+    <div class="recipe-carousel">
+      <% @recipe_source.recipes.each do |recipe| %>
+        <% unless recipe = @recipe %>
+          <%= render 'recipe_card_large', recipe: recipe %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <% if current_user && @already_added %>
   <%= link_to groceries_path, id: "grocery_list_button" do %>
