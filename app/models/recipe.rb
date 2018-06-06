@@ -8,7 +8,14 @@ class Recipe < ApplicationRecord
   def scrape_recipe
     require 'open-uri'
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
-    @recipe_source = RecipeSource.where(slug: self.link.split('.').second).first
+    s = URI.parse(self.link)
+    slug_segments = s.host.split('.')
+    if slug_segments.count > 2
+      slug = slug_segments[1] + "." + slug_segments[2]
+    else
+      slug = s.host
+    end
+    @recipe_source = RecipeSource.where(slug: slug).first
 
     self.ingredients = []
     self.name = @doc.css(@recipe_source.scrape_name).text

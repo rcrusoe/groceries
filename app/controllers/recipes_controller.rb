@@ -12,7 +12,9 @@ class RecipesController < ApplicationController
   def show
     @meal_plans = @recipe.meal_plans
     @likes = @recipe.likes
-    @like = Like.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
+    if current_user
+      @like = Like.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
+    end
     @recipe_source = RecipeSource.find(@recipe.recipe_source.id)
     ingredient_count
     is_current_recipe_on_list
@@ -26,10 +28,19 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe_source = RecipeSource.where(slug: recipe_params[:link].split('.').second).first
+    s = URI.parse(recipe_params[:link])
+    slug_segments = s.host.split('.')
+    if slug_segments.count > 2
+      slug = slug_segments[1] + "." + slug_segments[2]
+    else
+      slug = s.host
+    end
+    @recipe_source = RecipeSource.where(slug: slug).first
     @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
-    like = @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
-    like.save
+    if current_user
+      like = @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+      like.save
+    end
 
     respond_to do |format|
       if @recipe.save

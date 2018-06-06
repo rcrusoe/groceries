@@ -4,6 +4,7 @@ class RecipeSource < ApplicationRecord
   before_save :set_slug
 
   def set_slug
-    self.slug = link.split('.').second
+    s = URI.parse(link)
+    self.slug = s.host
   end
 end
