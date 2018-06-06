@@ -6,7 +6,6 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @user = session[:userinfo]
     liked_recipes
-    ingredient_count
   end
 
   def show
@@ -16,7 +15,6 @@ class RecipesController < ApplicationController
       @like = Like.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
     end
     @recipe_source = RecipeSource.find(@recipe.recipe_source.id)
-    ingredient_count
     is_current_recipe_on_list
   end
 

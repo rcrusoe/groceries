@@ -11,16 +11,6 @@ module GroceryListsHelper
     end
   end
 
-  def ingredient_count
-    if current_user
-      current_recipes_on_list
-      @ingredient_count = 0
-      @meal_plans.each do |meal_plan|
-        @ingredient_count += meal_plan.recipe.ingredients.count
-      end
-    end
-  end
-
   def is_current_recipe_on_list
     if current_user
       if MealPlan.where(recipe_id: params[:id], status: "Upcoming", user_id: current_user["uid"]).count > 0
