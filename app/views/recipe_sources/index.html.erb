@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recipe Sources</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Link</th>
+      <th>Scrape name</th>
+      <th>Scrape ingredient</th>
+      <th>Scrape image</th>
+      <th>Slug</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipe_sources.each do |recipe_source| %>
+      <tr>
+        <td><%= recipe_source.name %></td>
+        <td><%= recipe_source.link %></td>
+        <td><%= recipe_source.scrape_name %></td>
+        <td><%= recipe_source.scrape_ingredient %></td>
+        <td><%= recipe_source.scrape_image %></td>
+        <td><%= recipe_source.slug %></td>
+        <td><%= link_to 'Show', recipe_source %></td>
+        <td><%= link_to 'Edit', edit_recipe_source_path(recipe_source) %></td>
+        <td><%= link_to 'Destroy', recipe_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipe Source', new_recipe_source_path %>
