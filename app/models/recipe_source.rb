@@ -5,6 +5,11 @@ class RecipeSource < ApplicationRecord
 
   def set_slug
     s = URI.parse(link)
-    self.slug = s.host
+    slug_segments = s.host.split('.')
+    if slug_segments.count > 2
+      self.slug = slug_segments[1] + "." + slug_segments[2]
+    else
+      self.slug = s.host
+    end
   end
 end
