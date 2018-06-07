@@ -26,5 +26,7 @@ RecipeSource.create!([
   {name: "Ambitious Kitchen", link: "http://ambitiouskitchen.com", scrape_name: "h1.entry-title", scrape_ingredient: ".ERSIngredients li", scrape_image: ".entry_content p img", slug: "ambitiouskitchen.com"},
   {name: "Dinner at the Zoo", link: "http://dinneratthezoo.com", scrape_name: "h1.entry-title", scrape_ingredient: ".wprm-recipe-ingredient", scrape_image: ".entry-content p img", slug: "dinneratthezoo.com"},
   {name: "Damn Delicious", link: "http://damndelicious.net", scrape_name: ".post-title h1", scrape_ingredient: ".ingredient", scrape_image: ".post p img", slug: "damndelicious.net"},
-  {name: "The Girl on Bloor", link: "http://thegirlonbloor.com", scrape_name: "h1.entry-title", scrape_ingredient: ".wpurp-responsive-desktop .wpurp-recipe-ingredient-container .wpurp-recipe-ingredient", scrape_image: ".entry-content p img", slug: "thegirlonbloor.com"}
+  {name: "The Girl on Bloor", link: "http://thegirlonbloor.com", scrape_name: "h1.entry-title", scrape_ingredient: ".wpurp-responsive-desktop .wpurp-recipe-ingredient-container .wpurp-recipe-ingredient", scrape_image: ".entry-content p img", slug: "thegirlonbloor.com"},
+  {name: "Eazy Peazy Mealz", link: "https://www.eazypeazymealz.com/", scrape_name: "h1.entry-title", scrape_ingredient: ".ingredient", scrape_image: ".entry-content img", slug: "eazypeazymealz.com"},
+  {name: "No. 2 Pencil", link: "https://www.number-2-pencil.com/", scrape_name: "h1.entry-title", scrape_ingredient: ".wprm-recipe-ingredient", scrape_image: ".entry-content img", slug: "number-2-pencil.com"}
 ])

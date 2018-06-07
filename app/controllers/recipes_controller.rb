@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
     @recipe_source = RecipeSource.where(slug: slug).first
     @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
     if current_user
-      like = @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+      like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
       like.save
     end
 
