@@ -5,6 +5,7 @@ class Recipe < ApplicationRecord
   has_many :likes, :dependent => :destroy
   accepts_nested_attributes_for :meal_plans
   accepts_nested_attributes_for :likes
+  validates_length_of :ingredients, minimum: 1, if: :scrape_recipe
 
   def scrape_recipe
     require 'open-uri'

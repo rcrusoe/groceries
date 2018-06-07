@@ -37,8 +37,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :slug %>
-    <%= form.text_field :slug, id: :recipe_source_slug %>
+    <%= form.label :recipe_index_link %>
+    <%= form.text_field :recipe_index_link, id: :recipe_source_recipe_index_link %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_css %>
+    <%= form.text_field :category_css, id: :recipe_source_category_css %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recipe_css %>
+    <%= form.text_field :recipe_css, id: :recipe_source_recipe_css %>
   </div>
 
   <div class="actions">
