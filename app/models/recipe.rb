@@ -21,7 +21,14 @@ class Recipe < ApplicationRecord
     self.ingredients = []
     self.name = @doc.css(@recipe_source.scrape_name).text
     unless @recipe_source.scrape_image.blank?
-      self.image_url = @doc.css(@recipe_source.scrape_image).first.attr('src')
+      if @doc.css(@recipe_source.scrape_image).first.attr('src')
+        self.image_url = @doc.css(@recipe_source.scrape_image).first.attr('src')
+      elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
+        i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
+        i = i.split('.jpg')
+        i = i[0] + '.jpg'
+        self.image_url = i
+      end
     end
     ingredients = @doc.css(@recipe_source.scrape_ingredient)
     ingredients.each do |ingredient|
