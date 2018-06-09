@@ -6,6 +6,8 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :meal_plans
   accepts_nested_attributes_for :likes
   validates_length_of :ingredients, minimum: 1, if: :scrape_recipe
+  validates_presence_of :image_url, if: :scrape_recipe
+  validates_presence_of :name, if: :scrape_recipe
 
   def scrape_recipe
     require 'open-uri'
@@ -22,13 +24,15 @@ class Recipe < ApplicationRecord
     self.ingredients = []
     self.name = @doc.css(@recipe_source.scrape_name).text
     unless @recipe_source.scrape_image.blank?
-      if @doc.css(@recipe_source.scrape_image).first.attr('src')
-        self.image_url = @doc.css(@recipe_source.scrape_image).first.attr('src')
-      elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
-        i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
-        i = i.split('.jpg')
-        i = i[0] + '.jpg'
-        self.image_url = i
+      unless @doc.css(@recipe_source.scrape_image).blank?
+        if @doc.css(@recipe_source.scrape_image).first.attr('src')
+          self.image_url = @doc.css(@recipe_source.scrape_image).first.attr('src')
+        elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
+          i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
+          i = i.split('.jpg')
+          i = i[0] + '.jpg'
+          self.image_url = i
+        end
       end
     end
     ingredients = @doc.css(@recipe_source.scrape_ingredient)
