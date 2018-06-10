@@ -35,15 +35,15 @@ class RecipesController < ApplicationController
     end
     @recipe_source = RecipeSource.where(slug: slug).first
     @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
-    if current_user
-      like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
-      like.save
-    end
 
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
+        if current_user
+          like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+          like.save
+        end
       else
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
