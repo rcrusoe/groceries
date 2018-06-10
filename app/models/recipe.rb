@@ -22,7 +22,7 @@ class Recipe < ApplicationRecord
     @recipe_source = RecipeSource.where(slug: slug).first
 
     self.ingredients = []
-    self.name = @doc.css(@recipe_source.scrape_name).text
+    self.name = @doc.css(@recipe_source.scrape_name).first.text
     unless @recipe_source.scrape_image.blank?
       unless @doc.css(@recipe_source.scrape_image).blank?
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
