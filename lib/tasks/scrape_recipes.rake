@@ -22,7 +22,7 @@ namespace :scrape_recipes do
                 if link[0] = "/"
                   link = source.link + link
                 end
-                Recipe.where(recipe_source_id: source.id, link: link).first_or_create
+                Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
               end
             end
           else
@@ -31,7 +31,7 @@ namespace :scrape_recipes do
               if link[0] = "/"
                 link = source.link + link
               end
-              Recipe.where(recipe_source_id: source.id, link: link).first_or_create
+              Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
             end
           end
         end
@@ -48,8 +48,7 @@ namespace :scrape_recipes do
               if link[0] = "/"
                 link = source.link + link
               end
-              byebug
-              Recipe.where(recipe_source_id: source.id, link: link).first_or_create
+              Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
             end
           end
         else
@@ -58,7 +57,7 @@ namespace :scrape_recipes do
             if link[0] = "/"
               link = source.link + link
             end
-            Recipe.where(recipe_source_id: source.id, link: link).first_or_create
+            Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
           end
         end
       end
