@@ -24,6 +24,7 @@ namespace :scrape_recipes do
                 end
                 Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
               end
+              sleep(60)
             end
           else
             links = @doc.css(source.recipe_css).map { |link| link['href'] } || []
@@ -33,6 +34,7 @@ namespace :scrape_recipes do
               end
               Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
             end
+            sleep(60)
           end
         end
       else
@@ -50,6 +52,7 @@ namespace :scrape_recipes do
               end
               Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
             end
+            sleep(60)
           end
         else
           links = @doc.css(source.recipe_css).map { |link| link['href'] } || []

@@ -14,8 +14,8 @@ class Recipe < ApplicationRecord
 
   def scrape_recipe
     require 'base64'
-    require 'mechanize'
     require 'open-uri'
+    require 'tempfile'
 
     agent = Mechanize.new
 
@@ -35,12 +35,16 @@ class Recipe < ApplicationRecord
       unless @doc.css(@recipe_source.scrape_image).blank?
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
           i = @doc.css(@recipe_source.scrape_image).first.attr('src')
-          self.image_url = Base64.strict_encode64 agent.get(i).body_io.string
+          agent.get(i).save "tmp/cache/assets/images/image.jpg"
+          i = open("tmp/cache/assets/images/image.jpg")
+          self.image_url = Base64.strict_encode64(i.read)
         elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = i.split('.jpg')
           i = i[0] + '.jpg'
-          self.image_url = Base64.strict_encode64 agent.get(i).body_io.string
+          agent.get(i).save "tmp/cache/assets/images/image.jpg"
+          i = open("tmp/cache/assets/images/image.jpg")
+          self.image_url = Base64.strict_encode64(i.read)
         end
       end
     end
