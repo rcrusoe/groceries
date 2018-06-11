@@ -34,7 +34,7 @@
     <div class="recipe-carousel">
       <% @recipe_source.recipes.each do |recipe| %>
         <% unless recipe == @recipe %>
-          <%= render 'recipe_card_large', recipe: recipe %>
+          <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source %>
         <% end %>
       <% end %>
     </div>
@@ -46,7 +46,7 @@
     <span><%= @ingredient_count %></span>
   <% end %>
 <% elsif current_user %>
-  <button class="ui icon button" name="bookmark-this-recipe" id="grocery_list_button">
+  <button class="ui icon button" name="add-to-grocery-list" id="grocery_list_button">
     Add to Grocery List
     <span><%= @ingredient_count %></span>
   </button>

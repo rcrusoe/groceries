@@ -17,7 +17,7 @@ class RecipeSourcesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create recipe_source" do
     assert_difference('RecipeSource.count') do
-      post recipe_sources_url, params: { recipe_source: { link: @recipe_source.link, name: @recipe_source.name, scrape_image: @recipe_source.scrape_image, scrape_ingredient: @recipe_source.scrape_ingredient, scrape_name: @recipe_source.scrape_name, slug: @recipe_source.slug } }
+      post recipe_sources_url, params: { recipe_source: { link: @recipe_source.link, name: @recipe_source.name, scrape_image: @recipe_source.scrape_image, scrape_ingredient: @recipe_source.scrape_ingredient, scrape_name: @recipe_source.scrape_name, domain: @recipe_source.domain } }
     end
 
     assert_redirected_to recipe_source_url(RecipeSource.last)
@@ -34,7 +34,7 @@ class RecipeSourcesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update recipe_source" do
-    patch recipe_source_url(@recipe_source), params: { recipe_source: { link: @recipe_source.link, name: @recipe_source.name, scrape_image: @recipe_source.scrape_image, scrape_ingredient: @recipe_source.scrape_ingredient, scrape_name: @recipe_source.scrape_name, slug: @recipe_source.slug } }
+    patch recipe_source_url(@recipe_source), params: { recipe_source: { link: @recipe_source.link, name: @recipe_source.name, scrape_image: @recipe_source.scrape_image, scrape_ingredient: @recipe_source.scrape_ingredient, scrape_name: @recipe_source.scrape_name, domain: @recipe_source.domain } }
     assert_redirected_to recipe_source_url(@recipe_source)
   end
 

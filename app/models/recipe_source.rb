@@ -1,15 +1,18 @@
 class RecipeSource < ApplicationRecord
   has_many :recipes, :dependent => :destroy
   accepts_nested_attributes_for :recipes
-  before_save :set_slug
+  before_save :set_domain
 
-  def set_slug
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  def set_domain
     s = URI.parse(link)
-    slug_segments = s.host.split('.')
-    if slug_segments.count > 2
-      self.slug = slug_segments[1] + "." + slug_segments[2]
+    domain_segments = s.host.split('.')
+    if domain_segments.count > 2
+      self.domain = domain_segments[1] + "." + domain_segments[2]
     else
-      self.slug = s.host
+      self.domain = s.host
     end
   end
 end

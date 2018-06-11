@@ -64,13 +64,13 @@ class RecipeSourcesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe_source
-      @recipe_source = RecipeSource.find(params[:id])
+      @recipe_source = RecipeSource.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_source_params
       params.require(:recipe_source).permit(
-        :name, :link, :scrape_name, :scrape_ingredient, :scrape_image, :slug, :recipe_index_link, :category_css, :recipe_css, :multiple_pages,
+        :name, :link, :scrape_name, :scrape_ingredient, :scrape_image, :domain, :recipe_index_link, :category_css, :recipe_css, :multiple_pages,
         recipe_params: [:name, :link, :ingredients, :image_url]
       )
     end

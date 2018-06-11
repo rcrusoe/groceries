@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  resources :recipe_sources
   get "/auth/oauth2/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
   get "/auth/logout" => "auth0#logout"
   get "/auth/login" => "auth0#login"
   get "/groceries" => "grocery_lists#show"
+
+  resources :recipe_sources, path: :sources do
+    resources :recipes
+  end
 
   resources :recipes do
     resources :meal_plans

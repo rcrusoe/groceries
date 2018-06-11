@@ -9,17 +9,20 @@ class Recipe < ApplicationRecord
   validates_presence_of :image_url, if: :scrape_recipe
   validates_presence_of :name, if: :scrape_recipe
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   def scrape_recipe
     require 'open-uri'
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
     s = URI.parse(self.link)
-    slug_segments = s.host.split('.')
-    if slug_segments.count > 2
-      slug = slug_segments[1] + "." + slug_segments[2]
+    domain_segments = s.host.split('.')
+    if domain_segments.count > 2
+      domain = domain_segments[1] + "." + domain_segments[2]
     else
-      slug = s.host
+      domain = s.host
     end
-    @recipe_source = RecipeSource.where(slug: slug).first
+    @recipe_source = RecipeSource.where(domain: domain).first
 
     self.ingredients = []
     self.name = @doc.css(@recipe_source.scrape_name).first.text

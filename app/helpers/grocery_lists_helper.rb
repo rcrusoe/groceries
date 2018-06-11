@@ -5,7 +5,7 @@ module GroceryListsHelper
       @meals = []
       @meal_plans.each do |meal_plan|
         meal = {meal_plan: meal_plan}
-        meal[:recipe] = Recipe.find(meal_plan.recipe_id)
+        meal[:recipe] = Recipe.friendly.find(meal_plan.recipe_id)
         @meals.push(meal)
       end
     end
@@ -13,7 +13,8 @@ module GroceryListsHelper
 
   def is_current_recipe_on_list
     if current_user
-      if MealPlan.where(recipe_id: params[:id], status: "Upcoming", user_id: current_user["uid"]).count > 0
+      @recipe = Recipe.friendly.find(params[:id])
+      if MealPlan.where(recipe_id: @recipe.id, status: "Upcoming", user_id: current_user["uid"]).count > 0
         @already_added = true;
       end
     end

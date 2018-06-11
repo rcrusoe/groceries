@@ -14,7 +14,7 @@ class RecipesController < ApplicationController
     if current_user
       @like = Like.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
     end
-    @recipe_source = RecipeSource.find(@recipe.recipe_source.id)
+    @recipe_source = RecipeSource.friendly.find(@recipe.recipe_source.id)
     is_current_recipe_on_list
   end
 
@@ -27,18 +27,18 @@ class RecipesController < ApplicationController
 
   def create
     s = URI.parse(recipe_params[:link])
-    slug_segments = s.host.split('.')
-    if slug_segments.count > 2
-      slug = slug_segments[1] + "." + slug_segments[2]
+    domain_segments = s.host.split('.')
+    if domain_segments.count > 2
+      domain = domain_segments[1] + "." + domain_segments[2]
     else
-      slug = s.host
+      domain = s.host
     end
-    @recipe_source = RecipeSource.where(slug: slug).first
+    @recipe_source = RecipeSource.where(domain: domain).first
     @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to recipe_source_recipe_path(@recipe_source, @recipe), notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
         if current_user
           like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
@@ -74,7 +74,7 @@ class RecipesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
-      @recipe = Recipe.find(params[:id])
+      @recipe = Recipe.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
