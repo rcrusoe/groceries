@@ -13,7 +13,12 @@ class Recipe < ApplicationRecord
   friendly_id :name, use: :slugged
 
   def scrape_recipe
+    require 'base64'
+    require 'mechanize'
     require 'open-uri'
+
+    agent = Mechanize.new
+
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
     s = URI.parse(self.link)
     domain_segments = s.host.split('.')
@@ -29,12 +34,13 @@ class Recipe < ApplicationRecord
     unless @recipe_source.scrape_image.blank?
       unless @doc.css(@recipe_source.scrape_image).blank?
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
-          self.image_url = @doc.css(@recipe_source.scrape_image).first.attr('src')
+          i = @doc.css(@recipe_source.scrape_image).first.attr('src')
+          self.image_url = Base64.strict_encode64 agent.get(i).body_io.string
         elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = i.split('.jpg')
           i = i[0] + '.jpg'
-          self.image_url = i
+          self.image_url = Base64.strict_encode64 agent.get(i).body_io.string
         end
       end
     end
