@@ -15,12 +15,9 @@ class Recipe < ApplicationRecord
   def scrape_recipe
     require 'base64'
     require 'open-uri'
-<<<<<<< HEAD
-=======
     require 'mechanize'
 
     agent = Mechanize.new
->>>>>>> encoding-images
 
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
     s = URI.parse(self.link)
