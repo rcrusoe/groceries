@@ -15,9 +15,6 @@ class Recipe < ApplicationRecord
   def scrape_recipe
     require 'base64'
     require 'open-uri'
-    require 'tempfile'
-
-    agent = Mechanize.new
 
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
     s = URI.parse(self.link)
@@ -37,16 +34,12 @@ class Recipe < ApplicationRecord
       unless @doc.css(@recipe_source.scrape_image).blank?
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
           i = @doc.css(@recipe_source.scrape_image).first.attr('src')
-          agent.get(i).save "tmp/cache/assets/images/image.jpg"
-          i = open("tmp/cache/assets/images/image.jpg")
-          self.image_url = Base64.strict_encode64(i.read)
+          self.image_url = i
         elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = i.split('.jpg')
           i = i[0] + '.jpg'
-          agent.get(i).save "tmp/cache/assets/images/image.jpg"
-          i = open("tmp/cache/assets/images/image.jpg")
-          self.image_url = Base64.strict_encode64(i.read)
+          self.image_url = i
         end
       end
     end
