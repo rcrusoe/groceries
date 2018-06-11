@@ -29,8 +29,10 @@ class Recipe < ApplicationRecord
     end
     @recipe_source = RecipeSource.where(domain: domain).first
 
-    self.ingredients = []
-    self.name = @doc.css(@recipe_source.scrape_name).first.text
+    if @doc.css(@recipe_source.scrape_name).first
+      self.name = @doc.css(@recipe_source.scrape_name).first.text
+    end
+
     unless @recipe_source.scrape_image.blank?
       unless @doc.css(@recipe_source.scrape_image).blank?
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
@@ -48,6 +50,8 @@ class Recipe < ApplicationRecord
         end
       end
     end
+
+    self.ingredients = []
     ingredients = @doc.css(@recipe_source.scrape_ingredient)
     ingredients.each do |ingredient|
       self.ingredients << ingredient.text
