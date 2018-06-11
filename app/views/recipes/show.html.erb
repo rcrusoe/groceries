@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="container container--recipe">
-  <% if @recipe.image_url %>
+  <% if @recipe.encoded_image %>
     <div class="recipe__image" style="background-image: url(data:image/jpg;base64,<%= @recipe.encoded_image %>)"></div>
   <% end %>
   <% unless current_user %>
