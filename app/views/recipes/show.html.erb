@@ -32,7 +32,7 @@
   <div class="container container--recipe">
     <h2>More from <%= @recipe_source.name %></h2>
     <div class="recipe-carousel">
-      <% @recipe_source.recipes.each do |recipe| %>
+      <% @recipe_source.recipes.sample(10).each do |recipe| %>
         <% unless recipe == @recipe %>
           <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source %>
         <% end %>
