@@ -1,6 +1,6 @@
 <%= link_to recipe_source_recipe_path(recipe_source, recipe), class: "recipe-card--large" do %>
-  <% unless recipe.encoded_image.blank? %>
-    <div style="background-image: url(data:image/jpg;base64,<%= recipe.encoded_image %>)"></div>
+  <% unless recipe.image_url.blank? %>
+    <div style="background-image: url(<%= recipe.image_url %>)"></div>
   <% end %>
   <h3><%= recipe.name %></h3>
 <% end %>

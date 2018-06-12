@@ -1,16 +1,21 @@
 <div class="hero hero--recipe">
   <div class="hero__content">
-    <h1><%= @recipe.name %></h1>
-    <% if current_user && @like %>
-      <%= render 'unlike' %>
-    <% elsif current_user %>
-      <%= render 'like' %>
-    <% end %>
+    <div class="recipe__header">
+      <h1><%= @recipe.name %></h1>
+    </div>
+    <div class="recipe__subheader">
+      <%= link_to @recipe_source.name, @recipe_source, class: "simple-link simple-link--underline" %>
+      <% if current_user && @like %>
+        <%= render 'unlike' %>
+      <% elsif current_user %>
+        <%= render 'like' %>
+      <% end %>
+    </div>
   </div>
 </div>
 <div class="container container--recipe">
-  <% unless @recipe.encoded_image.blank? %>
-    <div class="recipe__image" style="background-image: url(data:image/jpg;base64,<%= @recipe.encoded_image %>)"></div>
+  <% unless @recipe.image_url.blank? %>
+    <div class="recipe__image" style="background-image: url(<%= @recipe.image_url %>)"></div>
   <% end %>
   <% unless current_user %>
     <div class="recipe__subheader sign-in-cta">
@@ -19,8 +24,8 @@
     </div>
   <% end %>
   <div class="recipe__subheader">
-    <h2>Ingredients</h2>
-    <a href="<%= @recipe.link %>?utm_source=mealprepday.co&utm_medium=referral" class="simple-link">View Recipe</a>
+    <h2>Ingredients (<%= @recipe.ingredients.length %>)</h2>
+    <a href="<%= @recipe.link %>?utm_source=mealprepday.co&utm_medium=referral" class="simple-link simple-link--underline">View Recipe</a>
   </div>
   <% @recipe.ingredients.each do |ingredient| %>
     <div class="ingredient">
@@ -29,10 +34,23 @@
   <% end %>
 </div>
 <% if @recipe_source.recipes.count > 3 %>
-  <div class="container container--recipe">
+  <div class="container container--recipe" id="related-recipes">
     <h2>More from <%= @recipe_source.name %></h2>
+    <%= link_to "View All Recipes", @recipe_source, class: "simple-link simple-link--underline" %>
     <div class="recipe-carousel">
       <% @recipe_source.recipes.sample(10).each do |recipe| %>
+        <% unless recipe == @recipe %>
+          <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% if @people_also_liked.count > 0 %>
+  <div class="container container--recipe" id="related-recipes">
+    <h2>People Also Liked</h2>
+    <div class="recipe-carousel">
+      <% @people_also_liked.sample(10).each do |recipe| %>
         <% unless recipe == @recipe %>
           <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source %>
         <% end %>
@@ -62,7 +80,8 @@
     $(this).siblings('form').submit()
   })
 
-  $('#like-recipe').on('click', function() {
+  $('#like-recipe').on('click', function(e) {
+    e.preventDefault();
     $(this).siblings('form').submit();
   })
 </script>

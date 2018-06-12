@@ -16,6 +16,7 @@ class RecipesController < ApplicationController
     end
     @recipe_source = RecipeSource.friendly.find(@recipe.recipe_source.id)
     is_current_recipe_on_list
+    people_also_liked
   end
 
   def new

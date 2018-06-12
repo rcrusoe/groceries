@@ -11,7 +11,6 @@ gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-auth0', '~> 2.0.0'
 gem 'figaro'
 gem 'seed_dump'
-gem 'byebug'
 gem 'friendly_id', '~> 5.1.0'
 gem 'mechanize'
 

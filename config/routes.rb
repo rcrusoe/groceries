@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     resources :likes
   end
 
-  resources :likes
+  resources :likes do
+    member do
+      get "/unlike", to: "likes#destroy"
+    end
+  end
 
   resources :meal_plans do
     member do

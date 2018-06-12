@@ -1,6 +1,6 @@
 <div class="hero hero--groceries">
   <div class="grocery-list-header">
-    <h1>Grocery List</h1>
+    <h1>Groceries</h1>
     <div class="ingredient-count">
       <span class="checked-ingredients">0</span>
       of <%= @ingredient_count %>
@@ -18,7 +18,7 @@
           <%= link_to meal_plan.recipe do %>
             <h2><%= meal_plan.recipe.name %></h2>
           <% end %>
-          <%= link_to "Remove", archive_meal_plan_path(meal_plan), class: "simple-link remove-link" %>
+          <%= link_to "Remove", archive_meal_plan_path(meal_plan), class: "simple-link simple-link--underline remove-link" %>
         </div>
       </div>
       <% meal_plan.recipe.ingredients.each do |ingredient| %>
