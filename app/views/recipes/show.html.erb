@@ -23,15 +23,31 @@
       <%= link_to "Sign In", {controller: "auth0", action: "login", redirect_url: request.original_url } %>
     </div>
   <% end %>
-  <div class="recipe__subheader">
-    <h2>Ingredients (<%= @recipe.ingredients.length %>)</h2>
-    <a href="<%= @recipe.link %>?utm_source=mealprepday.co&utm_medium=referral" class="simple-link simple-link--underline">View Recipe</a>
-  </div>
-  <% @recipe.ingredients.each do |ingredient| %>
-    <div class="ingredient">
-      <p><%= ingredient %></p>
+  <div class="recipe__content">
+    <div class="recipe__actions">
+      <% if current_user && !@already_added %>
+        <%= link_to "Add to Grocery List", "#", name: "add-to-grocery-list", id: "grocery_list_button", class: "simple-link simple-link--primary" %>
+        <%= form_for([@recipe, @recipe.meal_plans.build], html: {class: "d-none"}) do |f| %>
+          <%= f.hidden_field :status, value: "Upcoming" %>
+          <%= f.hidden_field :user_id, value: current_user["uid"] %>
+          <%= f.submit "Add to Grocery List", id: "add-to-list" %>
+        <% end %>
+      <% end %>
+      <a href="<%= @recipe.link %>?utm_source=mealprepday.co&utm_medium=referral" class="simple-link simple-link--secondary">View Recipe</a>
+      <% if current_user && @already_added %>
+        <%= link_to "My Grocery List (#{@ingredient_count})", "/groceries", class: "simple-link simple-link--background" %>
+        <%= link_to "Remove From Grocery List", archive_meal_plan_path(@meal_plan), class: "simple-link simple-link--background" %>
+      <% end %>
     </div>
-  <% end %>
+    <div class="recipe__ingredients">
+      <h2>Ingredients (<%= @recipe.ingredients.length %>)</h2>
+      <% @recipe.ingredients.each do |ingredient| %>
+        <div class="ingredient">
+          <p><%= ingredient %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 <% if @recipe_source.recipes.count > 3 %>
   <div class="container container--recipe" id="related-recipes">
@@ -59,24 +75,9 @@
   </div>
 <% end %>
 
-<% if current_user && @already_added %>
-  <%= link_to groceries_path, id: "grocery_list_button" do %>
-    <span><%= @ingredient_count %></span>
-  <% end %>
-<% elsif current_user %>
-  <button class="ui icon button" name="add-to-grocery-list" id="grocery_list_button">
-    Add to Grocery List
-    <span><%= @ingredient_count %></span>
-  </button>
-  <%= form_for([@recipe, @recipe.meal_plans.build], html: {class: "d-none"}) do |f| %>
-    <%= f.hidden_field :status, value: "Upcoming" %>
-    <%= f.hidden_field :user_id, value: current_user["uid"] %>
-    <%= f.submit "Add to Grocery List", id: "add-to-list" %>
-  <% end %>
-<% end %>
-
 <script type="text/javascript">
-  $('#grocery_list_button').on('click', function() {
+  $('#grocery_list_button').on('click', function(e) {
+    e.preventDefault();
     $(this).siblings('form').submit()
   })
 

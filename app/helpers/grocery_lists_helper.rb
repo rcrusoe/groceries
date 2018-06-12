@@ -15,6 +15,7 @@ module GroceryListsHelper
     if current_user
       @recipe = Recipe.friendly.find(params[:id])
       if MealPlan.where(recipe_id: @recipe.id, status: "Upcoming", user_id: current_user["uid"]).count > 0
+        @meal_plan = MealPlan.where(recipe_id: @recipe.id, status: "Upcoming", user_id: current_user["uid"]).first
         @already_added = true;
       end
     end
