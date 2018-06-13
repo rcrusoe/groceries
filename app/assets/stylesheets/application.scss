@@ -287,6 +287,7 @@ button.ui.icon.button {
 }
 
 .recipe__content {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
 
@@ -307,10 +308,14 @@ button.ui.icon.button {
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  width: 100%;
 
   @media (min-width: $desktop) {
     flex-basis: 33%;
     margin-bottom: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 2rem;
   }
 
   .simple-link--background {
