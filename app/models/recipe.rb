@@ -13,7 +13,6 @@ class Recipe < ApplicationRecord
   friendly_id :name, use: :slugged
 
   def scrape_recipe
-    require 'base64'
     require 'open-uri'
     require 'mechanize'
 
@@ -38,19 +37,19 @@ class Recipe < ApplicationRecord
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
           i = @doc.css(@recipe_source.scrape_image).first.attr('src')
           self.image_url = i
-          i_slug = i.split('/').last
-          agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
-          i = open("tmp/cache/assets/images/#{i_slug}.jpg")
-          self.encoded_image = Base64.strict_encode64(i.read)
+          # i_slug = i.split('/').last
+          # agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
+          # i = open("tmp/cache/assets/images/#{i_slug}.jpg")
+          # self.encoded_image = Base64.strict_encode64(i.read)
         elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = i.split('.jpg')
           i = i[0] + '.jpg'
           self.image_url = i
-          i_slug = i.split('/').last
-          agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
-          i = open("tmp/cache/assets/images/#{i_slug}.jpg")
-          self.encoded_image = Base64.strict_encode64(i.read)
+          # i_slug = i.split('/').last
+          # agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
+          # i = open("tmp/cache/assets/images/#{i_slug}.jpg")
+          # self.encoded_image = Base64.strict_encode64(i.read)
         end
       end
     end
