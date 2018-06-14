@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
   def scrape_recipe
     require 'open-uri'
     require 'mechanize'
+    require "google/cloud/storage"
 
     agent = Mechanize.new
 
@@ -37,19 +38,22 @@ class Recipe < ApplicationRecord
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
           i = @doc.css(@recipe_source.scrape_image).first.attr('src')
           self.image_url = i
-          # i_slug = i.split('/').last
-          # agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
-          # i = open("tmp/cache/assets/images/#{i_slug}.jpg")
-          # self.encoded_image = Base64.strict_encode64(i.read)
+          storage = Google::Cloud::Storage.new project: "recidex-207202"
+          bucket = storage.bucket "recidex.com"
+          i_slug = i.split('/').last
+          agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
+          file = bucket.create_file "tmp/cache/assets/images/#{i_slug}.jpg", "recipe_images/#{@recipe_source.slug}/#{i_slug}.jpg"
+          self.image_url = file.public_url
         elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = i.split('.jpg')
           i = i[0] + '.jpg'
-          self.image_url = i
-          # i_slug = i.split('/').last
-          # agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
-          # i = open("tmp/cache/assets/images/#{i_slug}.jpg")
-          # self.encoded_image = Base64.strict_encode64(i.read)
+          storage = Google::Cloud::Storage.new project: "recidex-207202"
+          bucket = storage.bucket "recidex.com"
+          i_slug = i.split('/').last
+          agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
+          file = bucket.create_file "tmp/cache/assets/images/#{i_slug}.jpg", "recipe_images/#{@recipe_source.slug}/#{i_slug}.jpg"
+          self.image_url = file.public_url
         end
       end
     end
