@@ -19,22 +19,24 @@ namespace :scrape_recipes do
               @doc = Nokogiri::HTML(open(page, 'User-Agent' => 'firefox'))
               links = @doc.css(source.recipe_css).map { |link| link['href'] } || []
               links.each do |link|
-                if link[0] = "/"
+                if link[0] == "/"
+                  byebug
                   link = source.link + link
                 end
                 Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
               end
-              sleep(60)
+              sleep(10)
             end
           else
             links = @doc.css(source.recipe_css).map { |link| link['href'] } || []
             links.each do |link|
-              if link[0] = "/"
+              if link[0] == "/"
+                byebug
                 link = source.link + link
               end
               Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
             end
-            sleep(60)
+            sleep(10)
           end
         end
       else
@@ -52,12 +54,13 @@ namespace :scrape_recipes do
               end
               Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
             end
-            sleep(60)
+            sleep(10)
           end
         else
           links = @doc.css(source.recipe_css).map { |link| link['href'] } || []
           links.each do |link|
-            if link[0] = "/"
+            if link[0] == "/"
+              byebug
               link = source.link + link
             end
             Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
