@@ -13,7 +13,7 @@ gem 'figaro'
 gem 'seed_dump'
 gem 'friendly_id', '~> 5.1.0'
 gem 'mechanize'
-gem 'google-cloud-storage'
+gem 'aws-sdk-s3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'

@@ -15,7 +15,7 @@ class Recipe < ApplicationRecord
   def scrape_recipe
     require 'open-uri'
     require 'mechanize'
-    require "google/cloud/storage"
+    require 'aws-sdk-s3'
 
     agent = Mechanize.new
 
@@ -37,23 +37,12 @@ class Recipe < ApplicationRecord
       unless @doc.css(@recipe_source.scrape_image).blank?
         if @doc.css(@recipe_source.scrape_image).first.attr('src')
           i = @doc.css(@recipe_source.scrape_image).first.attr('src')
-          self.image_url = i
-          storage = Google::Cloud::Storage.new project: "recidex-207202"
-          bucket = storage.bucket "recidex.com"
-          i_slug = i.split('/').last
-          agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
-          file = bucket.create_file "tmp/cache/assets/images/#{i_slug}.jpg", "recipe_images/#{@recipe_source.slug}/#{i_slug}.jpg"
-          self.image_url = file.public_url
+          save_image_to_s3(i, agent)
         elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
           i = i.split('.jpg')
           i = i[0] + '.jpg'
-          storage = Google::Cloud::Storage.new project: "recidex-207202"
-          bucket = storage.bucket "recidex.com"
-          i_slug = i.split('/').last
-          agent.get(i).save "tmp/cache/assets/images/#{i_slug}.jpg"
-          file = bucket.create_file "tmp/cache/assets/images/#{i_slug}.jpg", "recipe_images/#{@recipe_source.slug}/#{i_slug}.jpg"
-          self.image_url = file.public_url
+          save_image_to_s3(i, agent)
         end
       end
     end
@@ -63,5 +52,18 @@ class Recipe < ApplicationRecord
     ingredients.each do |ingredient|
       self.ingredients << ingredient.text
     end
+  end
+
+  def save_image_to_s3(i, agent)
+    slug = self.name.parameterize
+    agent.get(i).save "tmp/cache/assets/images/#{slug}.jpg"
+    s3 = Aws::S3::Resource.new(region:'us-east-1')
+    obj_key = "recipes/#{@recipe_source.slug}/#{slug}"
+    obj = s3.bucket('recidex').object(obj_key)
+    obj.upload_file("tmp/cache/assets/images/#{slug}.jpg")
+    bucket = s3.bucket("recidex")
+    object = bucket.object(obj_key)
+    resp = object.acl.put({ acl: "public-read" })
+    self.image_url = "https://s3.amazonaws.com/recidex/#{obj_key}"
   end
 end
