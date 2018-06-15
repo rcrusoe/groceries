@@ -33,7 +33,7 @@
           <%= f.submit "Add to Grocery List", id: "add-to-list" %>
         <% end %>
       <% end %>
-      <a href="<%= @recipe.link %>?utm_source=mealprepday.co&utm_medium=referral" class="simple-link simple-link--secondary">View Recipe</a>
+      <a href="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" class="simple-link simple-link--secondary">View Recipe</a>
       <% if current_user && @already_added %>
         <%= link_to "My Grocery List (#{@ingredient_count})", "/groceries", class: "simple-link simple-link--background" %>
         <%= link_to "Remove From Grocery List", archive_meal_plan_path(@meal_plan), class: "simple-link simple-link--background" %>
