@@ -10,7 +10,7 @@
     <h2>My Recipes</h2>
     <div class="recipe-carousel">
       <% @liked_recipes.each do |recipe| %>
-        <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source %>
+        <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
       <% end %>
     </div>
   </div>
@@ -19,7 +19,7 @@
   <h2>Recently Used</h2>
   <div class="recipe-carousel">
     <% @recipes.each do |recipe| %>
-      <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source %>
+      <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
     <% end %>
   </div>
 </div>

@@ -1,6 +1,9 @@
-<%= link_to recipe_source_recipe_path(recipe_source, recipe), class: "recipe-card--large" do %>
+<%= link_to recipe_source_recipe_path(recipe_source, recipe, show_source), class: "recipe-card--large" do %>
   <% unless recipe.image_url.blank? %>
     <div style="background-image: url(<%= recipe.image_url %>)"></div>
   <% end %>
   <h3><%= recipe.name %></h3>
+  <% if show_source == true %>
+    <p class="minor"><%= recipe_source.name %></p>
+  <% end %>
 <% end %>
