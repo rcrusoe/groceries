@@ -26,4 +26,8 @@ module RecipesHelper
       end
     end
   end
+
+  def recipe_search(term)
+    return Recipe.where("name like ?", "%#{term}%")
+  end
 end

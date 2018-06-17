@@ -23,3 +23,27 @@
     <% end %>
   </div>
 </div>
+<div class="container">
+  <h2>Salad Recipes</h2>
+  <div class="recipe-carousel">
+    <% @salad_recipes.sample(10).each do |recipe| %>
+      <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <h2>Chicken Recipes</h2>
+  <div class="recipe-carousel">
+    <% @chicken_recipes.sample(10).each do |recipe| %>
+      <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <h2>Vegetarian Recipes</h2>
+  <div class="recipe-carousel">
+    <% @vegetarian_recipes.each do |recipe| %>
+      <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
+    <% end %>
+  </div>
+</div>
