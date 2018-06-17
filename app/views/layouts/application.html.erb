@@ -1,6 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <% if @recipe && @recipe_source %>
+      <title><%= @recipe.name %> by <%= @recipe_source.name %> | Recidex</title>
+      <meta property="og:title" content="<%= @recipe.name %> by <%= @recipe_source.name %> | Recidex" />
+      <meta name="description"
+            content="Save all of your favorite recipes in one place. Import recipes from any blog or website, and write reviews to discover related recipes."/>
+      <meta property="og:description"
+            content="Save all of your favorite recipes in one place. Import recipes from any blog or website, and write reviews to discover related recipes." />
+      <% if @recipe.image_url %>
+        <meta property="og:image" content="<%= @recipe.image_url %>" />
+      <% end %>
+      <meta property="og:image:width" content="400" />
+      <meta property="og:image:height" content="400" />
+    <% elsif @recipe_source %>
+      <title>Top reviewed recipes from <%= @recipe_source.name %> | Recidex</title>
+      <meta property="og:title" content="Top reviewed recipes from <%= @recipe_source.name %> | Recidex" />
+      <meta name="description"
+            content="Save all of your favorite recipes in one place. Import recipes from any blog or website, and write reviews to discover related recipes."/>
+      <meta property="og:description"
+            content="Save all of your favorite recipes in one place. Import recipes from any blog or website, and write reviews to discover related recipes." />
+      <meta property="og:image" content="<%= image_url 'recidex-banner.jpg' %>" />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="400" />
+    <% else %>
+      <title>Save and review your favorite recipes | Recidex</title>
+      <meta property="og:title" content="Save and review your favorite recipes | Recidex" />
+      <meta name="description"
+            content="Save all of your favorite recipes in one place. Import recipes from any blog or website, and write reviews to discover related recipes."/>
+      <meta property="og:description"
+            content="Save all of your favorite recipes in one place. Import recipes from any blog or website, and write reviews to discover related recipes." />
+      <meta property="og:image" content="<%= image_url 'recidex-banner.jpg' %>" />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="400" />
+    <% end %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44787524-10"></script>
     <script>

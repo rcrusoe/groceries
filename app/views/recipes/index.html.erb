@@ -1,7 +1,7 @@
 <div class="hero hero--home">
   <div class="hero__copy">
-    <h1>Paste a recipe link, get a grocery list</h1>
-    <p class="m-hidden">Create a simple grocery checklist by pasting a link to a recipe on one of 100+ different recipe websites.</p>
+    <h1>All of your favorite recipes in one place.</h1>
+    <p class="m-hidden">Paste a link to a recipe from your favorite blog or website to get started.</p>
   </div>
   <%= render 'form', recipe: @recipe %>
 </div>
@@ -16,7 +16,7 @@
   </div>
 <% end %>
 <div class="container">
-  <h2>Recently Used</h2>
+  <h2>What's cooking?</h2>
   <div class="recipe-carousel">
     <% @recipes.each do |recipe| %>
       <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>

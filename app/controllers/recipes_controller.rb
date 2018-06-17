@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
-    @recipes = Recipe.take(4)
+    @recipes = Recipe.all.sample(10)
     @recipe = Recipe.new
     @user = session[:userinfo]
     liked_recipes
