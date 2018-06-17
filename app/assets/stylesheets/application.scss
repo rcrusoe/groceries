@@ -361,10 +361,7 @@ button.ui.icon.button {
   -webkit-overflow-scrolling: touch;
 
   & > * {
-
-    &:not(:last-of-type) {
-      margin-right: 2rem;
-    }
+    margin-right: 2rem;
   }
 }
 
