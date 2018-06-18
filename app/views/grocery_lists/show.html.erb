@@ -15,7 +15,7 @@
           <div class="recipe__image" style="background-image: url(<%= meal_plan.recipe.image_url %>)"></div>
         <% end %>
         <div>
-          <%= link_to meal_plan.recipe do %>
+          <%= link_to recipe_source_recipe_path(meal_plan.recipe.recipe_source_id ,meal_plan.recipe, false) do %>
             <h2><%= meal_plan.recipe.name %></h2>
           <% end %>
           <%= link_to "Remove", archive_meal_plan_path(meal_plan), class: "simple-link simple-link--underline remove-link" %>
