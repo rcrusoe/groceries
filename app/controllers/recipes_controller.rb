@@ -63,7 +63,7 @@ class RecipesController < ApplicationController
           color: "#5a4753",
         }
         RECIPE_NOTIFIER.ping(attachments: [recipe_info])
-        format.html { redirect_to recipes_path, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to recipes_url, notice: "Bummer. That link didn't seem to work :/."}
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
@@ -72,7 +72,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.'}
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }

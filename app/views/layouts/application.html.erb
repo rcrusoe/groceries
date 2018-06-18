@@ -53,6 +53,11 @@
   </head>
 
   <body>
+    <% if notice %>
+      <div class="notice">
+        <p><%= notice %></p>
+      </div>
+    <% end %>
     <div class="ui sidebar vertical right menu">
       <%= render 'shared/nav_links' %>
     </div>
