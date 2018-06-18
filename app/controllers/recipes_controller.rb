@@ -52,6 +52,13 @@ class RecipesController < ApplicationController
           like.save
         end
       else
+        recipe_info = {
+          pretext: "Someone tried (unsuccessfully) to create a recipe.",
+          title: "#{params[:link]}",
+          title_link: "#{params[:link]}",
+          color: "#5a4753",
+        }
+        RECIPE_NOTIFIER.ping(attachments: [recipe_info])
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
