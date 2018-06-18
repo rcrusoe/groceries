@@ -1,5 +1,0 @@
-<%= link_to "Save Recipe", "#", id: "like-recipe", class: "simple-link simple-link--underline" %>
-<%= form_for([@recipe, @recipe.likes.build], html: {class: "d-none"}) do |f| %>
-  <%= f.hidden_field :user_id, value: current_user["uid"] %>
-  <%= f.submit "Like" %>
-<% end %>

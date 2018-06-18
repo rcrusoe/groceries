@@ -13,7 +13,8 @@ module Auth0Helper
     if user_signed_in?
       @current_user = session[:userinfo]
     else
-      redirect_to auth_login_path
+      cookies[:redirect_url] = params[:redirect_url]
+      redirect_to "/auth/auth0"
     end
   end
 
