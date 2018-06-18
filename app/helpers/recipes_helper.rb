@@ -41,12 +41,11 @@ module RecipesHelper
     terms = r.name.split(" ")
     excluded_terms = ["and"]
     terms = terms.map(&:capitalize) - excluded_terms.map(&:capitalize)
-    byebug
-    @related_recipes = Set[]
+    @related_recipes = []
     terms.each do |term|
       recs = Recipe.where("name like ?", "%#{term}%")
       recs.each do |rec|
-        @related_recipes.add(rec) unless rec.name == r.name
+        @related_recipes.push(rec) unless rec.name == r.name || @related_recipes.include?(rec)
       end
     end
   end
