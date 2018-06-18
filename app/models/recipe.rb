@@ -6,7 +6,6 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :meal_plans
   accepts_nested_attributes_for :likes
   validates_length_of :ingredients, minimum: 1, if: :scrape_recipe
-  validates_presence_of :image_url, if: :scrape_recipe
   validates_presence_of :name, if: :scrape_recipe
 
   extend FriendlyId
