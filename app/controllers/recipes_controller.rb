@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:like]
 
   def index
     @recipes = Recipe.all.sample(10)
@@ -73,6 +74,19 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def like
+    @recipe = Recipe.friendly.find(params[:id])
+    @like = @recipe.likes.create(recipe_id: @recipe.id, user_id: current_user["uid"])
+    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
+  end
+
+  def unlike
+    @recipe = Recipe.friendly.find(params[:id])
+    @like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
+    @like.destroy
+    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
   end
 
   private

@@ -12,11 +12,10 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :meal_plans
     resources :likes
-  end
 
-  resources :likes do
     member do
-      get "/unlike", to: "likes#destroy"
+      get "/unlike", to: "recipes#unlike"
+      get "/like", to: "recipes#like"
     end
   end
 

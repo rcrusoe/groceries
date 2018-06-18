@@ -5,10 +5,10 @@
     </div>
     <div class="recipe__subheader">
       <%= link_to @recipe_source.name, @recipe_source, class: "simple-link simple-link--underline" %>
-      <% if current_user && @like %>
-        <%= render 'unlike' %>
-      <% elsif current_user %>
-        <%= render 'like' %>
+      <% if @like %>
+        <%= link_to "Saved", unlike_recipe_path(@recipe), class: "simple-link simple-link--underline", id: "unsave-recipe" %>
+      <% else %>
+        <%= link_to "Save", like_recipe_path(@recipe, redirect_url: like_recipe_path(@recipe)), class: "simple-link simple-link--underline" %>
       <% end %>
     </div>
   </div>
@@ -81,8 +81,11 @@
     $(this).siblings('form').submit()
   })
 
-  $('#like-recipe').on('click', function(e) {
-    e.preventDefault();
-    $(this).siblings('form').submit();
+  $('#unsave-recipe').on('mouseover', function() {
+    $(this).text("Unsave")
+  })
+
+  $('#unsave-recipe').on('mouseleave', function() {
+    $(this).text("Saved")
   })
 </script>
