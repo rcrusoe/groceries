@@ -28,28 +28,32 @@ class Recipe < ApplicationRecord
     end
     @recipe_source = RecipeSource.where(domain: domain).first
 
-    if @doc.css(@recipe_source.scrape_name).first
-      self.name = @doc.css(@recipe_source.scrape_name).first.text
-    end
+    unless @recipe_source.blank?
+      if @doc.css(@recipe_source.scrape_name).first
+        self.name = @doc.css(@recipe_source.scrape_name).first.text
+      end
 
-    unless @recipe_source.scrape_image.blank?
-      unless @doc.css(@recipe_source.scrape_image).blank?
-        if @doc.css(@recipe_source.scrape_image).first.attr('src')
-          i = @doc.css(@recipe_source.scrape_image).first.attr('src')
-          save_image_to_s3(i, agent)
-        elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
-          i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
-          i = i.split('.jpg')
-          i = i[0] + '.jpg'
-          save_image_to_s3(i, agent)
+      unless @recipe_source.scrape_image.blank?
+        unless @doc.css(@recipe_source.scrape_image).blank?
+          if @doc.css(@recipe_source.scrape_image).first.attr('src')
+            i = @doc.css(@recipe_source.scrape_image).first.attr('src')
+            save_image_to_s3(i, agent)
+          elsif @doc.css(@recipe_source.scrape_image).first.attr('srcset')
+            i = @doc.css(@recipe_source.scrape_image).first.attr('srcset')
+            i = i.split('.jpg')
+            i = i[0] + '.jpg'
+            save_image_to_s3(i, agent)
+          end
         end
       end
-    end
 
-    self.ingredients = []
-    ingredients = @doc.css(@recipe_source.scrape_ingredient)
-    ingredients.each do |ingredient|
-      self.ingredients << ingredient.text
+      self.ingredients = []
+      ingredients = @doc.css(@recipe_source.scrape_ingredient)
+      ingredients.each do |ingredient|
+        self.ingredients << ingredient.text
+      end
+    else
+      false
     end
   end
 

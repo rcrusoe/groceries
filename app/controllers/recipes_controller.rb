@@ -41,10 +41,14 @@ class RecipesController < ApplicationController
       domain = s.host
     end
     @recipe_source = RecipeSource.where(domain: domain).first
-    @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
+    unless @recipe_source.blank?
+      @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
+    else
+      false
+    end
 
     respond_to do |format|
-      if @recipe.save
+      if @recipe && @recipe.save
         format.html { redirect_to recipe_source_recipe_path(@recipe_source, @recipe), notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
         if current_user
@@ -54,12 +58,12 @@ class RecipesController < ApplicationController
       else
         recipe_info = {
           pretext: "Someone tried (unsuccessfully) to create a recipe.",
-          title: "#{params[:link]}",
-          title_link: "#{params[:link]}",
+          title: "#{recipe_params[:link]}",
+          title_link: "#{recipe_params[:link]}",
           color: "#5a4753",
         }
         RECIPE_NOTIFIER.ping(attachments: [recipe_info])
-        format.html { render :new }
+        format.html { redirect_to recipes_path, notice: 'Recipe was successfully created.' }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
