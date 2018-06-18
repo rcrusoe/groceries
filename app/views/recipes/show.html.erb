@@ -49,6 +49,16 @@
     </div>
   </div>
 </div>
+<% if @related_recipes.count > 3 %>
+  <div class="container container--recipe" id="related-recipes">
+    <h2>Similar Recipes</h2>
+    <div class="recipe-carousel">
+      <% @related_recipes.each do |recipe| %>
+        <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 <% if @recipe_source.recipes.count > 3 %>
   <div class="container container--recipe" id="related-recipes">
     <h2>More from <%= @recipe_source.name %></h2>

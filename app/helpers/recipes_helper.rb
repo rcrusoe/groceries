@@ -37,6 +37,20 @@ module RecipesHelper
     end
   end
 
+  def related_recipes(r)
+    terms = r.name.split(" ")
+    excluded_terms = ["and"]
+    terms = terms.map(&:capitalize) - excluded_terms.map(&:capitalize)
+    byebug
+    @related_recipes = Set[]
+    terms.each do |term|
+      recs = Recipe.where("name like ?", "%#{term}%")
+      recs.each do |rec|
+        @related_recipes.add(rec) unless rec.name == r.name
+      end
+    end
+  end
+
   def recipe_search(term)
     return Recipe.where("name like ?", "%#{term}%")
   end
