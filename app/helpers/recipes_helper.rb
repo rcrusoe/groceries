@@ -2,9 +2,19 @@ module RecipesHelper
   def liked_recipes
     if current_user
       likes = Like.where(user_id: current_user["uid"])
-      @liked_recipes = []
+      @liked_recipes = Set[]
       likes.each do |like|
-        @liked_recipes.push(Recipe.find(like.recipe_id))
+        @liked_recipes.add(Recipe.find(like.recipe_id))
+      end
+    end
+  end
+
+  def previously_cooked
+    if current_user
+      meal_plans = MealPlan.where(user_id: current_user["uid"], status: "Complete")
+      @previously_cooked = Set[]
+      meal_plans.each do |meal_plan|
+        @previously_cooked.add(Recipe.find(meal_plan.recipe_id))
       end
     end
   end

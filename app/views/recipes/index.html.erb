@@ -5,6 +5,16 @@
   </div>
   <%= render 'form', recipe: @recipe %>
 </div>
+<% if previously_cooked && @previously_cooked.count > 0 %>
+  <div class="container">
+    <h2>Make It Again</h2>
+    <div class="recipe-carousel">
+      <% @previously_cooked.each do |recipe| %>
+        <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 <% if current_user && @liked_recipes.count > 0 %>
   <div class="container">
     <h2>My Recipes</h2>

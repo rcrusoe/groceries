@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @user = session[:userinfo]
     liked_recipes
+    previously_cooked
     @salad_recipes = recipe_search("Salad")
     @chicken_recipes = recipe_search("Chicken")
     @vegetarian_recipes = recipe_search("Vegetarian")
