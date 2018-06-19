@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     member do
       get "/unlike", to: "recipes#unlike"
       get "/like", to: "recipes#like"
+      get '/add-to-list', to: "recipes#add_to_list"
+      get '/remove-from-list', to: "recipes#remove_from_list"
     end
   end
 

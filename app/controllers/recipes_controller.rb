@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:like]
+  before_action :authenticate_user!, only: [:like, :add_to_list]
 
   def index
     @recipes = Recipe.all.sample(10)
@@ -99,6 +99,20 @@ class RecipesController < ApplicationController
     @recipe = Recipe.friendly.find(params[:id])
     @like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
     @like.destroy
+    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
+  end
+
+  def add_to_list
+    @recipe = Recipe.friendly.find(params[:id])
+    @meal_plan = @recipe.meal_plans.create(recipe_id: @recipe.id, user_id: current_user["uid"], status: "Upcoming")
+    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
+  end
+
+  def remove_from_list
+    @meal_plan = MealPlan.find(params[:id])
+    @meal_plan.update_column(:status, "Complete")
+    @meal_plan.save
+    @recipe = Recipe.find(@meal_plan.recipe_id)
     redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
   end
 
