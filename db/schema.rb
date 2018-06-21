@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613023341) do
+ActiveRecord::Schema.define(version: 20180619230828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,24 @@ ActiveRecord::Schema.define(version: 20180613023341) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "grocery_items", force: :cascade do |t|
+    t.string "name"
+    t.string "aisle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.decimal "qty"
+    t.string "measurement"
+    t.string "note"
+    t.string "aisle"
+    t.integer "recipe_id"
+    t.integer "grocery_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -56,13 +74,15 @@ ActiveRecord::Schema.define(version: 20180613023341) do
     t.string "recipe_css"
     t.boolean "multiple_pages"
     t.string "slug"
+    t.string "scrape_qty"
+    t.string "scrape_measurement"
     t.index ["domain"], name: "index_recipe_sources_on_domain", unique: true
   end
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "link"
-    t.jsonb "ingredients"
+    t.jsonb "ingredients_array"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_url"

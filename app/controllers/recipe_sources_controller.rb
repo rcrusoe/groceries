@@ -70,8 +70,8 @@ class RecipeSourcesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_source_params
       params.require(:recipe_source).permit(
-        :name, :link, :scrape_name, :scrape_ingredient, :scrape_image, :domain, :recipe_index_link, :category_css, :recipe_css, :multiple_pages,
-        recipe_params: [:name, :link, :ingredients, :image_url]
+        :name, :link, :scrape_name, :scrape_qty, :scrape_measurement, :scrape_ingredient, :scrape_image, :domain, :recipe_index_link, :category_css, :recipe_css, :multiple_pages,
+        recipe_params: [:name, :link, :ingredients_array, :image_url]
       )
     end
 end

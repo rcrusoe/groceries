@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       current_recipes_on_list
       @ingredient_count = 0
       @meal_plans.each do |meal_plan|
-        @ingredient_count += meal_plan.recipe.ingredients.count
+        @ingredient_count += meal_plan.recipe.ingredients_array.count
       end
     end
   end

@@ -1,11 +1,17 @@
 class Recipe < ApplicationRecord
   before_save :scrape_recipe
+  after_save :save_ingredients
+
   belongs_to :recipe_source
   has_many :meal_plans, :dependent => :destroy
   has_many :likes, :dependent => :destroy
+  has_many :ingredients, :dependent => :destroy
+  has_many :grocery_items, through: :ingredients
+
   accepts_nested_attributes_for :meal_plans
   accepts_nested_attributes_for :likes
-  validates_length_of :ingredients, minimum: 1, if: :scrape_recipe
+  accepts_nested_attributes_for :ingredients
+  validates_length_of :ingredients_array, minimum: 1, if: :scrape_recipe
   validates_presence_of :name, if: :scrape_recipe
 
   extend FriendlyId
@@ -15,24 +21,12 @@ class Recipe < ApplicationRecord
     require 'open-uri'
     require 'mechanize'
     require 'aws-sdk-s3'
-
     agent = Mechanize.new
-
-    @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
-    s = URI.parse(self.link)
-    domain_segments = s.host.split('.')
-    if domain_segments.count > 2
-      domain = domain_segments[1] + "." + domain_segments[2]
-    else
-      domain = s.host
-    end
-    @recipe_source = RecipeSource.where(domain: domain).first
+    identify_recipe_source
 
     unless @recipe_source.blank?
-      if @doc.css(@recipe_source.scrape_name).first
-        self.name = @doc.css(@recipe_source.scrape_name).first.text
-      end
-
+      save_recipe_name
+      scrape_ingredient_array
       unless @recipe_source.scrape_image.blank?
         unless @doc.css(@recipe_source.scrape_image).blank?
           if @doc.css(@recipe_source.scrape_image).first.attr('src')
@@ -46,14 +40,59 @@ class Recipe < ApplicationRecord
           end
         end
       end
-
-      self.ingredients = []
-      ingredients = @doc.css(@recipe_source.scrape_ingredient)
-      ingredients.each do |ingredient|
-        self.ingredients << ingredient.text
-      end
     else
       false
+    end
+  end
+
+  def identify_recipe_source
+    @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
+    s = URI.parse(self.link)
+    domain_segments = s.host.split('.')
+    if domain_segments.count > 2
+      domain = domain_segments[1] + "." + domain_segments[2]
+    else
+      domain = s.host
+    end
+    @recipe_source = RecipeSource.where(domain: domain).first
+  end
+
+  def save_recipe_name
+    if @doc.css(@recipe_source.scrape_name).first
+      self.name = @doc.css(@recipe_source.scrape_name).first.text
+    end
+  end
+
+  def scrape_ingredient_array
+    self.ingredients_array = []
+    ingredients = @doc.css(@recipe_source.scrape_ingredient)
+    ingredients.each do |ingredient|
+      self.ingredients_array << ingredient.text
+    end
+  end
+
+  def save_ingredients
+    @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
+    ingredients = @doc.css(@recipe_source.scrape_ingredient)
+    ingredients.each do |ingredient|
+      self.ingredients_array << ingredient.text
+      grocery_item_name = set_grocery_item(ingredient.text)
+      if grocery_item_name
+        grocery_item = GroceryItem.where(name: grocery_item_name).first_or_create(name: grocery_item_name)
+      else
+        grocery_item = GroceryItem.where(name: "Unassigned").first_or_create(name: "Unassigned")
+      end
+      ing = Ingredient.where(recipe_id: self.id, note: ingredient.text).first_or_create(recipe_id: self.id, grocery_item_id: grocery_item.id, note: ingredient.text)
+    end
+  end
+
+  def set_grocery_item(string)
+    require "google/cloud/language"
+    language = Google::Cloud::Language.new
+    response = language.analyze_entities content: string, type: :PLAIN_TEXT
+    entities = response.entities
+    unless entities.blank?
+      entities.first.name
     end
   end
 

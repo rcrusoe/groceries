@@ -32,6 +32,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :scrape_qty %>
+    <%= form.text_field :scrape_qty, id: :recipe_source_scrape_qty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scrape_measurement %>
+    <%= form.text_field :scrape_measurement, id: :recipe_source_scrape_measurement %>
+  </div>
+
+  <div class="field">
     <%= form.label :scrape_ingredient %>
     <%= form.text_field :scrape_ingredient, id: :recipe_source_scrape_ingredient %>
   </div>

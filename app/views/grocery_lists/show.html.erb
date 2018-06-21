@@ -18,15 +18,36 @@
           <%= link_to recipe_source_recipe_path(meal_plan.recipe.recipe_source_id ,meal_plan.recipe, false) do %>
             <h2><%= meal_plan.recipe.name %></h2>
           <% end %>
-          <%= link_to "Remove", archive_meal_plan_path(meal_plan), class: "simple-link simple-link--underline remove-link" %>
+          <%= link_to "Remove", remove_from_list_recipe_path(meal_plan), class: "simple-link simple-link--underline" %>
         </div>
       </div>
-      <% meal_plan.recipe.ingredients.each do |ingredient| %>
-        <div class="ingredient ingredient--checkable">
-          <div class="checkbox"></div>
-          <p><%= ingredient %></p>
-        </div>
+      <% if meal_plan.recipe.ingredients.count > 0 %>
+        <% meal_plan.recipe.ingredients.each do |ingredient| %>
+          <div class="ingredient ingredient--checkable">
+            <div class="checkbox"></div>
+            <p><%= ingredient.note %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <% meal_plan.recipe.ingredients_array.each do |ingredient| %>
+          <div class="ingredient ingredient--checkable">
+            <div class="checkbox"></div>
+            <p><%= ingredient %></p>
+          </div>
+        <% end %>
       <% end %>
+    </div>
+  <% end %>
+
+  <% @groceries.each do |item, ingredients| %>
+    <div class="ingredient ingredient--checkable">
+      <div class="checkbox"></div>
+      <div style="display: flex; flex-direction: column;">
+        <p><%= item.name %></p>
+        <% item.ingredients.each do |ingredient| %>
+          <p><%= ingredient.note %> | <%= ingredient.recipe.name %></p>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qty: 9.99
+  measurement: MyString
+  note: MyString
+  aisle: MyString
+  recipe_id: 1
+  grocery_item_id: 1
+
+two:
+  qty: 9.99
+  measurement: MyString
+  note: MyString
+  aisle: MyString
+  recipe_id: 1
+  grocery_item_id: 1

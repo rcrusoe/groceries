@@ -35,8 +35,8 @@
       <% end %>
     </div>
     <div class="recipe__ingredients">
-      <h2>Ingredients (<%= @recipe.ingredients.length %>)</h2>
-      <% @recipe.ingredients.each do |ingredient| %>
+      <h2>Ingredients (<%= @recipe.ingredients_array.length %>)</h2>
+      <% @recipe.ingredients_array.each do |ingredient| %>
         <div class="ingredient">
           <p><%= ingredient %></p>
         </div>
