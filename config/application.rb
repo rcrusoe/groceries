@@ -1,8 +1,5 @@
 require_relative 'boot'
 
-config.enable_dependency_loading = true
-config.autoload_paths << Rails.root.join('lib')
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
