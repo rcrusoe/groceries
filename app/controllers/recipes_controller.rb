@@ -116,30 +116,6 @@ class RecipesController < ApplicationController
     redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
   end
 
-  def self.create_ingredients_from_array
-    require "google/cloud/language"
-    Recipe.all.each do |r|
-      r.ingredients_array.each do |ingredient|
-        language = Google::Cloud::Language.new
-        response = language.analyze_entities content: ingredient, type: :PLAIN_TEXT
-        entities = response.entities
-        blacklist = ["cup", "teaspoon", "pinch", "tablespoon"]
-        grocery_item_name = nil
-        unless entities.blank?
-          entities.each do |e|
-            grocery_item_name = e.name unless blacklist.include?(e.name.downcase)
-          end
-        end
-        unless grocery_item_name.blank?
-          grocery_item = GroceryItem.where(name: grocery_item_name).first_or_create(name: grocery_item_name)
-        else
-          grocery_item = GroceryItem.where(name: "Unassigned").first_or_create(name: "Unassigned")
-        end
-        ing = Ingredient.where(recipe_id: r.id, note: ingredient).first_or_create(recipe_id: r.id, grocery_item_id: grocery_item.id, note: ingredient)
-      end
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe

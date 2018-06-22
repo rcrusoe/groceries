@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get "/auth/logout" => "auth0#logout"
   get "/auth/login" => "auth0#login"
   get "/groceries" => "grocery_lists#show"
-  get "/create-ingredients" => "recipes#create_ingredients_from_array"
 
   resources :recipe_sources, path: :sources do
     resources :recipes
