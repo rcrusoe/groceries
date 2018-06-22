@@ -103,7 +103,7 @@ class Recipe < ApplicationRecord
 
   def create_ingredients
     self.ingredients_array.each do |ingredient|
-      grocery_item_name = set_grocery_item(ingredient.text)
+      grocery_item_name = set_grocery_item(ingredient)
       unless grocery_item_name.blank?
         grocery_item = GroceryItem.where(name: grocery_item_name).first_or_create(name: grocery_item_name)
       else
