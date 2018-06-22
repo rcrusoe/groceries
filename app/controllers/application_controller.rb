@@ -8,11 +8,8 @@ class ApplicationController < ActionController::Base
 
   def ingredient_count
     if current_user
-      current_recipes_on_list
-      @ingredient_count = 0
-      @meal_plans.each do |meal_plan|
-        @ingredient_count += meal_plan.recipe.ingredients_array.count
-      end
+      grocery_items_on_list
+      @ingredient_count = @ingreds.count
     end
   end
 end

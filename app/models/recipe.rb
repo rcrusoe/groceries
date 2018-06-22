@@ -77,10 +77,10 @@ class Recipe < ApplicationRecord
     ingredients.each do |ingredient|
       self.ingredients_array << ingredient.text
       grocery_item_name = set_grocery_item(ingredient.text)
-      if grocery_item_name
+      unless grocery_item_name.blank?
         grocery_item = GroceryItem.where(name: grocery_item_name).first_or_create(name: grocery_item_name)
       else
-        grocery_item = GroceryItem.where(name: "Unassigned").first_or_create(name: "Unassigned")
+        grocery_item = GroceryItem.where(name: "Unidentified").first_or_create(name: "Unidentified")
       end
       ing = Ingredient.where(recipe_id: self.id, note: ingredient.text).first_or_create(recipe_id: self.id, grocery_item_id: grocery_item.id, note: ingredient.text)
     end
@@ -91,9 +91,13 @@ class Recipe < ApplicationRecord
     language = Google::Cloud::Language.new
     response = language.analyze_entities content: string, type: :PLAIN_TEXT
     entities = response.entities
+    blacklist = ["cup", "teaspoon", "pinch", "tablespoon"]
     unless entities.blank?
-      entities.first.name
+      entities.each do |e|
+        return e.name unless blacklist.include?(e.name.downcase)
+      end
     end
+    return nil
   end
 
   def save_image_to_s3(i, agent)

@@ -1,10 +1,4 @@
 module GroceryListsHelper
-  def current_recipes_on_list
-    if current_user
-      @meal_plans = MealPlan.where(user_id: current_user["uid"], status: "Upcoming")
-    end
-  end
-
   def is_current_recipe_on_list
     if current_user
       @recipe = Recipe.friendly.find(params[:id])
@@ -16,19 +10,17 @@ module GroceryListsHelper
   end
 
   def grocery_items_on_list
-    @groceries = {}
-    @meal_plans.each do |meal|
-      meal.recipe.grocery_items.each do |grocery|
-        unless @groceries.include?(grocery)
-          ingreds = []
-          grocery.ingredients.each do |i|
-            if @meal_plans.include?(Recipe.find(i.recipe_id))
-              ingreds.push(i)
-            end
-          end
-          @groceries[grocery] = ingreds
-        end
-      end
-    end
+    # get all recipes on list
+    @recipes = Recipe.joins(:meal_plans).where(meal_plans: {user_id: current_user["uid"], status: "Upcoming"})
+    @recipes = Recipe.joins(:meal_plans).where(meal_plans: {status: "Upcoming"})
+
+    # get all ingredients from all recipes on list
+    @ingreds = Ingredient.where('recipe_id IN (?)', @recipes.select { |r| r.id })
+
+    # group ingredients by grocery item
+    @grocery_item_grouping = @ingreds.group_by{ |i| i.grocery_item }
+
+    # group ingredients by recipes
+    @recipe_grouping = @ingreds.group_by{ |i| i.recipe }
   end
 end

@@ -440,8 +440,50 @@ button.ui.icon.button {
   cursor: pointer;
 }
 
+.ingredient--grocery {
+  align-items: flex-start;
+
+  .checkbox {
+    margin-top: 0.5rem;
+  }
+
+  .grocery-item-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grocery-item {
+    text-transform: capitalize;
+  }
+
+  .ingred {
+    color: $gray-3;
+    display: flex;
+    margin-top: 1rem;
+
+    &:before {
+      background-color: $yellow;
+      border-radius: 2px;
+      content: '';
+      height: 4rem;
+      margin-right: 1rem;
+      width: 2px;
+    }
+
+    .ingred__content {
+      display: flex;
+      flex-direction: column;
+
+      .ingred__recipe {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
+}
+
 .checkbox {
-  border: 2px solid $gray-3;
+  border: 2px solid $orange;
   box-sizing: border-box;
   border-radius: 100%;
   display: block;
@@ -474,7 +516,7 @@ button.ui.icon.button {
       display: block;
       width: 6px;
       height: 12px;
-      border: solid $gray-3;
+      border: solid $orange;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
@@ -529,4 +571,19 @@ button.ui.icon.button {
 
 .d-none {
   display: none;
+}
+
+#grouping-toggle a {
+  margin-left: 1rem;
+}
+
+.grocery-list-section {
+  transition: $transition;
+}
+
+.grocery-list-section--hidden {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(5rem);
 }

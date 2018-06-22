@@ -2,65 +2,138 @@
   <div class="grocery-list-header">
     <h1>Groceries</h1>
     <div class="ingredient-count">
-      <span class="checked-ingredients">0</span>
-      of <%= @ingredient_count %>
+      <span id="checked-items">0</span>
+      of
+      <span id="total-items"><%= @ingredient_count %></span>
     </div>
   </div>
 </div>
 <div class="container container--recipe">
-  <% @meal_plans.each do |meal_plan| %>
-    <div class="ingredient-group ingredient-group--meal-plan">
-      <div class="recipe__subheader">
-        <% if meal_plan.recipe.image_url %>
-          <div class="recipe__image" style="background-image: url(<%= meal_plan.recipe.image_url %>)"></div>
-        <% end %>
-        <div>
-          <%= link_to recipe_source_recipe_path(meal_plan.recipe.recipe_source_id ,meal_plan.recipe, false) do %>
-            <h2><%= meal_plan.recipe.name %></h2>
+  <p id="grouping-toggle">Group by:
+    <a href="#" id="js-group-by-recipe" class="simple-link simple-link--underline">Recipe</a>
+    <a href="#" id="js-group-by-item" class="simple-link simple-link--underline">Item</a>
+  </p>
+</div>
+<div class="container container--recipe">
+  <div id="recipe-grouping" class="grocery-list-section">
+    <% @recipe_grouping.each do |recipe, ingreds| %>
+      <div class="ingredient-group ingredient-group--meal-plan">
+        <div class="recipe__subheader">
+          <% if recipe.image_url %>
+            <div class="recipe__image" style="background-image: url(<%= recipe.image_url %>)"></div>
           <% end %>
-          <%= link_to "Remove", remove_from_list_recipe_path(meal_plan), class: "simple-link simple-link--underline" %>
+          <div>
+            <%= link_to recipe_source_recipe_path(recipe.recipe_source_id ,recipe, false) do %>
+              <h2><%= recipe.name %></h2>
+            <% end %>
+            <%= link_to "Remove", remove_from_list_recipe_path(recipe.meal_plans.active(@current_user).first), class: "simple-link simple-link--underline" %>
+          </div>
+        </div>
+        <% if ingreds.count > 0 %>
+          <% ingreds.each do |ingred| %>
+            <div class="ingredient ingredient--checkable" data-ingredient="<%= ingred.id %>">
+              <div class="checkbox"></div>
+              <p><%= ingred.note %></p>
+            </div>
+          <% end %>
+        <% else %>
+          <% recipe.ingredients_array.each do |ingred| %>
+            <div class="ingredient ingredient--checkable" data-ingredient="<%= ingred.id %>">
+              <div class="checkbox"></div>
+              <p><%= ingred %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div id="grocery-item-grouping" class="grocery-list-section grocery-list-section--hidden">
+    <h2>Grocery Items</h2>
+    <% @grocery_item_grouping.each do |item, ingreds| %>
+      <div class="ingredient ingredient--checkable ingredient--grocery">
+        <div class="checkbox"></div>
+        <div class="grocery-item-container">
+          <p class="grocery-item"><%= item.name %></p>
+          <% ingreds.each do |ingred| %>
+            <div class="ingred" data-ingredient="<%= ingred.id %>">
+              <p class="ingred__content">
+                <span class="ingred__note"><%= ingred.note %></span>
+                <span class="ingred__recipe"><%= ingred.recipe.name %></span>
+              </p>
+            </div>
+          <% end %>
         </div>
       </div>
-      <% if meal_plan.recipe.ingredients.count > 0 %>
-        <% meal_plan.recipe.ingredients.each do |ingredient| %>
-          <div class="ingredient ingredient--checkable">
-            <div class="checkbox"></div>
-            <p><%= ingredient.note %></p>
-          </div>
-        <% end %>
-      <% else %>
-        <% meal_plan.recipe.ingredients_array.each do |ingredient| %>
-          <div class="ingredient ingredient--checkable">
-            <div class="checkbox"></div>
-            <p><%= ingredient %></p>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% @groceries.each do |item, ingredients| %>
-    <div class="ingredient ingredient--checkable">
-      <div class="checkbox"></div>
-      <div style="display: flex; flex-direction: column;">
-        <p><%= item.name %></p>
-        <% item.ingredients.each do |ingredient| %>
-          <p><%= ingredient.note %> | <%= ingredient.recipe.name %></p>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <script type="text/javascript">
-  $('.ingredient').on('click', function() {
-    var checkedIngredients = $('.checked-ingredients').text();
-    if ($(this).hasClass('ingredient--checked')) {
+  function incrementCount(el) {
+    var checkedIngredients = $('#checked-items').text();
+    if ($(el).hasClass('ingredient--checked')) {
       checkedIngredients--
     } else {
       checkedIngredients++
     }
-    $(this).toggleClass('ingredient--checked');
-    $('.checked-ingredients').text(checkedIngredients);
+    $(el).toggleClass('ingredient--checked');
+    $('#checked-items').text(checkedIngredients);
+  }
+
+  $('#grocery-item-grouping .ingredient').on('click', function() {
+    alreadyChecked = false;
+    if ($(this).hasClass('ingredient--checked')) {
+      alreadyChecked = true;
+    }
+    $(this).find('.ingred').each(function() {
+      id = $(this).attr("data-ingredient")
+      if (alreadyChecked == true) {
+        $("#recipe-grouping").find(`[data-ingredient='${id}']`).removeClass('ingredient--checked');
+      } else {
+        $("#recipe-grouping").find(`[data-ingredient='${id}']`).addClass('ingredient--checked');
+      }
+    })
+
+    el = $(this)
+    incrementCount(el)
+  })
+
+  $('#recipe-grouping .ingredient').on('click', function() {
+    alreadyChecked = false;
+    if ($(this).hasClass('ingredient--checked')) {
+      alreadyChecked = true;
+    }
+    id = $(this).attr("data-ingredient")
+    if (alreadyChecked == true) {
+      $("#grocery-item-grouping").find(`[data-ingredient='${id}']`).removeClass('ingredient--checked');
+      $("#grocery-item-grouping").find(`[data-ingredient='${id}']`).closest('.ingredient').removeClass('ingredient--checked');
+    } else {
+      $("#grocery-item-grouping").find(`[data-ingredient='${id}']`).addClass('ingredient--checked');
+    }
+
+    el = $(this)
+    incrementCount(el)
+  })
+
+  function updateCount(group) {
+    checked = $(group + ' .ingredient.ingredient--checked').length
+    $('#checked-items').text(checked)
+
+    total = $(group + ' .ingredient').length
+    $('#total-items').text(total)
+  }
+
+  $('#js-group-by-recipe').on('click', function(e) {
+    e.preventDefault()
+    $('#recipe-grouping').removeClass('grocery-list-section--hidden')
+    $('#grocery-item-grouping').addClass('grocery-list-section--hidden')
+    updateCount('#recipe-grouping')
+  })
+
+  $('#js-group-by-item').on('click', function(e) {
+    e.preventDefault()
+    $('#grocery-item-grouping').removeClass('grocery-list-section--hidden')
+    $('#recipe-grouping').addClass('grocery-list-section--hidden')
+    updateCount('#grocery-item-grouping')
   })
 </script>
