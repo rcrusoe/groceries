@@ -69,7 +69,8 @@ namespace :scrape_recipes do
     end
   end
 
-  task :create_ingredients_from_array, [:source_id] => [:environment] do |task, args|
+  desc "Creates ingredients from the recipe ingredients_array"
+  task :create_ingredients_from_array do |task, args|
     require "google/cloud/language"
     Recipe.all.each do |r|
       r.ingredients_array.each do |ingredient|
