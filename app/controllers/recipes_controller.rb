@@ -89,7 +89,7 @@ class RecipesController < ApplicationController
   end
 
   def like
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.friendly.find(params[:id])
     @like = @recipe.likes.create(user_id: current_user["uid"])
     respond_to do |format|
       format.html
@@ -98,7 +98,7 @@ class RecipesController < ApplicationController
   end
 
   def unlike
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.friendly.find(params[:id])
     @like = @recipe.likes.where(user_id: current_user["uid"]).first
     @like.destroy
     respond_to do |format|
