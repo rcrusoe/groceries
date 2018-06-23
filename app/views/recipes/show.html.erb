@@ -5,11 +5,13 @@
     </div>
     <div class="recipe__subheader">
       <%= link_to @recipe_source.name, @recipe_source, class: "simple-link simple-link--underline" %>
-      <% if @like %>
-        <%= link_to "Saved", unlike_recipe_path(@recipe), class: "simple-link simple-link--underline", id: "unsave-recipe" %>
-      <% else %>
-        <%= link_to "Save", like_recipe_path(@recipe, redirect_url: like_recipe_path(@recipe)), class: "simple-link simple-link--underline" %>
-      <% end %>
+      <div class="like-container">
+        <% if current_user && @likes.include?(@recipe) %>
+          <%= render 'unlike', recipe: @recipe %>
+        <% else %>
+          <%= render 'like', recipe: @recipe %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

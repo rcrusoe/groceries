@@ -1,12 +1,12 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :likes, only: [:show, :index]
   before_action :authenticate_user!, only: [:like, :add_to_list]
 
   def index
     @recipes = Recipe.all.sample(10)
     @recipe = Recipe.new
     @user = session[:userinfo]
-    liked_recipes
     previously_cooked
     @salad_recipes = recipe_search("Salad")
     @chicken_recipes = recipe_search("Chicken")
@@ -15,7 +15,6 @@ class RecipesController < ApplicationController
 
   def show
     @meal_plans = @recipe.meal_plans
-    @likes = @recipe.likes
     if current_user
       @like = Like.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
     end
@@ -90,16 +89,22 @@ class RecipesController < ApplicationController
   end
 
   def like
-    @recipe = Recipe.friendly.find(params[:id])
-    @like = @recipe.likes.create(recipe_id: @recipe.id, user_id: current_user["uid"])
-    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
+    @recipe = Recipe.find(params[:id])
+    @like = @recipe.likes.create(user_id: current_user["uid"])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def unlike
-    @recipe = Recipe.friendly.find(params[:id])
-    @like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first
+    @recipe = Recipe.find(params[:id])
+    @like = @recipe.likes.where(user_id: current_user["uid"]).first
     @like.destroy
-    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def add_to_list
@@ -120,6 +125,12 @@ class RecipesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.friendly.find(params[:id])
+    end
+
+    def likes
+      if current_user
+        @likes = Recipe.joins(:likes).where(likes: {user_id: current_user["uid"]})
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

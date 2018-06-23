@@ -376,16 +376,45 @@ button.ui.icon.button {
   }
 }
 
-.recipe-card--large {
+.recipe-card-container {
   flex: 0 0 calc(25% - 2rem);
+  margin-top: 2rem;
+  position: relative;
+}
+
+.recipe-card--large ~ .like-container {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+
+.like-container {
+  transition: $transition;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.recipe-card__like {
+  -webkit-text-stroke: 2px $white;
+  color: rgba(90, 71, 83, 0.3) !important;
+  font-size: 2rem;
+
+  &.unlike {
+    color: $yellow !important;
+  }
+}
+
+.recipe-card--large {
   scroll-behavior: smooth;
 
-  div {
+  .recipe-card__image {
     background-position: center center;
     background-size: cover;
     border-radius: $border-radius-m;
     height: 27.5rem;
-    margin: 2rem 0 1rem;
+    margin: 0;
     width: 225px;
 
     @media (min-width: $desktop) {

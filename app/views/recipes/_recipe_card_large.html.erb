@@ -1,9 +1,18 @@
-<%= link_to recipe_source_recipe_path(recipe_source, recipe, show_source), class: "recipe-card--large" do %>
-  <% unless recipe.image_url.blank? %>
-    <div style="background-image: url(<%= recipe.image_url %>)"></div>
+<div class="recipe-card-container">
+  <%= link_to recipe_source_recipe_path(recipe_source, recipe, show_source), class: "recipe-card--large" do %>
+    <% unless recipe.image_url.blank? %>
+      <div class="recipe-card__image" style="background-image: url(<%= recipe.image_url %>)"></div>
+    <% end %>
+    <h3><%= recipe.name %></h3>
+    <% if show_source == true %>
+      <p class="minor"><%= recipe_source.name %></p>
+    <% end %>
   <% end %>
-  <h3><%= recipe.name %></h3>
-  <% if show_source == true %>
-    <p class="minor"><%= recipe_source.name %></p>
-  <% end %>
-<% end %>
+  <div class="like-container">
+    <% if current_user && @likes.include?(recipe) %>
+      <%= render 'unlike', recipe: recipe %>
+    <% else %>
+      <%= render 'like', recipe: recipe %>
+    <% end %>
+  </div>
+</div>

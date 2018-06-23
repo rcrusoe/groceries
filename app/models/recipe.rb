@@ -1,7 +1,6 @@
 class Recipe < ApplicationRecord
-  before_save :create_ingredients
-  # before_save :scrape_recipe
-  # after_save :save_ingredients
+  before_save :scrape_recipe
+  after_save :save_ingredients
 
   belongs_to :recipe_source
   has_many :meal_plans, :dependent => :destroy
@@ -99,18 +98,6 @@ class Recipe < ApplicationRecord
       end
     end
     return nil
-  end
-
-  def create_ingredients
-    self.ingredients_array.each do |ingredient|
-      grocery_item_name = set_grocery_item(ingredient)
-      unless grocery_item_name.blank?
-        grocery_item = GroceryItem.where(name: grocery_item_name).first_or_create(name: grocery_item_name)
-      else
-        grocery_item = GroceryItem.where(name: "Unassigned").first_or_create(name: "Unassigned")
-      end
-      ing = Ingredient.where(recipe_id: self.id, note: ingredient).first_or_create(recipe_id: self.id, grocery_item_id: grocery_item.id, note: ingredient)
-    end
   end
 
   def save_image_to_s3(i, agent)

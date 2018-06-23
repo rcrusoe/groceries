@@ -1,0 +1,4 @@
+<% recipe = recipe || @recipe %>
+<%= link_to unlike_recipe_path(recipe, redirect_url: unlike_recipe_path(recipe)), remote: true, class: "recipe-card__like unlike" do %>
+  <i class="heart icon"></i>
+<% end %>

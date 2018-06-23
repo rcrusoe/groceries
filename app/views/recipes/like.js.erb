@@ -1,0 +1,4 @@
+$('.like').bind('ajax:success', function(){
+  $(this).closest('.like').hide();
+  $(this).closest('.like-container').html('<%= escape_javascript (render partial: 'unlike', recipe: @recipe ) %>');
+});
