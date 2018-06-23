@@ -26,7 +26,7 @@
             <%= link_to recipe_source_recipe_path(recipe.recipe_source_id ,recipe, false) do %>
               <h2><%= recipe.name %></h2>
             <% end %>
-            <!-- %= link_to "Remove", remove_from_list_recipe_path(recipe.meal_plans.active(@current_user).first), class: "simple-link simple-link--underline" % -->
+            <%= link_to "Remove", remove_from_list_recipe_path(recipe.meal_plans.active(@current_user).first), class: "simple-link simple-link--underline" %>
           </div>
         </div>
         <% if ingreds.count > 0 %>

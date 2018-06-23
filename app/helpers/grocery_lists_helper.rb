@@ -12,7 +12,6 @@ module GroceryListsHelper
   def grocery_items_on_list
     # get all recipes on list
     @recipes = Recipe.joins(:meal_plans).where(meal_plans: {user_id: current_user["uid"], status: "Upcoming"})
-    @recipes = Recipe.joins(:meal_plans).where(meal_plans: {status: "Upcoming"})
 
     # get all ingredients from all recipes on list
     @ingreds = Ingredient.where('recipe_id IN (?)', @recipes.select { |r| r.id })
