@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
       @ingredient_count = @ingreds.count
     end
   end
+
+  def is_admin?
+    redirect_to root_path unless current_user && current_user["uid"] = "google-oauth2|111539100317559359673"
+  end
 end

@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :likes, only: [:show, :index]
   before_action :authenticate_user!, only: [:like, :add_to_list]
+  before_action :is_admin?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @recipes = Recipe.all.sample(10)

@@ -1,5 +1,6 @@
 class RecipeSourcesController < ApplicationController
   before_action :set_recipe_source, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin?, except: [:show]
 
   # GET /recipe_sources
   # GET /recipe_sources.json
