@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def is_admin?
     redirect_to root_path unless current_user && current_user["uid"] = "google-oauth2|111539100317559359673"
   end
+
+  def store_location
+    session[:user_return_to] = request.fullpath
+  end
 end

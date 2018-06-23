@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   before_action :likes, only: [:show, :index]
   before_action :authenticate_user!, only: [:like, :add_to_list]
   before_action :is_admin?, only: [:new, :create, :edit, :update, :destroy]
+  after_action :store_location, only: [:show]
 
   def index
     @recipes = Recipe.all.sample(10)
@@ -119,7 +120,7 @@ class RecipesController < ApplicationController
     @meal_plan.update_column(:status, "Complete")
     @meal_plan.save
     @recipe = Recipe.find(@meal_plan.recipe_id)
-    redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe)
+    redirect_to session[:user_return_to] || root_path
   end
 
   private
