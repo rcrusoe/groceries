@@ -1,10 +1,23 @@
 <div class="container container--search">
-  <div class="search-input">
-    <h2><%= @term %></h2>
-    <%= form_tag(recipes_search_path, :method => "get", id: "search-form") do %>
-      <%= text_field_tag :term, params[:term], placeholder: "Search Recipes" %>
-      <%= submit_tag "Search", :name => nil %>
-    <% end %>
+  <div class="search-inputs">
+    <div class="search-by-term">
+      <% if @term && @term.present? %>
+        <h2>Showing results for "<span class="search-input__term"><%= @term %></span>" (<%= @recipes.count %>)</h2>
+      <% else %>
+        <h2>Search over 5,000 recipes</h2>
+      <% end %>
+      <%= render 'search_form' %>
+      <div class="search-by-term__quicklinks">
+        <% @sample_search_terms.sort_by!{ |e| e.downcase }.each do |term| %>
+          <%= link_to term, recipes_search_path(term: term) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="search-by-link">
+      <h2>Look up a specific recipe</h2>
+      <p>Paste a link to a recipe from your favorite blog or website to get started.</p>
+      <%= render 'form', recipe: @recipe %>
+    </div>
   </div>
   <div class="search-results">
     <% @recipes.each do |recipe| %>

@@ -131,6 +131,7 @@ class RecipesController < ApplicationController
   end
 
   def search
+    sample_search_terms
     if params[:term]
       @term = params[:term]
       @term = @term.downcase.tr("-", " ")

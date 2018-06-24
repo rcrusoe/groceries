@@ -1,3 +1,4 @@
+<%= link_to "Search Recipes", recipes_search_path, class: "simple-link simple-link--background" %>
 <% if current_user %>
     <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background m-hidden" %>
     <%= link_to "Logout", auth_logout_path, class: "simple-link simple-link--background" %>

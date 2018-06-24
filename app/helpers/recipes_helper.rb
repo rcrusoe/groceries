@@ -43,4 +43,29 @@ module RecipesHelper
   def recipe_search(term)
     return Recipe.where("name like ?", "%#{term}%")
   end
+
+  def sample_search_terms
+    @sample_search_terms = [
+      "ice cream",
+      "breakfast",
+      "pancakes",
+      "chicken",
+      "cookies",
+      "meal prep",
+      "soup",
+      "salad",
+      "heathy",
+      "lasagna",
+      "quinoa",
+      "steak",
+      "mediterranean",
+      "italian",
+      "thai",
+      "curry",
+      "chili",
+      "vegetarian",
+      "vegan",
+      "gluten-free"
+    ]
+  end
 end

@@ -373,6 +373,7 @@ button.ui.icon.button {
 
   & > * {
     margin-right: 2rem;
+    min-width: 225px;
   }
 }
 
@@ -415,7 +416,6 @@ button.ui.icon.button {
     border-radius: $border-radius-m;
     height: 27.5rem;
     margin: 0;
-    width: 225px;
 
     @media (min-width: $desktop) {
       width: 100%;
@@ -619,22 +619,82 @@ button.ui.icon.button {
 
 .container--search {
   display: flex;
+  flex-direction: column;
 
   & > * {
     flex: calc(50% - 2rem);
   }
+
+  @media(min-width: $desktop) {
+    flex-direction: row;
+  }
 }
 
-.search-input {
+.search-inputs {
   background-color: $gray-2;
-  height: calc(100vh - 4rem);
-  margin-right: 2rem;
-  position: sticky;
-  position: -webkit-sticky;
-  position: -moz-sticky;
-  position: -ms-sticky;
-  position: -o-sticky;
-  top: 2rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+
+  @media (min-width: $desktop) {
+    height: calc(100vh - 4rem);
+    margin-bottom: 0;
+    margin-right: 2rem;
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    top: 2rem;
+  }
+}
+
+.search-by-term {
+  margin-bottom: 2rem;
+
+  form {
+    margin-bottom: 2rem;
+  }
+}
+
+.search-by-term__quicklinks {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+
+  @media (min-width: $desktop) {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  a {
+    background: $yellow;
+    border-radius: 3rem;
+    font-size: 1.4rem;
+    font-weight: $bold;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    transition: $transition;
+    white-space: nowrap;
+
+    &:not(first-of-type) {
+      margin-right: 1rem;
+    }
+
+    &:hover {
+      box-shadow: 0 3px 0 0 darken($yellow, 10%);
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.search-by-term h2 {
+  margin-bottom: 2rem;
+}
+
+.search-by-link {
+  p {
+    margin-bottom: 2rem;
+  }
 }
 
 .search-results {
@@ -651,6 +711,10 @@ button.ui.icon.button {
 
     &:nth-of-type(2n-1) {
       margin-right: 2rem;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
     }
   }
 }

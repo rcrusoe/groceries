@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get "/auth/logout" => "auth0#logout"
   get "/auth/login" => "auth0#login"
   get "/groceries" => "grocery_lists#show"
-  get "recipes/search" => "recipes#search"
+  get "/recipes/search" => "recipes#search"
+  get "/search", to: redirect('/recipes/search')
 
   resources :recipe_sources, path: :sources do
     resources :recipes
