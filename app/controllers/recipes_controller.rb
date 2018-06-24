@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :likes, only: [:show, :index]
+  before_action :likes, only: [:show, :index, :search]
   before_action :authenticate_user!, only: [:like, :add_to_list]
   before_action :is_admin?, only: [:new, :create, :edit, :update, :destroy]
   after_action :store_location, only: [:show]
@@ -128,6 +128,12 @@ class RecipesController < ApplicationController
     @meal_plan.save
     @recipe = Recipe.find(@meal_plan.recipe_id)
     redirect_to session[:user_return_to] || root_path
+  end
+
+  def search
+    @term = params[:term]
+    @term = @term.capitalize
+    @recipes = Recipe.where("name like ?", "%#{@term}%")
   end
 
   private

@@ -616,3 +616,41 @@ button.ui.icon.button {
   overflow: hidden;
   transform: translateY(5rem);
 }
+
+.container--search {
+  display: flex;
+
+  & > * {
+    flex: calc(50% - 2rem);
+  }
+}
+
+.search-input {
+  background-color: $gray-2;
+  height: calc(100vh - 4rem);
+  margin-right: 2rem;
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  top: 2rem;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    flex: calc(50% - 2rem);
+
+    &:nth-of-type(1),
+    &:nth-of-type(2) {
+      margin-top: 0;
+    }
+
+    &:nth-of-type(2n-1) {
+      margin-right: 2rem;
+    }
+  }
+}

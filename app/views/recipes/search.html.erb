@@ -1,0 +1,10 @@
+<div class="container container--search">
+  <div class="search-input">
+    <h2><%= @term %></h2>
+  </div>
+  <div class="search-results">
+    <% @recipes.each do |recipe| %>
+      <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
+    <% end %>
+  </div>
+</div>
