@@ -132,8 +132,8 @@ class RecipesController < ApplicationController
 
   def search
     @term = params[:term]
-    @term = @term.capitalize
-    @recipes = Recipe.where("name like ?", "%#{@term}%")
+    @term = @term.downcase.tr("-", " ")
+    @recipes = Recipe.where("lower(name) like ?", "%#{@term}%").limit(50)
   end
 
   private

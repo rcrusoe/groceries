@@ -59,7 +59,7 @@ class Recipe < ApplicationRecord
 
   def save_recipe_name
     if @doc.css(@recipe_source.scrape_name).first
-      self.name = @doc.css(@recipe_source.scrape_name).first.text
+      self.name = @doc.css(@recipe_source.scrape_name).first.text.downcase
     end
   end
 
@@ -75,7 +75,7 @@ class Recipe < ApplicationRecord
     @doc = Nokogiri::HTML(open(self.link, 'User-Agent' => 'firefox'))
     ingredients = @doc.css(@recipe_source.scrape_ingredient)
     ingredients.each do |ingredient|
-      self.ingredients_array << ingredient.text
+      self.ingredients_array << ingredient.text.downcase
       grocery_item_name = set_grocery_item(ingredient.text)
       unless grocery_item_name.blank?
         grocery_item = GroceryItem.where(name: grocery_item_name).first_or_create(name: grocery_item_name)
