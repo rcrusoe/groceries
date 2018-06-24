@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/auth/logout" => "auth0#logout"
   get "/auth/login" => "auth0#login"
   get "/groceries" => "grocery_lists#show"
-  get "/search/:term" => "recipes#search"
+  get "recipes/search" => "recipes#search"
 
   resources :recipe_sources, path: :sources do
     resources :recipes

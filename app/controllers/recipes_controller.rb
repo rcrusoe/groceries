@@ -131,9 +131,13 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @term = params[:term]
-    @term = @term.downcase.tr("-", " ")
-    @recipes = Recipe.where("lower(name) like ?", "%#{@term}%").limit(50)
+    if params[:term]
+      @term = params[:term]
+      @term = @term.downcase.tr("-", " ")
+      @recipes = Recipe.where("lower(name) like ?", "%#{@term}%").limit(50)
+    else
+      @recipes = Recipe.all.limit(50)
+    end
   end
 
   private

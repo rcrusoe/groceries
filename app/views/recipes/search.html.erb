@@ -1,6 +1,10 @@
 <div class="container container--search">
   <div class="search-input">
     <h2><%= @term %></h2>
+    <%= form_tag(recipes_search_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :term, params[:term], placeholder: "Search Recipes" %>
+      <%= submit_tag "Search", :name => nil %>
+    <% end %>
   </div>
   <div class="search-results">
     <% @recipes.each do |recipe| %>
