@@ -1,4 +1,10 @@
 <% recipe = recipe || @recipe %>
-<%= link_to like_recipe_path(recipe), remote: true, class: "recipe-card__like like" do %>
-  <i class="heart icon"></i>
+<% if current_user %>
+  <%= link_to like_recipe_path(recipe), remote: true, class: "recipe-card__like like" do %>
+    <i class="heart icon"></i>
+  <% end %>
+<% else %>
+  <%= link_to like_recipe_path(recipe, redirect_url: like_recipe_path(recipe, login: true)), class: "recipe-card__like like" do %>
+    <i class="heart icon"></i>
+  <% end %>
 <% end %>

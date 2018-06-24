@@ -92,10 +92,17 @@ class RecipesController < ApplicationController
 
   def like
     @recipe = Recipe.friendly.find(params[:id])
-    @like = @recipe.likes.create(user_id: current_user["uid"])
-    respond_to do |format|
-      format.html
-      format.js
+    @like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first_or_create(user_id: current_user["uid"])
+    if params[:login]
+      respond_to do |format|
+        format.html { redirect_to recipe_source_recipe_path(@recipe.recipe_source, @recipe), notice: "Howdy, welcome back! Let's get cooking." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 
