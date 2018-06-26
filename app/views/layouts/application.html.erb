@@ -78,11 +78,11 @@
       </div>
       <%= yield %>
     </div>
+
+    <script type="text/javascript">
+      $('.ui.sidebar')
+        .sidebar('attach events', '.open', 'show')
+        .sidebar('setting', 'transition', 'push');
+    </script>
   </body>
 </html>
-
-<script type="text/javascript">
-  $('.ui.sidebar')
-    .sidebar('attach events', '.open', 'show')
-    .sidebar('setting', 'transition', 'push');
-</script>

@@ -411,11 +411,14 @@ button.ui.icon.button {
   scroll-behavior: smooth;
 
   .recipe-card__image {
-    background-position: center center;
-    background-size: cover;
     border-radius: $border-radius-m;
     height: 27.5rem;
+    overflow: hidden;
     margin: 0;
+
+    img {
+      width: 100%;
+    }
 
     @media (min-width: $desktop) {
       width: 100%;
@@ -428,13 +431,17 @@ button.ui.icon.button {
 }
 
 .recipe__image {
-  background-position: center center;
-  background-size: cover;
   border-radius: $border-radius-m;
   height: 30rem;
   margin-bottom: 2rem;
   margin-top: -19rem;
+  overflow: hidden;
   width: 100%;
+
+  img {
+    transform: translateY(-50%);
+    width: 100%;
+  }
 
   @media (min-width: $desktop) {
     margin-bottom: 4rem;

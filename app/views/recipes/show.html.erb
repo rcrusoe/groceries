@@ -1,7 +1,7 @@
 <div class="hero hero--recipe">
   <div class="hero__content">
     <div class="recipe__header">
-      <h1><%= @recipe.name %></h1>
+      <h1 itemprop="name"><%= @recipe.name.capitalize %></h1>
     </div>
     <div class="recipe__subheader">
       <%= link_to @recipe_source.name, @recipe_source, class: "simple-link simple-link--underline" %>
@@ -17,7 +17,9 @@
 </div>
 <div class="container container--recipe">
   <% unless @recipe.image_url.blank? %>
-    <div class="recipe__image" style="background-image: url(<%= @recipe.image_url %>)"></div>
+    <div class="recipe__image">
+      <%= image_tag @recipe.image_url %>
+    </div>
   <% end %>
   <% unless current_user %>
     <div class="recipe__subheader sign-in-cta">
@@ -30,7 +32,7 @@
       <% unless @already_added %>
         <%= link_to "Add To Grocery List", add_to_list_recipe_path(@recipe, redirect_url: add_to_list_recipe_path(@recipe)), class: "simple-link simple-link--primary" %>
       <% end %>
-      <a href="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" class="simple-link simple-link--secondary">View Recipe</a>
+      <a itemprop="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" href="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" class="simple-link simple-link--secondary">View Recipe</a>
       <% if current_user && @already_added %>
         <%= link_to "My Grocery List (#{@ingredient_count})", "/groceries", class: "simple-link simple-link--background" %>
         <%= link_to "Remove From Grocery List", remove_from_list_recipe_path(@meal_plan, redirect_url: remove_from_list_recipe_path(@recipe)), class: "simple-link simple-link--background" %>
@@ -40,7 +42,7 @@
       <h2>Ingredients (<%= @recipe.ingredients_array.length %>)</h2>
       <% @recipe.ingredients_array.each do |ingredient| %>
         <div class="ingredient">
-          <p><%= ingredient %></p>
+          <p itemprop="ingredients"><%= ingredient %></p>
         </div>
       <% end %>
     </div>
