@@ -16,6 +16,7 @@ gem 'mechanize'
 gem 'aws-sdk-s3'
 gem 'slack-notifier'
 gem 'google-cloud-language'
+gem 'sendgrid-ruby'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'

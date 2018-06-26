@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body style="background-color: #fafafa; color: #2A2F2F; padding: 5%; font-family: 'brandon-grotesque', 'avenir', 'Helvetica', sans-serif;">
+    <div style="background-color: white; padding: 30px; margin-bottom: 100px;">
+        <h3 style="font-weight: bold; font-size: 20px; margin: 0;">Volunteer your expertise</h3>
+        <p style="color: #A9A9A9; font-size: 16px; margin: 0.5em 0;">Below are the latest opportunities to volunteer your expertise on Project 501.</p>
+        <hr style="border: 0; height: 1px; background-color: #BDD6DD; margin: 2em 0;">
+        <%= @liked_recipes.each do |r| %>
+          <img src="<%= r.image_url %>" alt="<%= r.name %>">
+          <h2><%= r.name %></h2>
+        <% end %>
+    </div>
+    <p style="text-align: center; font-size: 16px;">Need some help? Contact us at <a href="mailto:team@project501.com">team@project501.com</a></p>
+  </body>
+</html>
