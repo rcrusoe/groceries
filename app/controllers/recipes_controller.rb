@@ -34,37 +34,47 @@ class RecipesController < ApplicationController
   end
 
   def create
-    s = URI.parse(recipe_params[:link])
-    domain_segments = s.host.split('.')
-    if domain_segments.count > 2
-      domain = domain_segments[1] + "." + domain_segments[2]
-    else
-      domain = s.host
-    end
-    @recipe_source = RecipeSource.where(domain: domain).first
-    unless @recipe_source.blank?
-      @recipe = @recipe_source.recipes.where(link: recipe_params[:link]).first_or_initialize(params[:recipe].permit(:name, :link, :ingredients, :image_url))
-    else
-      false
-    end
+    @recipe = Recipe.where(link: recipe_params[:link]).first
+    identify_recipe_source
 
-    respond_to do |format|
-      if @recipe && @recipe.save
-        format.html { redirect_to recipe_source_recipe_path(@recipe_source, @recipe), notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @recipe }
-        if current_user
-          like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
-          like.save
+    if @recipe.present? && @recipe_source.present?
+      if current_user
+        like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+        like.save
+      end
+      redirect_to recipe_source_recipe_path(@recipe_source, @recipe)
+    elsif @recipe_source.present?
+      @recipe = @recipe_source.recipes.build(params[:recipe].permit(:name, :link, :ingredients, :image_url))
+      respond_to do |format|
+        if @recipe && @recipe.save
+          format.html { redirect_to recipe_source_recipe_path(@recipe_source, @recipe), notice: 'Recipe was successfully created.' }
+          format.json { render :show, status: :created, location: @recipe }
+          if current_user
+            like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+            like.save
+          end
+        else
+          recipe_info = {
+            pretext: "Someone tried (unsuccessfully) to create a recipe.",
+            title: "#{recipe_params[:link]}",
+            title_link: "#{recipe_params[:link]}",
+            color: "#5a4753",
+          }
+          RECIPE_NOTIFIER.ping(attachments: [recipe_info])
+          format.html { redirect_to recipes_url, notice: "Bummer. That link didn't seem to work :/."}
+          format.json { render json: @recipe.errors, status: :unprocessable_entity }
         end
-      else
+      end
+    else
+      respond_to do |format|
         recipe_info = {
-          pretext: "Someone tried (unsuccessfully) to create a recipe.",
+          pretext: "Someone tried using a new recipe source.",
           title: "#{recipe_params[:link]}",
           title_link: "#{recipe_params[:link]}",
           color: "#5a4753",
         }
         RECIPE_NOTIFIER.ping(attachments: [recipe_info])
-        format.html { redirect_to recipes_url, notice: "Bummer. That link didn't seem to work :/."}
+        format.html { redirect_to recipes_url, notice: "Sorry, we don't support this blog or website yet. We've recorded your link and will have it working soon."}
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end

@@ -44,6 +44,17 @@ module RecipesHelper
     return Recipe.where("name like ?", "%#{term}%")
   end
 
+  def identify_recipe_source
+    s = URI.parse(recipe_params[:link])
+    domain_segments = s.host.split('.')
+    if domain_segments.count > 2
+      domain = domain_segments[1] + "." + domain_segments[2]
+    else
+      domain = s.host
+    end
+    @recipe_source = RecipeSource.where(domain: domain).first
+  end
+
   def sample_search_terms
     @sample_search_terms = [
       "ice cream",
