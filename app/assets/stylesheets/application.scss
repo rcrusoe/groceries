@@ -289,10 +289,10 @@ button.ui.icon.button {
 }
 
 .container {
-  padding: 4rem 2rem;
+  margin: 4rem 2rem;
 
   @media (min-width: $desktop) {
-    padding: 4rem 12rem;
+    margin: 4rem 12rem;
   }
 }
 
@@ -709,7 +709,6 @@ button.ui.icon.button {
 }
 
 .search-results {
-
 
   .results {
     display: flex;
