@@ -412,11 +412,12 @@ button.ui.icon.button {
 
   .recipe-card__image {
     border-radius: $border-radius-m;
-    max-height: 27.5rem;
+    height: 27.5rem;
     overflow: hidden;
     margin: 0;
 
     img {
+      min-height: 100%;
       width: 100%;
     }
 
@@ -440,7 +441,7 @@ button.ui.icon.button {
   width: 100%;
 
   img {
-    transform: translateY(-50%);
+    transform: translateY(-10%);
     width: 100%;
   }
 
