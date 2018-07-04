@@ -50,7 +50,7 @@ body.pushable {
 }
 
 .open {
-  color: $green;
+  color: $gray-4;
   font-size: 1.6rem;
   margin-left: 1rem;
 }
@@ -149,9 +149,9 @@ body.pushable {
 
   button.ui.icon.button {
     background: none !important;
-    border: 1px solid $green;
+    border: 1px solid $blue;
     border-radius: $border-radius-s;
-    color: $green;
+    color: $blue;
     font-size: 1.4rem;
     margin-left: 2rem;
     padding: 0.8rem !important;
@@ -159,7 +159,7 @@ body.pushable {
 
     &:hover {
       cursor: pointer;
-      background-color: $green !important;
+      background-color: $blue !important;
       color: $white;
     }
   }
@@ -182,7 +182,7 @@ body.pushable {
 
   .ui.button {
     background-color: $gray-2;
-    color: $green;
+    color: $blue;
   }
 
   .grocery-list-header {
@@ -266,7 +266,7 @@ form {
 }
 
 button.ui.icon.button {
-  background-color: $green !important;
+  background-color: $blue !important;
   border: none;
   border-radius: $border-radius-s;
   color: $white;
@@ -378,7 +378,7 @@ button.ui.icon.button {
 }
 
 .recipe-card-container {
-  flex: 0 0 calc(25% - 2rem);
+  width: 0 0 calc(25% - 2rem);
   margin-top: 2rem;
   position: relative;
 }
@@ -412,7 +412,7 @@ button.ui.icon.button {
 
   .recipe-card__image {
     border-radius: $border-radius-m;
-    height: 27.5rem;
+    max-height: 27.5rem;
     overflow: hidden;
     margin: 0;
 
@@ -427,6 +427,7 @@ button.ui.icon.button {
 
   h3 {
     margin-bottom: 0;
+    margin-top: 1rem;
   }
 }
 
@@ -704,7 +705,7 @@ button.ui.icon.button {
   h3 {
     margin-bottom: 1rem;
   }
-  
+
   p {
     margin-bottom: 2rem;
   }

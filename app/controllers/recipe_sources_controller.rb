@@ -1,6 +1,7 @@
 class RecipeSourcesController < ApplicationController
   before_action :set_recipe_source, only: [:show, :edit, :update, :destroy]
   before_action :is_admin?, except: [:show]
+  before_action :likes, only: [:show]
 
   # GET /recipe_sources
   # GET /recipe_sources.json
@@ -11,6 +12,7 @@ class RecipeSourcesController < ApplicationController
   # GET /recipe_sources/1
   # GET /recipe_sources/1.json
   def show
+    @source_like_count = Like.where('recipe_id IN (?)', @recipe_source.recipes.select { |r| r.id }).count
   end
 
   # GET /recipe_sources/new

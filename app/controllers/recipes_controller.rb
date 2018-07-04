@@ -158,12 +158,6 @@ class RecipesController < ApplicationController
       @recipe = Recipe.friendly.find(params[:id])
     end
 
-    def likes
-      if current_user
-        @likes = Recipe.joins(:likes).where(likes: {user_id: current_user["uid"]})
-      end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
       params.require(:recipe).permit(

@@ -1,0 +1,20 @@
+<div class="hero hero--recipe-source">
+  <h1><%= @recipe_source.name %></h1>
+  <div class="hero--recipe-source__right">
+    <a href="<%= @recipe_source.link %>?utm_source=recidex.com&utm_medium=referral" target="_blank" class="simple-link simple-link--secondary">Visit Website</a>
+    <div class="source-stat">
+      <p class="source-stat__number"><%= @source_like_count %></p>
+      <p class="source-state__label">likes</p>
+    </div>
+    <div class="source-stat">
+      <p class="source-stat__number"><%= @recipe_source.recipes.count %></p>
+      <p class="source-state__label">recipes</p>
+    </div>
+    </div>
+  </div>
+  <div class="recipes-grid">
+    <% @recipe_source.recipes.each do |recipe| %>
+      <%= render 'recipes/recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: false %>
+    <% end %>
+  </div>
+</div>

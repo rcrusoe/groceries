@@ -12,9 +12,9 @@
   <% end %>
   <div class="like-container">
     <% if current_user && @likes.include?(recipe) %>
-      <%= render 'unlike', recipe: recipe %>
+      <%= render 'recipes/unlike', recipe: recipe %>
     <% else %>
-      <%= render 'like', recipe: recipe %>
+      <%= render 'recipes/like', recipe: recipe %>
     <% end %>
   </div>
 </div>

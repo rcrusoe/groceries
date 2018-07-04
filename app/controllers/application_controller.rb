@@ -20,4 +20,10 @@ class ApplicationController < ActionController::Base
   def store_location
     session[:user_return_to] = request.fullpath
   end
+
+  def likes
+    if current_user
+      @likes = Recipe.joins(:likes).where(likes: {user_id: current_user["uid"]})
+    end
+  end
 end
