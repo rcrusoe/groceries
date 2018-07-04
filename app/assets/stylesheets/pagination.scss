@@ -1,0 +1,28 @@
+@import 'variables.scss';
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+nav {
+  display: inline-block;
+  font-size: 1.6rem;
+
+  & > * {
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .current {
+    color: $blue;
+    border-bottom: 2px solid $blue;
+  }
+
+  @media (min-width: $desktop) {
+    & > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
