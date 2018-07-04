@@ -12,6 +12,7 @@ class RecipeSourcesController < ApplicationController
   # GET /recipe_sources/1
   # GET /recipe_sources/1.json
   def show
+    @recipes = @recipe_source.recipes.page params[:page]
     @source_like_count = Like.where('recipe_id IN (?)', @recipe_source.recipes.select { |r| r.id }).count
   end
 

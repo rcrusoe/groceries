@@ -13,8 +13,9 @@
     </div>
   </div>
   <div class="recipes-grid">
-    <% @recipe_source.recipes.each do |recipe| %>
+    <% @recipes.each do |recipe| %>
       <%= render 'recipes/recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: false %>
     <% end %>
   </div>
+  <%= paginate @recipes, window: 2, remote: true %>
 </div>
