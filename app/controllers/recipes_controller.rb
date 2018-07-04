@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   after_action :store_location, only: [:show]
 
   def index
-    @recipes = Recipe.all.order("created_at DESC").page params[:page]
+    @recipes = Recipe.all.order("name ASC").page params[:page]
     @recipe = Recipe.new
   end
 
