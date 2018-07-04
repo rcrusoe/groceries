@@ -411,15 +411,11 @@ button.ui.icon.button {
   scroll-behavior: smooth;
 
   .recipe-card__image {
+    background-size: cover;
     border-radius: $border-radius-m;
     height: 27.5rem;
     overflow: hidden;
     margin: 0;
-
-    img {
-      min-height: 100%;
-      width: 100%;
-    }
 
     @media (min-width: $desktop) {
       width: 100%;
@@ -441,7 +437,7 @@ button.ui.icon.button {
   width: 100%;
 
   img {
-    transform: translateY(-10%);
+    transform: translateY(-50%);
     width: 100%;
   }
 
