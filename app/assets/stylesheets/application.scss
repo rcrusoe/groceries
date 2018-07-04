@@ -448,7 +448,7 @@ button.ui.icon.button {
   width: 100%;
 
   img {
-    transform: translateY(-50%);
+    transform: translateY(-20%);
     width: 100%;
   }
 
@@ -461,6 +461,7 @@ button.ui.icon.button {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2rem;
   width: 100%;
 }
 
