@@ -90,6 +90,16 @@ body.pushable {
   }
 }
 
+.nav__right form {
+  display: inline;
+  margin-right: 2rem;
+
+  .input {
+    border: 1px solid $gray-2;
+    margin-right: 0;
+  }
+}
+
 .nav__right .simple-link:not(:last-of-type) {
   margin-right: 2rem;
 }
@@ -289,10 +299,10 @@ button.ui.icon.button {
 }
 
 .container {
-  margin: 4rem 2rem;
+  margin: 2rem;
 
   @media (min-width: $desktop) {
-    margin: 4rem 12rem;
+    margin: 2rem 12rem;
   }
 }
 
@@ -626,6 +636,7 @@ button.ui.icon.button {
 }
 
 .container--search {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
 
@@ -644,7 +655,6 @@ button.ui.icon.button {
   margin-bottom: 2rem;
 
   @media (min-width: $desktop) {
-    height: calc(100vh - 4rem);
     margin-bottom: 0;
     margin-right: 2rem;
     position: sticky;
@@ -657,7 +667,6 @@ button.ui.icon.button {
 }
 
 .search-by-term {
-  margin-bottom: 2rem;
 
   form {
     margin-bottom: 2rem;
@@ -697,18 +706,6 @@ button.ui.icon.button {
 
 .search-by-term h2 {
   margin-bottom: 2rem;
-}
-
-.search-by-link {
-  margin-top: 4rem;
-
-  h3 {
-    margin-bottom: 1rem;
-  }
-
-  p {
-    margin-bottom: 2rem;
-  }
 }
 
 .search-results {

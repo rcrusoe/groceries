@@ -1,6 +1,6 @@
 <%= form_tag(recipes_search_path, :method => "get", id: "search-form") do %>
   <div class="ui large input">
-    <%= text_field_tag :term, params[:term], placeholder: "Enter an ingredient or name" %>
+    <%= text_field_tag :term, params[:term], placeholder: "Search for an ingredient or name" %>
   </div>
   <button class="ui icon button" type="submit">
     <i class="arrow right icon"></i>

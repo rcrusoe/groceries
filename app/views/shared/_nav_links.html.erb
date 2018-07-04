@@ -1,4 +1,11 @@
-<%= link_to "Search Recipes", recipes_search_path, class: "simple-link simple-link--background" %>
+<%= link_to "Search Recipes", recipes_search_path, class: "simple-link simple-link--background m-only" %>
+<%= form_tag(recipes_search_path, :method => "get", id: "search-form", class: "m-hidden") do %>
+  <div class="ui large icon input">
+    <i class="search icon"></i>
+    <%= text_field_tag :term, params[:term], placeholder: "Search for an ingredient or name" %>
+  </div>
+<% end %>
+<%= link_to "Import A Recipe", new_recipe_path, class: "simple-link simple-link--background" %>
 <% if current_user %>
     <%= link_to "My Recipes", my_recipes_favorites_path, class: "simple-link simple-link--background" %>
     <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background m-hidden" %>
