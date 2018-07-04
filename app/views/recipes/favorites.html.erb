@@ -1,0 +1,17 @@
+<div class="hero hero--recipe-source">
+  <h1>My Recipes</h1>
+  <div class="hero--recipe-source__right">
+    <%= link_to "Logout", auth_logout_path, class: "simple-link simple-link--underline" %>
+  </div>
+</div>
+<div class="container my-recipes-container">
+  <%= render 'my_recipes_nav' %>
+  <div class="my-recipes__grid">
+    <h2>Favorites</h2>
+    <div class="recipes-grid">
+      <% @likes.each do |recipe| %>
+        <%= render 'recipes/recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: false %>
+      <% end %>
+    </div>
+  </div>
+</div>

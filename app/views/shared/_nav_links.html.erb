@@ -1,7 +1,7 @@
 <%= link_to "Search Recipes", recipes_search_path, class: "simple-link simple-link--background" %>
 <% if current_user %>
+    <%= link_to "My Recipes", my_recipes_favorites_path, class: "simple-link simple-link--background" %>
     <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background m-hidden" %>
-    <%= link_to "Logout", auth_logout_path, class: "simple-link simple-link--background" %>
 <% else %>
   <%= link_to "Sign In", {controller: "auth0", action: "login", redirect_url: request.original_url }, class: "simple-link simple-link--background" %>
 <% end %>

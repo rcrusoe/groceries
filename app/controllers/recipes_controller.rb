@@ -1,12 +1,12 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :likes, only: [:show, :index, :search]
+  before_action :likes, only: [:show, :index, :search, :favorites, :cooked]
   before_action :authenticate_user!, only: [:like, :add_to_list]
   before_action :is_admin?, only: [:edit, :update, :destroy]
   after_action :store_location, only: [:show]
 
   def index
-    @recipes = Recipe.all.sample(10)
+    @recipes = Recipe.all
     @recipe = Recipe.new
     @user = session[:userinfo]
     previously_cooked
@@ -151,6 +151,14 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all.page params[:page]
     end
+  end
+
+  def favorites
+    previously_cooked
+  end
+
+  def cooked
+    previously_cooked
   end
 
   private

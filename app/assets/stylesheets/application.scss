@@ -42,7 +42,7 @@ body {
 }
 
 body.pushable {
-  background-color: $gray-1 !important;
+  background-color: $white !important;
 }
 
 .pushable > .pusher {
@@ -411,6 +411,7 @@ button.ui.icon.button {
   scroll-behavior: smooth;
 
   .recipe-card__image {
+    background-position: center center;
     background-size: cover;
     border-radius: $border-radius-m;
     height: 27.5rem;
@@ -569,6 +570,8 @@ button.ui.icon.button {
   }
 
   .recipe__image {
+    background-position: center center;
+    background-size: cover;
     flex: 0 0 9rem;
     height: 9rem;
     margin: 0 1rem 0 0;

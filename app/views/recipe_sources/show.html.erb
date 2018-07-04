@@ -12,6 +12,8 @@
     </div>
     </div>
   </div>
+</div>
+<div class="container">
   <div class="recipes-grid">
     <% @recipes.each do |recipe| %>
       <%= render 'recipes/recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: false %>

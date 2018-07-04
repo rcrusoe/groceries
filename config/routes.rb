@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/groceries" => "grocery_lists#show"
   get "/recipes/search" => "recipes#search"
   get "/search", to: redirect('/recipes/search')
+  get "/my-recipes/cooked" => "recipes#cooked"
+  get "/my-recipes/favorites" => "recipes#favorites"
 
   resources :recipe_sources, path: :sources do
     resources :recipes

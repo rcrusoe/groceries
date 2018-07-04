@@ -1,0 +1,50 @@
+@import 'variables.scss';
+
+.my-recipes-container {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $desktop) {
+    flex-direction: row;
+  }
+}
+
+.my-recipes-nav {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+
+  @media (min-width: $desktop) {
+    flex-basis: 33%;
+    margin-bottom: 0;
+  }
+
+  .simple-link--background {
+    display: block;
+  }
+}
+
+.my-recipes__grid {
+  flex-basis: 67%;
+}
+
+.my-recipes-container .recipes-grid .recipe-card-container {
+  flex: calc(50% - 2rem);
+
+  &:not(:nth-of-type(2n)) {
+    margin-right: 2rem;
+  }
+
+  @media (min-width: $desktop) {
+    flex: calc(33% - 2rem);
+
+    &:not(:nth-of-type(2n)) {
+      margin-right: 0;
+    }
+
+    &:not(:nth-of-type(3n)) {
+      margin-right: 2rem;
+    }
+  }
+}
