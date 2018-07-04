@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include GroceryListsHelper
   include RecipesHelper
 
-  before_action :ingredient_count
+  before_action :ingredient_count, :popular_sources
 
   def ingredient_count
     if current_user
@@ -25,5 +25,17 @@ class ApplicationController < ActionController::Base
     if current_user
       @likes = Recipe.joins(:likes).where(likes: {user_id: current_user["uid"]})
     end
+  end
+
+  def popular_sources
+    @most_popular_sources = RecipeSource.joins(recipes: :likes)
+      .group('recipe_sources.id')
+      .order('count(likes.id) DESC')
+  end
+
+  def popular_recipes
+    @most_popular_recipes = Recipe.joins(:likes)
+      .group('recipes.id')
+      .order('count(likes.id) DESC')
   end
 end

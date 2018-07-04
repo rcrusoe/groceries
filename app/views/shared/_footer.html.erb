@@ -1,0 +1,10 @@
+<div class="container container--footer">
+  <section>
+    <h4>Most Popular Blogs</h4>
+    <ul>
+      <% @most_popular_sources.each do |source| %>
+        <li><%= link_to source.name, recipe_source_path(source) %></li>
+      <% end %>
+    </ul>
+  </section>
+</div>
