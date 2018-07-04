@@ -6,13 +6,8 @@ class RecipesController < ApplicationController
   after_action :store_location, only: [:show]
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.page params[:page]
     @recipe = Recipe.new
-    @user = session[:userinfo]
-    previously_cooked
-    @salad_recipes = recipe_search("Salad")
-    @chicken_recipes = recipe_search("Chicken")
-    @vegetarian_recipes = recipe_search("Vegetarian")
   end
 
   def show
