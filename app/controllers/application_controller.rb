@@ -31,11 +31,13 @@ class ApplicationController < ActionController::Base
     @most_popular_sources = RecipeSource.joins(recipes: :likes)
       .group('recipe_sources.id')
       .order('count(likes.id) DESC')
+      .limit(5)
   end
 
   def popular_recipes
     @most_popular_recipes = Recipe.joins(:likes)
       .group('recipes.id')
       .order('count(likes.id) DESC')
+      .limit(20)
   end
 end
