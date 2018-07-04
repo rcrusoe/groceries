@@ -2,7 +2,7 @@
   <div class="search-inputs">
     <div class="search-by-term">
       <% if @term && @term.present? %>
-        <h2>Showing results for "<span class="search-input__term"><%= @term %></span>" (<%= @recipes.count %>)</h2>
+        <h2>Showing results for "<span class="search-input__term"><%= @term %></span>" (<%= @results.count %>)</h2>
       <% else %>
         <h2>Search over 5,000 recipes</h2>
       <% end %>
@@ -23,5 +23,8 @@
     <% @recipes.each do |recipe| %>
       <%= render 'recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
     <% end %>
+    <div class="pagination-wrapper">
+      <%= paginate @recipes, window: 2 %>
+    </div>
   </div>
 </div>

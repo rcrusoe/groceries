@@ -146,9 +146,10 @@ class RecipesController < ApplicationController
     if params[:term]
       @term = params[:term]
       @term = @term.downcase.tr("-", " ")
-      @recipes = Recipe.where("lower(name) like ?", "%#{@term}%").limit(50)
+      @results = Recipe.where("lower(name) like ?", "%#{@term}%")
+      @recipes = @results.page params[:page]
     else
-      @recipes = Recipe.all.limit(50)
+      @recipes = Recipe.all.page params[:page]
     end
   end
 
