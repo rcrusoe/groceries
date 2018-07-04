@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include GroceryListsHelper
   include RecipesHelper
 
-  before_action :ingredient_count, :popular_sources
+  before_action :ingredient_count, :popular_sources, :popular_recipes
 
   def ingredient_count
     if current_user
