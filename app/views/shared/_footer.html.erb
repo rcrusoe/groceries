@@ -3,7 +3,15 @@
     <h4>Most Popular Blogs</h4>
     <ul>
       <% @most_popular_sources.each do |source| %>
-        <li><%= link_to source.name, recipe_source_path(source) %></li>
+        <li><%= link_to source.name, recipe_source_path(source), class: "simple-link simple-link--underline" %></li>
+      <% end %>
+    </ul>
+  </section>
+  <section>
+    <h4>Most Popular Recipes</h4>
+    <ul>
+      <% @most_popular_recipes.each do |recipe| %>
+        <li><%= link_to recipe.name, recipe_source_recipe_path(recipe.recipe_source, recipe), class: "simple-link simple-link--underline" %></li>
       <% end %>
     </ul>
   </section>

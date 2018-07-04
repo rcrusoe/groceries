@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
     @most_popular_recipes = Recipe.joins(:likes)
       .group('recipes.id')
       .order('count(likes.id) DESC')
-      .limit(20)
+      .limit(5)
   end
 end
