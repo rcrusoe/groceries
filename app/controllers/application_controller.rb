@@ -45,6 +45,6 @@ class ApplicationController < ActionController::Base
     @common_ingredients = GroceryItem.joins(:recipes)
       .group('grocery_items.id')
       .order('count(recipes.id) DESC')
-      .limit(10)
+      .limit(5)
   end
 end

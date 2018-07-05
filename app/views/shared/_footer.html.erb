@@ -19,7 +19,7 @@
     <h4>Common Ingredients</h4>
     <ul>
       <% @common_ingredients.each do |i| %>
-        <li><%= link_to i.name, "/recipes/ingredient/#{i.name}" %></li>
+        <li><%= link_to i.name, "/recipes/ingredient/#{i.name}", class: "simple-link simple-link--underline" %></li>
       <% end %>
     </ul>
   </section>

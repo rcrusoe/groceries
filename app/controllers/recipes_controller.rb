@@ -160,6 +160,7 @@ class RecipesController < ApplicationController
     @recipes = Recipe.joins(:grocery_items)
       .where("grocery_items.name = ?", params[:ingredient])
       .group('recipes.id')
+      .page params[:page]
   end
 
   private
