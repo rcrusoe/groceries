@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :likes, only: [:show, :index, :search, :favorites, :cooked]
+  before_action :likes, only: [:show, :index, :search, :favorites, :cooked, :ingredient]
   before_action :authenticate_user!, only: [:like, :add_to_list]
   before_action :is_admin?, only: [:edit, :update, :destroy]
   after_action :store_location, only: [:show]
@@ -154,6 +154,12 @@ class RecipesController < ApplicationController
 
   def cooked
     previously_cooked
+  end
+
+  def ingredient
+    @recipes = Recipe.joins(:grocery_items)
+      .where("grocery_items.name = ?", params[:ingredient])
+      .group('recipes.id')
   end
 
   private

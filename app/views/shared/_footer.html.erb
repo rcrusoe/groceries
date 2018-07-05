@@ -15,4 +15,12 @@
       <% end %>
     </ul>
   </section>
+  <section>
+    <h4>Common Ingredients</h4>
+    <ul>
+      <% @common_ingredients.each do |i| %>
+        <li><%= link_to i.name, "/recipes/ingredient/#{i.name}" %></li>
+      <% end %>
+    </ul>
+  </section>
 </footer>
