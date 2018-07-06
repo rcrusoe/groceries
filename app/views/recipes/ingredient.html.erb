@@ -1,9 +1,19 @@
-<div class="hero hero--recipe-source">
-  <h1>Search by ingredient</h1>
+<div class="hero hero--recipe">
+  <div class="hero__content">
+    <div class="recipe__header">
+      <h1 itemprop="name">The most popular recipes using <%= params[:ingredient] %></h1>
+    </div>
+  </div>
+</div>
+<div class="container container--recipe">
+  <% unless @recipes.first.image_url.blank? %>
+    <div class="recipe__image">
+      <%= image_tag @recipes.first.image_url %>
+    </div>
+  <% end %>
 </div>
 <div class="container">
   <div class="my-recipes__grid">
-    <h2>The most popular recipes that contain <%= params[:ingredient] %>:</h2>
     <div class="recipes-grid">
       <% @recipes.each do |recipe| %>
         <%= render 'recipes/recipe_card_large', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true %>
