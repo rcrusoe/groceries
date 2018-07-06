@@ -3,11 +3,22 @@
 footer {
   border-top: 1px solid $gray-2;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 4rem 0;
 
+  @media (min-width: $desktop) {
+    flex-direction: row;
+  }
+
   section {
     flex: 50%;
+
+    @media (min-width: $desktop) {
+      &:not(:last-of-type) {
+        margin-right: 3rem;
+      }
+    }
   }
 
   ul {
