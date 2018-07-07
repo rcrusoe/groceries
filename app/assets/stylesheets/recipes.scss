@@ -11,6 +11,14 @@
   @media (min-width: $desktop) {
     display: block;
   }
+
+  h4 {
+    text-transform: uppercase;;
+  }
+
+  .simple-link {
+    text-transform: capitalize;
+  }
 }
 
 .container--recipe-index .recipes-grid {
