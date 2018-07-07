@@ -12,7 +12,8 @@ footer {
   }
 
   section {
-    flex: 50%;
+    flex: 25%;
+    width: calc(25% - 2.25rem);
 
     @media (min-width: $desktop) {
       &:not(:last-of-type) {
