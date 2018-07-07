@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all.order("name ASC").page params[:page]
     @recipe = Recipe.new
+    @random_recipe = Recipe.order('random()').first
   end
 
   def show

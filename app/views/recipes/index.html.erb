@@ -31,6 +31,12 @@
         <li><%= link_to "Noodles", "/recipes/ingredient/noodles", class: "simple-link simple-link--underline" %></li>
       </ul>
     </section>
+    <section>
+      <h4>Feeling lucky?</h4>
+      <ul>
+        <li><%= link_to "Random Recipe", recipe_source_recipe_path(@random_recipe.recipe_source, @random_recipe), class: "simple-link simple-link--underline" %></li>
+      </ul>
+    </section>
   </div>
   <div class="recipes-grid">
     <% @recipes.each do |recipe| %>
