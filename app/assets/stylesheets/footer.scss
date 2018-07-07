@@ -12,27 +12,28 @@ footer {
   }
 
   section {
-    flex: 25%;
-    width: calc(25% - 2.25rem);
 
     @media (min-width: $desktop) {
+      flex: 25%;
+      width: calc(25% - 2.25rem);
+      
       &:not(:last-of-type) {
         margin-right: 3rem;
       }
     }
   }
 
-  ul {
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    list-style: none;
-    padding: 0.5rem 0;
-  }
-
   .simple-link {
     text-transform: capitalize !important;
   }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+  padding: 0.5rem 0;
 }
