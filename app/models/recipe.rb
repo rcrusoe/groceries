@@ -104,6 +104,9 @@ class Recipe < ApplicationRecord
 
   def save_image_to_s3(i, agent)
     slug = self.name.parameterize
+    if i[0] === "/"
+      i = "https:" + i
+    end
     agent.get(i).save "tmp/cache/assets/images/#{slug}.jpg"
     s3 = Aws::S3::Resource.new(region:'us-east-1')
     obj_key = "recipes/#{@recipe_source.slug}/#{slug}"
