@@ -30,7 +30,6 @@ namespace :scrape_recipes do
             links = @doc.css(source.recipe_css).map { |link| link['href'] } || []
             links.each do |link|
               if link[0] == "/"
-                byebug
                 link = source.link + link
               end
               Recipe.where(recipe_source_id: source.id, link: link).first_or_create.update(link: link)
