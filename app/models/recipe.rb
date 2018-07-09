@@ -24,6 +24,9 @@ class Recipe < ApplicationRecord
     require 'mechanize'
     require 'aws-sdk-s3'
     agent = Mechanize.new
+
+    self.link = self.link.split('?').first
+
     identify_recipe_source
 
     unless @recipe_source.blank?
