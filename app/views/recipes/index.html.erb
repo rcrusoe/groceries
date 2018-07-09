@@ -12,6 +12,14 @@
       </ul>
     </section>
     <section>
+      <h4>Recently Added</h4>
+      <ul>
+        <% @new_sources.each do |source| %>
+          <li><%= link_to source.name, recipe_source_path(source), class: "simple-link simple-link--underline" %></li>
+        <% end %>
+      </ul>
+    </section>
+    <section>
       <h4>Diets</h4>
       <ul>
         <li><%= link_to "Gluten-Free", recipes_search_path(term: "gluten-free"), class: "simple-link simple-link--underline" %></li>
