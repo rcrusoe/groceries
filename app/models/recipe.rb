@@ -14,7 +14,7 @@ class Recipe < ApplicationRecord
   validates_length_of :ingredients_array, minimum: 1, if: :scrape_recipe
   validates_presence_of :name, if: :scrape_recipe
 
-  paginates_per 20
+  paginates_per 24
 
   extend FriendlyId
   friendly_id :name, use: :slugged
