@@ -32,7 +32,7 @@
       <% unless @already_added %>
         <%= link_to "Add To Grocery List", add_to_list_recipe_path(@recipe, redirect_url: add_to_list_recipe_path(@recipe)), class: "simple-link simple-link--primary" %>
       <% end %>
-      <a itemprop="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" href="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" class="simple-link simple-link--secondary">View Recipe</a>
+      <a itemprop="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" href="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" class="simple-link simple-link--secondary" target="_blank">View Recipe</a>
       <% if current_user && @already_added %>
         <%= link_to "My Grocery List (#{@ingredient_count})", "/groceries", class: "simple-link simple-link--background" %>
         <%= link_to "Remove From Grocery List", remove_from_list_recipe_path(@meal_plan, redirect_url: remove_from_list_recipe_path(@recipe)), class: "simple-link simple-link--background" %>
