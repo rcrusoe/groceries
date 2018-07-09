@@ -104,7 +104,7 @@ class Recipe < ApplicationRecord
 
   def save_image_to_s3(i, agent)
     slug = self.name.parameterize
-    if i[0] === "/"
+    if i[0] === "/" && i[1] === "/"
       i = "https:" + i
     end
     agent.get(i).save "tmp/cache/assets/images/#{slug}.jpg"
