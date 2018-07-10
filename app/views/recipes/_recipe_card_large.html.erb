@@ -1,5 +1,5 @@
 <div class="recipe-card-container">
-  <%= link_to recipe_source_recipe_path(recipe_source, recipe, show_source), class: "recipe-card--large" do %>
+  <%= link_to recipe_source_recipe_path(recipe_source, recipe), class: "recipe-card--large" do %>
     <% unless recipe.image_url.blank? %>
       <div class="recipe-card__image" style="background-image: url(<%= recipe.image_url %>)"></div>
     <% end %>
