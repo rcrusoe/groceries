@@ -37,6 +37,11 @@
         <%= link_to "Add To Grocery List", add_to_list_recipe_path(@recipe, redirect_url: add_to_list_recipe_path(@recipe)), class: "simple-link simple-link--primary" %>
       <% end %>
       <a itemprop="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" href="<%= @recipe.link %>?utm_source=recidex.com&utm_medium=referral" class="simple-link simple-link--secondary" target="_blank">View Recipe</a>
+      <% if current_user %>
+        <button href="#" class="simple-link simple-link--secondary" id="add-to-collection-button">Add to Collection</button>
+      <% else %>
+        <%= link_to "Add To Collection", auth_login_path(redirect_url: recipe_source_recipe_path(@recipe.recipe_source, @recipe)), class: "simple-link simple-link--secondary" %>
+      <% end %>
       <% if current_user && @already_added %>
         <%= link_to "My Grocery List (#{@ingredient_count})", "/groceries", class: "simple-link simple-link--background" %>
         <%= link_to "Remove From Grocery List", remove_from_list_recipe_path(@meal_plan, redirect_url: remove_from_list_recipe_path(@recipe)), class: "simple-link simple-link--background" %>
@@ -86,6 +91,9 @@
     </div>
   </div>
 <% end %>
+<% if current_user %>
+  <%= render "shared/add_to_collection_modal", recipe: @recipe %>
+<% end %>
 
 <script type="text/javascript">
   $('#unsave-recipe').on('mouseover', function() {
@@ -95,4 +103,8 @@
   $('#unsave-recipe').on('mouseleave', function() {
     $(this).text("Saved")
   })
+
+  $('.ui.modal')
+    .modal('attach events', '#add-to-collection-button', 'show')
+  ;
 </script>

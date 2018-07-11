@@ -30,7 +30,9 @@ h3 {
 p,
 ol,
 ul,
-td {
+li,
+td,
+button {
   font-family: $font-family;
   font-size: 1.6rem;
   font-weight: $regular;
@@ -57,7 +59,8 @@ a {
   }
 }
 
-a.simple-link {
+a.simple-link,
+button.simple-link {
   color: $gray-4;
   font-size: 1.4rem;
   font-weight: $regular;
@@ -66,10 +69,21 @@ a.simple-link {
   position: relative;
   text-transform: uppercase;
   transition: $transition;
+}
 
-  &:not(:last-of-type) {
-    margin-bottom: 1rem;
+button.simple-link {
+
+  &:hover {
+    cursor: pointer;
   }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.simple-link:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 a.simple-link--underline {
@@ -131,4 +145,12 @@ a.simple-link--background {
   &:hover {
     background: $gray-2;
   }
+}
+
+.simple-link--small {
+  font-size: 1.2rem;
+}
+
+.simple-link--block {
+  width: auto;
 }

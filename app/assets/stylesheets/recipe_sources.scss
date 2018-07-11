@@ -46,6 +46,7 @@
 .recipes-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .recipes-grid .recipe-card-container {

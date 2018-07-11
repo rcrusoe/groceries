@@ -19,6 +19,10 @@
 @import "semantic-ui/elements/icon";
 @import "semantic-ui/elements/input";
 @import "semantic-ui/modules/sidebar";
+@import "semantic-ui/modules/dimmer";
+@import "semantic-ui/modules/transition";
+@import "semantic-ui/modules/modal";
+@import "semantic-ui/modules/dropdown";
 
 html {
   font-size: 62.5%;
@@ -79,6 +83,12 @@ body.pushable {
   }
 }
 
+.nav-avatar img {
+  margin-left: 2rem;
+  height: 4rem;
+  border-radius: 100%;
+}
+
 .nav {
   align-items: center;
   display: flex;
@@ -86,7 +96,16 @@ body.pushable {
   padding: 2rem;
 
   @media (min-width: $desktop) {
-    padding: 3rem 12rem;
+    padding: 2rem 12rem;
+  }
+}
+
+.nav__right {
+  align-items: center;
+  display: flex;
+
+  & > * {
+    white-space: nowrap;
   }
 }
 
@@ -102,6 +121,17 @@ body.pushable {
 
 .nav__right .simple-link:not(:last-of-type) {
   margin-right: 2rem;
+}
+
+.ui.dropdown .menu > .item {
+  padding: 0 !important;
+
+  a {
+    box-sizing: border-box;
+    display: block;
+    padding: 1rem;
+    width: 100%;
+  }
 }
 
 .hero {
@@ -268,7 +298,7 @@ form {
 }
 
 .ui.input > input {
-  border: none;
+  border: 1px solid $gray-2;
   border-radius: $border-radius-s;
   font-size: 1.8rem;
   line-height: 2.6rem;
@@ -399,7 +429,14 @@ button.ui.icon.button {
   top: 2rem;
 }
 
-.like-container {
+.recipe-card--large ~ .remove-from-collection-container {
+  position: absolute;
+  right: 5.5rem;
+  top: 2rem;
+}
+
+.like-container,
+.remove-from-collection-container {
   transition: $transition;
 
   &:hover {
@@ -574,19 +611,18 @@ button.ui.icon.button {
   &:not(:last-of-type) {
     margin-bottom: 4rem;
   }
+}
 
-  .recipe__subheader {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
+.recipe__banner {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
 
-  .recipe__image {
-    background-position: center center;
-    background-size: cover;
-    flex: 0 0 9rem;
-    height: 9rem;
-    margin: 0 1rem 0 0;
-  }
+.recipe__banner .recipe__image {
+  flex: 0 0 9rem;
+  height: 9rem;
+  margin: 0 1rem 0 0;
 }
 
 .ingredient-group--meal-plan .recipe__subheader {

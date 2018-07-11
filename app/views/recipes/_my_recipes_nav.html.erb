@@ -1,4 +1,5 @@
 <div class="my-recipes-nav">
   <%= link_to "#{@likes.count} Favorites", my_recipes_favorites_path, class: "simple-link simple-link--background" %>
   <%= link_to "#{@previously_cooked.count} Previously Cooked", my_recipes_cooked_path, class: "simple-link simple-link--background" %>
+  <%= link_to "#{@my_collections.count} Collections", my_recipes_collections_path, class: "simple-link simple-link--background" %>
 </div>

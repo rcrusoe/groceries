@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619230828) do
+ActiveRecord::Schema.define(version: 20180711141926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collections", force: :cascade do |t|
+    t.string "name"
+    t.string "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_collections_on_slug", unique: true
+  end
+
+  create_table "collections_recipes", id: false, force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "collection_id", null: false
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -89,6 +103,11 @@ ActiveRecord::Schema.define(version: 20180619230828) do
     t.integer "recipe_source_id"
     t.string "slug"
     t.index ["slug"], name: "index_recipes_on_slug", unique: true
+  end
+
+  create_table "recipes_collections", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "collection_id"
   end
 
 end

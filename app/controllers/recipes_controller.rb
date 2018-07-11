@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :likes, only: [:show, :index, :search, :favorites, :cooked, :ingredient]
+  before_action :likes, only: [:show, :index, :search, :favorites, :cooked, :collections, :ingredient]
   before_action :authenticate_user!, only: [:like, :add_to_list]
   before_action :is_admin?, only: [:edit, :update, :destroy]
   after_action :store_location, only: [:show]
@@ -150,6 +150,10 @@ class RecipesController < ApplicationController
   end
 
   def favorites
+    previously_cooked
+  end
+
+  def collections
     previously_cooked
   end
 

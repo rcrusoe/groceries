@@ -1,0 +1,38 @@
+<div class="hero hero--recipe-source">
+  <h1>My Recipes</h1>
+</div>
+<div class="container my-recipes-container">
+  <%= render 'my_recipes_nav' %>
+  <div class="my-recipes__grid">
+    <h2>My Collections</h2>
+    <div class="recipes-grid">
+      <% @my_collections.each do |c| %>
+        <div class="flex-item collection-card">
+          <div class="collection-card__title">
+            <%= link_to c do %>
+              <h3><%= c.name %></h3>
+            <% end %>
+            <%= link_to "All Recipes", c, class: "simpe-link simple-link--underline" %>
+          </div>
+          <% c.recipes.limit(3).each do |recipe| %>
+            <%= link_to recipe_source_recipe_path(recipe.recipe_source, recipe) do %>
+              <div class="recipe__banner">
+                <div class="recipe__image">
+                  <% unless recipe.image_url.blank? %>
+                    <%= image_tag recipe.image_url %>
+                  <% else %>
+                    <%= image_tag "default-landscape.png" %>
+                  <% end %>
+                </div>
+                <div class="recipe__title">
+                  <h4 class="recipe__name"><%= recipe.name %></h4>
+                  <p class="minor"><%= recipe.recipe_source.name %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

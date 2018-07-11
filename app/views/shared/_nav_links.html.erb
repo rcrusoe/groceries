@@ -7,8 +7,25 @@
 <% end %>
 <%= link_to "Import A Recipe", new_recipe_path, class: "simple-link simple-link--background" %>
 <% if current_user %>
-    <%= link_to "My Recipes", my_recipes_favorites_path, class: "simple-link simple-link--background" %>
-    <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background m-hidden" %>
+  <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background m-hidden" %>
+  <div class="ui top right pointing dropdown item nav-avatar">
+    <% if current_user["info"]["image"] %>
+      <%= image_tag current_user["info"]["image"] %>
+    <% else %>
+      <%= image_tag "avatar.svg" %>
+    <% end %>
+    <ul class="menu">
+      <li class="item"><%= link_to "My Recipes", my_recipes_favorites_path, class: "simple-link" %></li>
+      <li class="item"><%= link_to "My Collections", my_recipes_collections_path, class: "simple-link" %></li>
+      <li class="item"><%= link_to "Logout", auth_logout_path, class: "simple-link" %></li>
+    </ul>
+  </div>
 <% else %>
   <%= link_to "Sign In", {controller: "auth0", action: "login", redirect_url: request.original_url }, class: "simple-link simple-link--background" %>
 <% end %>
+
+<script type="text/javascript">
+  $('.ui.dropdown')
+    .dropdown()
+  ;
+</script>

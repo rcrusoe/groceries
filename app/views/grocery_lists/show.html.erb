@@ -18,10 +18,14 @@
   <div id="recipe-grouping" class="grocery-list-section">
     <% @recipe_grouping.each do |recipe, ingreds| %>
       <div class="ingredient-group ingredient-group--meal-plan">
-        <div class="recipe__subheader">
-          <% if recipe.image_url %>
-            <div class="recipe__image" style="background-image: url(<%= recipe.image_url %>)"></div>
-          <% end %>
+        <div class="recipe__banner">
+          <div class="recipe__image">
+            <% unless recipe.image_url.blank? %>
+              <%= image_tag recipe.image_url %>
+            <% else %>
+              <%= image_tag "default-landscape.png" %>
+            <% end %>
+          </div>
           <div>
             <%= link_to recipe_source_recipe_path(recipe.recipe_source_id ,recipe, false) do %>
               <h2><%= recipe.name %></h2>

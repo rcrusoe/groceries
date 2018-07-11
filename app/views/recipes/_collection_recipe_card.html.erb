@@ -1,0 +1,27 @@
+<div class="recipe-card-container">
+  <%= link_to recipe_source_recipe_path(recipe_source, recipe), class: "recipe-card--large" do %>
+    <% unless recipe.image_url.blank? %>
+      <div class="recipe-card__image" style="background-image: url(<%= recipe.image_url %>)"></div>
+    <% else %>
+      <div class="recipe-card__image" style="background-image: url(<%= asset_path 'default-portrait.png' %>) "></div>
+    <% end %>
+    <h3><%= recipe.name %></h3>
+    <% if show_source == true %>
+      <p class="minor"><%= recipe_source.name %></p>
+    <% end %>
+  <% end %>
+  <div class="remove-from-collection-container">
+    <% if current_user && current_user["uid"] === @collection.user_id %>
+      <%= link_to remove_from_collection_path(recipe: recipe, collection: @collection), class: "recipe-card__like like" do %>
+        <i class="trash icon"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="like-container">
+    <% if current_user && @likes.include?(recipe) %>
+      <%= render 'recipes/unlike', recipe: recipe %>
+    <% else %>
+      <%= render 'recipes/like', recipe: recipe %>
+    <% end %>
+  </div>
+</div>

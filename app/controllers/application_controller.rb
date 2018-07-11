@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include GroceryListsHelper
   include RecipesHelper
 
-  before_action :ingredient_count, :popular_sources, :popular_recipes, :common_ingredients, :new_sources
+  before_action :ingredient_count, :popular_sources, :popular_recipes, :common_ingredients, :new_sources, :my_collections
 
   def ingredient_count
     if current_user
@@ -53,5 +53,13 @@ class ApplicationController < ActionController::Base
       .group('grocery_items.id')
       .order('count(recipes.id) DESC')
       .limit(5)
+  end
+
+  def my_collections
+    @collection = Collection.new
+
+    if current_user
+      @my_collections = Collection.where(user_id: current_user["uid"])
+    end
   end
 end

@@ -1,0 +1,26 @@
+<div class="hero hero--recipe">
+  <div class="hero__content">
+    <div class="recipe__header">
+      <h1 itemprop="name"><%= @collection.name.capitalize %></h1>
+    </div>
+  </div>
+</div>
+<div class="container container--recipe">
+  <% if @recipes.first && @recipes.first.image_url %>
+    <div class="recipe__image">
+      <%= image_tag @recipes.first.image_url %>
+    </div>
+  <% end %>
+</div>
+<div class="container">
+  <div class="my-recipes__grid">
+    <div class="recipes-grid">
+      <% @recipes.each do |recipe| %>
+        <%= render 'recipes/collection_recipe_card', recipe: recipe, recipe_source: recipe.recipe_source, show_source: true, remove_from_collection: true %>
+      <% end %>
+    </div>
+  </div>
+  <div class="pagination-wrapper">
+    <%= paginate @recipes, window: 1 %>
+  </div>
+</div>

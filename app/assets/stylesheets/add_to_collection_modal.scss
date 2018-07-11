@@ -1,0 +1,55 @@
+@import 'variables.scss';
+
+.ui.dimmer {
+  padding: 0 !important;
+}
+
+.ui.modal {
+  border-radius: $border-radius-s !important;
+  box-sizing: border-box;
+  margin: 2rem !important;
+  max-width: 65rem;
+  padding: 2rem;
+  width: auto !important;
+}
+
+.recipe__title {
+  width: calc(100% - 10rem);
+}
+
+.recipe__name {
+  font-weight: $regular;
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+
+  @media (min-width: $desktop) {
+    white-space: nowrap;
+  }
+}
+
+.add-to-collection-modal .recipe__banner {
+  align-items: flex-start;
+  margin-bottom: 2rem;
+
+  @media (min-width: $desktop) {
+    align-items: center;
+  }
+}
+
+.add-to-collection-modal .lists h2,
+.add-to-collection-modal .lists p,
+ul.collection-list {
+  margin-bottom: 1rem;
+}
+
+ul.collection-list li {
+  border-bottom: 1px solid $gray-2;
+  padding: 1rem;
+  transition: $transition;
+
+  &:hover {
+    background-color: $gray-2;
+  }
+}

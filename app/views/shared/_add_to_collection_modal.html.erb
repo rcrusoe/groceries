@@ -1,0 +1,59 @@
+<div class="ui modal add-to-collection-modal">
+  <div class="recipe__banner">
+    <div class="recipe__image">
+      <% unless recipe.image_url.blank? %>
+        <%= image_tag recipe.image_url %>
+      <% else %>
+        <%= image_tag "default-landscape.png" %>
+      <% end %>
+    </div>
+    <div class="recipe__title">
+      <h2 class="recipe__name"><%= recipe.name %></h2>
+      <p class="minor"><%= recipe.recipe_source.name %></p>
+    </div>
+  </div>
+  <div class="lists">
+    <% if @my_collections.count > 0 %>
+      <h2>Choose Collection</h2>
+      <ul class="collection-list">
+        <% @my_collections.each do |c| %>
+          <%= link_to add_to_collection_path(recipe: recipe, collection: c), class: "add-to-list-link", remote: true do %>
+            <li><%= c.name %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <h2>Create A Collection</h2>
+      <p>Collections make it easy for you to organize recipes however you'd like. Collect your favorite breakfast recipes, vegetarian recipes, or anything else you'd like!</p>
+    <% end %>
+    <a href="#" class="simple-link simple-link--underline simple-link--small" id="new-collection-link">+ Create New Collection</a>
+    <%= form_with model: @collection, local: true, id: "new-collection-form", class: "d-none" do |form| %>
+      <div class="ui small input">
+        <%= form.text_field :name, placeholder: "Collection name" %>
+      </div>
+      <%= form.hidden_field :recipe, value: recipe.id %>
+      <button class="simple-link simple-link--secondary simple-link--block" type="submit">
+        Add
+      </button>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#new-collection-link').on('click', function(e) {
+    e.preventDefault();
+    $(this).hide();
+    $('#new-collection-form').removeClass('d-none');
+    $('#new-collection-form .ui.input input').focus();
+  })
+
+  $('.ui.modal')
+    .modal('attach events', '.add-to-list-link', 'hide')
+  ;
+
+  $('#new-collection-form').on('submit', function() {
+    $('.ui.modal')
+      .modal('hide')
+    ;
+  })
+</script>

@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
   has_many :likes, :dependent => :destroy
   has_many :ingredients, :dependent => :destroy
   has_many :grocery_items, through: :ingredients
+  has_and_belongs_to_many :collections
 
   accepts_nested_attributes_for :meal_plans
   accepts_nested_attributes_for :likes

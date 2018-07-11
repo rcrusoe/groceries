@@ -14,4 +14,8 @@
 //= require rails-ujs
 //= require turbolinks
 //= require semantic-ui/sidebar
+//= require semantic-ui/modal
+//= require semantic-ui/dimmer
+//= require semantic-ui/transition
+//= require semantic-ui/dropdown
 //= require_tree .
