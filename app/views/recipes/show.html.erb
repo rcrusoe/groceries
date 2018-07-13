@@ -4,7 +4,7 @@
       <h1 itemprop="name"><%= @recipe.name.capitalize %></h1>
     </div>
     <div class="recipe__subheader">
-      <%= link_to @recipe_source.name, @recipe_source, class: "simple-link simple-link--underline" %>
+      <%= link_to @recipe_source.name, @recipe_source, class: "simple-link simple-link--underline simple-link--uppercase" %>
       <div class="like-container">
         <% if current_user && @likes.include?(@recipe) %>
           <%= render 'unlike', recipe: @recipe %>

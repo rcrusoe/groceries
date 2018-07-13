@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/recipes/ingredient/:ingredient" => "recipes#ingredient"
   get '/add-to-collection' => "collections#add_to_collection"
   get '/remove-from-collection' => "collections#remove_from_collection"
+  get '/about' => "pages#about"
 
   resources :recipe_sources, path: :sources do
     resources :recipes

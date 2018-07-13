@@ -67,7 +67,6 @@ button.simple-link {
   letter-spacing: 1px;
   line-height: 2rem;
   position: relative;
-  text-transform: uppercase;
   transition: $transition;
 }
 
@@ -84,6 +83,10 @@ button.simple-link {
 
 .simple-link:not(:last-child) {
   margin-bottom: 1rem;
+}
+
+.nav .simple-link {
+  margin-bottom: 0;
 }
 
 a.simple-link--underline {
@@ -153,4 +156,8 @@ a.simple-link--background {
 
 .simple-link--block {
   width: auto;
+}
+
+.simple-link--uppercase {
+  text-transform: uppercase;
 }
