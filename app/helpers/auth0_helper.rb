@@ -13,7 +13,12 @@ module Auth0Helper
     if user_signed_in?
       @current_user = session[:userinfo]
     else
-      cookies[:redirect_url] = params[:redirect_url]
+      if params[:recipe]
+        # TODO figure out how to pass this nested param through import_path() instead
+        cookies[:redirect_url] = "https://localhost:3000/import?recipe[link]=" + params[:recipe][:link]
+      else
+        cookies[:redirect_url] = params[:redirect_url]
+      end
       redirect_to "/auth/auth0"
     end
   end

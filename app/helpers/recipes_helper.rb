@@ -40,6 +40,13 @@ module RecipesHelper
     end
   end
 
+  def like_this_recipe
+    if current_user
+      like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
+      like.save
+    end
+  end
+
   def recipe_search(term)
     return Recipe.where("name like ?", "%#{term}%")
   end

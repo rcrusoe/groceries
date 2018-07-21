@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :likes, only: [:show, :index, :search, :favorites, :cooked, :collections, :ingredient]
-  before_action :authenticate_user!, only: [:like, :add_to_list]
+  before_action :authenticate_user!, only: [:like, :add_to_list, :import]
   before_action :is_admin?, only: [:edit, :update, :destroy]
   after_action :store_location, only: [:show]
 
@@ -22,6 +22,10 @@ class RecipesController < ApplicationController
     related_recipes(@recipe)
   end
 
+  def import
+    create
+  end
+
   def new
     @recipe = Recipe.new
   end
@@ -29,15 +33,12 @@ class RecipesController < ApplicationController
   def edit
   end
 
-  def create
+  def create(link = nil)
     @recipe = Recipe.where(link: recipe_params[:link]).first
     identify_recipe_source
 
     if @recipe.present? && @recipe_source.present?
-      if current_user
-        like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
-        like.save
-      end
+      like_this_recipe
       redirect_to recipe_source_recipe_path(@recipe_source, @recipe)
     elsif @recipe_source.present?
       @recipe = @recipe_source.recipes.build(params[:recipe].permit(:name, :link, :ingredients, :image_url))
@@ -45,10 +46,7 @@ class RecipesController < ApplicationController
         if @recipe && @recipe.save
           format.html { redirect_to recipe_source_recipe_path(@recipe_source, @recipe), notice: 'Recipe was successfully created.' }
           format.json { render :show, status: :created, location: @recipe }
-          if current_user
-            like = @recipe.likes.where(recipe_id: @recipe.id, user_id: current_user["uid"]).first || @recipe.likes.build(recipe_id: @recipe.id, user_id: current_user["uid"])
-            like.save
-          end
+          like_this_recipe
         else
           recipe_info = {
             pretext: "Someone tried (unsuccessfully) to create a recipe.",
