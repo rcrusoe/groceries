@@ -15,7 +15,7 @@ module Auth0Helper
     else
       if params[:recipe]
         # TODO figure out how to pass this nested param through import_path() instead
-        cookies[:redirect_url] = "https://localhost:3000/import?recipe[link]=" + params[:recipe][:link]
+        cookies[:redirect_url] = "https://recidex.com/import?recipe[link]=" + params[:recipe][:link]
       else
         cookies[:redirect_url] = params[:redirect_url]
       end
