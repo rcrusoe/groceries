@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get "/recipes/ingredient/:ingredient" => "recipes#ingredient"
   get '/add-to-collection' => "collections#add_to_collection"
   get '/remove-from-collection' => "collections#remove_from_collection"
-  get '/about' => "pages#about"
+  get '/about', to: "pages#about"
+  get '/press', to: "pages#press"
   get '/import', to: "recipes#import"
 
   resources :recipe_sources, path: :sources do

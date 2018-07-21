@@ -1,10 +1,11 @@
 @import 'variables.scss';
 
-footer {
+footer.container {
   border-top: 1px solid $gray-2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 8rem;
   padding: 4rem 0;
 
   @media (min-width: $desktop) {
@@ -16,7 +17,7 @@ footer {
     @media (min-width: $desktop) {
       flex: 25%;
       width: calc(25% - 2.25rem);
-      
+
       &:not(:last-of-type) {
         margin-right: 3rem;
       }
