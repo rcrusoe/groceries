@@ -6,14 +6,15 @@ class RecipeSourcesController < ApplicationController
   # GET /recipe_sources
   # GET /recipe_sources.json
   def index
-    @recipe_sources = RecipeSource.all
+    @recipe_sources = RecipeSource.left_joins(recipes: :likes)
+      .group('recipe_sources.id')
+      .order('count(likes.id) DESC')
   end
 
   # GET /recipe_sources/1
   # GET /recipe_sources/1.json
   def show
     @recipes = @recipe_source.recipes.page params[:page]
-    @source_like_count = Like.where('recipe_id IN (?)', @recipe_source.recipes.select { |r| r.id }).count
   end
 
   # GET /recipe_sources/new

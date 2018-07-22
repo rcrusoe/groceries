@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/remove-from-collection' => "collections#remove_from_collection"
   get '/about', to: "pages#about"
   get '/press', to: "pages#press"
+  get '/for-blogs', to: "pages#for_blogs"
   get '/import', to: "recipes#import"
 
   resources :recipe_sources, path: :sources do

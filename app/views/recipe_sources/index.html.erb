@@ -1,0 +1,19 @@
+<div class="hero hero--text">
+  <h1>Recipe Leaderboard</h1>
+</div>
+<div class="container container--text">
+  <table>
+    <tr>
+      <th>Recipe Source</th>
+      <th>Recipes</th>
+      <th>Likes</th>
+    </tr>
+    <% @recipe_sources.each do |source| %>
+      <tr>
+        <td><%= link_to source.name, source, class: "simple-link simple-link--underline" %></td>
+        <td><%= source.like_count %></td>
+        <td><%= source.recipes.count %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

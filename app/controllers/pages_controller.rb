@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def press
   end
+
+  def for_blogs
+  end
 end

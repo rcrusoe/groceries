@@ -15,4 +15,8 @@ class RecipeSource < ApplicationRecord
       self.domain = s.host
     end
   end
+
+  def like_count
+    Like.where('recipe_id IN (?)', self.recipes.select { |r| r.id }).count
+  end
 end

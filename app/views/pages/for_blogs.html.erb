@@ -1,0 +1,32 @@
+<div class="hero hero--text">
+  <h1>Using Recidex On Your Blog</h1>
+</div>
+<div class="container container--text" id="for-blogs-page">
+  <h2>Add the Recidex Button</h2>
+  <p>Adding the Recidex button to your recipe pages allows your readers to save your recipes to their recipe collections on Recidex. They'll never lose your recipe again, and they'll return to your site each time they are ready to cook.</p>
+  <%= image_tag "recidex-button-collapsed" %>
+  <%= image_tag "recidex-button-expanded" %>
+  <h3>Step 1: Does Recidex support your site?</h3>
+  <p>Recidex currently supports 100+ different blogs. If your site is <%= link_to "on this list", recipe_sources_path, class: "simple-link simple-link--underline" %>, then you're ready to continue to step 2.</p>
+  <p>If we don't currently support your site, <%= link_to "submit a link", new_recipe_path, class: "simple-link simple-link--underline" %> to one of your recipes, and we'll add support for your site within 48 hours.</p>
+  <h3>Step 2: Add this code to your site.</h3>
+  <p>Copy the code below and paste it on your site wherever you'd like the button to appear.</p>
+  <div class="code-snippet-block">
+    <code class="code-snippet" id="recidex-button-code">
+      &lt;a href="//recidex.com" id="recidex-button"&gt;&lt;/a&gt;&lt;script src="https://www.recidex.com/js/button.js"&gt;&lt;/script&gt;
+    </code>
+    <a href="#" class="simple-link simple-link--primary" id="copy-to-clipboard">Copy</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#copy-to-clipboard').on('click', function(e) {
+    e.preventDefault();
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($('#recidex-button-code').text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $('#copy-to-clipboard').text('Copied 👍')
+  })
+</script>

@@ -3,13 +3,12 @@
   <div class="hero--recipe-source__right">
     <a href="<%= @recipe_source.link %>?utm_source=recidex.com&utm_medium=referral" target="_blank" class="simple-link simple-link--secondary">Visit Website</a>
     <div class="source-stat">
-      <p class="source-stat__number"><%= @source_like_count %></p>
+      <p class="source-stat__number"><%= @recipe_source.like_count %></p>
       <p class="source-state__label">likes</p>
     </div>
     <div class="source-stat">
       <p class="source-stat__number"><%= @recipe_source.recipes.count %></p>
       <p class="source-state__label">recipes</p>
-    </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,29 @@
+@import 'variables.scss';
+
+.code-snippet-block {
+  align-items: center;
+  display: flex;
+  width: 100%;
+
+  .code-snippet {
+    background-color: $gray-2;
+    line-height: 2rem;
+    overflow: hidden;
+    padding: 1rem 0 1rem 1rem;
+    white-space: nowrap;
+  }
+
+  #copy-to-clipboard {
+    white-space: nowrap;
+    width: auto;
+  }
+}
+
+#for-blogs-page h2 {
+  margin-bottom: 2rem;
+}
+
+#for-blogs-page img {
+  height: 6rem;
+  margin-right: 2rem;
+}
