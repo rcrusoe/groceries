@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include GroceryListsHelper
   include RecipesHelper
 
-  before_action :ingredient_count, :popular_sources, :popular_recipes, :common_ingredients, :new_sources, :my_collections
+  before_action :ingredient_count, :popular_sources, :popular_recipes, :new_sources, :my_collections
 
   def ingredient_count
     if current_user
@@ -45,13 +45,6 @@ class ApplicationController < ActionController::Base
     @new_sources = RecipeSource
       .all
       .order("created_at DESC")
-      .limit(5)
-  end
-
-  def common_ingredients
-    @common_ingredients = GroceryItem.joins(:recipes)
-      .group('grocery_items.id')
-      .order('count(recipes.id) DESC')
       .limit(5)
   end
 

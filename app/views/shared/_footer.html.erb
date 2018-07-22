@@ -1,5 +1,15 @@
 <footer class="container">
   <section>
+    <h4>Connect</h4>
+    <ul>
+      <li><%= link_to "About Recidex", about_path, class: "simple-link simple-link--underline" %></li>
+      <li><%= link_to "Press", press_path, class: "simple-link simple-link--underline" %></li>
+      <li><%= link_to "Facebook", "https://www.facebook.com/recidex", class: "simple-link simple-link--underline" %></li>
+      <li><%= link_to "Pinterest", "https://www.pinterest.com/recidex/", class: "simple-link simple-link--underline" %></li>
+      <li><%= link_to "Twitter", "https://twitter.com/my_recidex", class: "simple-link simple-link--underline" %></li>
+    </ul>
+  </section>
+  <section>
     <h4>Most Popular Blogs</h4>
     <ul>
       <% @most_popular_sources.each do |source| %>
@@ -13,24 +23,6 @@
       <% @most_popular_recipes.each do |recipe| %>
         <li><%= link_to recipe.name, recipe_source_recipe_path(recipe.recipe_source, recipe), class: "simple-link simple-link--underline" %></li>
       <% end %>
-    </ul>
-  </section>
-  <section>
-    <h4>Common Ingredients</h4>
-    <ul>
-      <% @common_ingredients.each do |i| %>
-        <li><%= link_to i.name, "/recipes/ingredient/#{i.name}", class: "simple-link simple-link--underline" %></li>
-      <% end %>
-    </ul>
-  </section>
-  <section>
-    <h4>Connect</h4>
-    <ul>
-      <li><%= link_to "About Recidex", about_path, class: "simple-link simple-link--underline" %></li>
-      <li><%= link_to "Press", press_path, class: "simple-link simple-link--underline" %></li>
-      <li><%= link_to "Facebook", "https://www.facebook.com/recidex", class: "simple-link simple-link--underline" %></li>
-      <li><%= link_to "Pinterest", "https://www.pinterest.com/recidex/", class: "simple-link simple-link--underline" %></li>
-      <li><%= link_to "Twitter", "https://twitter.com/my_recidex", class: "simple-link simple-link--underline" %></li>
     </ul>
   </section>
 </footer>
