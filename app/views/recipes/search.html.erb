@@ -7,11 +7,6 @@
         <h2>Search over 5,000 recipes</h2>
       <% end %>
       <%= render 'search_form' %>
-      <div class="search-by-term__quicklinks">
-        <% @sample_search_terms.sort_by!{ |e| e.downcase }.each do |term| %>
-          <%= link_to term, recipes_search_path(term: term) %>
-        <% end %>
-      </div>
     </div>
   </div>
   <div class="search-results">

@@ -61,29 +61,4 @@ module RecipesHelper
     end
     @recipe_source = RecipeSource.where(domain: domain).first
   end
-
-  def sample_search_terms
-    @sample_search_terms = [
-      "ice cream",
-      "breakfast",
-      "pancakes",
-      "chicken",
-      "cookies",
-      "meal prep",
-      "soup",
-      "salad",
-      "heathy",
-      "lasagna",
-      "quinoa",
-      "steak",
-      "mediterranean",
-      "italian",
-      "thai",
-      "curry",
-      "chili",
-      "vegetarian",
-      "vegan",
-      "gluten-free"
-    ]
-  end
 end

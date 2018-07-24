@@ -8,7 +8,7 @@
 <%= link_to "Import A Recipe", new_recipe_path, class: "simple-link simple-link--background simple-link--uppercase" %>
 <% if current_user %>
   <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background simple-link--uppercase m-hidden" %>
-  <div class="ui top right pointing dropdown item nav-avatar">
+  <div class="ui top right pointing dropdown item nav-avatar m-hidden">
     <% if current_user["info"]["image"] %>
       <%= image_tag current_user["info"]["image"] %>
     <% else %>
