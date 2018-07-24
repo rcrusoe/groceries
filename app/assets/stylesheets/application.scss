@@ -413,9 +413,8 @@ button.ui.icon.button {
   }
 }
 
-#related-recipes {
-  border: 2px solid $gray-4;
-  border-radius: $border-radius-s;
+.related-recipes {
+  background-color: $yellow;
   box-sizing: border-box;
   padding: 2rem 0;
 
@@ -424,26 +423,9 @@ button.ui.icon.button {
     margin: 0 2rem;
   }
 
-  .recipe-carousel {
-    padding: 0 2rem;
-  }
-
   .simple-link {
     display: inline-block;
     margin-top: 1rem;
-  }
-}
-
-.recipe-carousel {
-  display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  & > * {
-    margin-right: 2rem;
-    min-width: 225px;
   }
 }
 
