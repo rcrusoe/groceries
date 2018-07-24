@@ -29,7 +29,6 @@
 
   @media (min-width: $desktop) {
     flex: calc(33% - 2rem);
-    max-width: calc(33% - 2rem);
 
     &:not(:nth-of-type(3n)) {
       margin-right: 2rem;
