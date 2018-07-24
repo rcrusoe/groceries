@@ -100,22 +100,35 @@ body.pushable {
   }
 }
 
+.nav__left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+}
+
+.nav__left form {
+  flex: 1;
+  margin-left: 2rem;
+
+  .input {
+    border: 1px solid $gray-2;
+    margin-right: 0;
+  }
+}
+
+.nav__left {
+  .ui.large.icon.input {
+    display: flex;
+    margin-right: 4rem;
+  }
+}
+
 .nav__right {
   align-items: center;
   display: flex;
 
   & > * {
     white-space: nowrap;
-  }
-}
-
-.nav__right form {
-  display: inline;
-  margin-right: 2rem;
-
-  .input {
-    border: 1px solid $gray-2;
-    margin-right: 0;
   }
 }
 
