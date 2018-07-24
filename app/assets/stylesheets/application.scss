@@ -447,6 +447,12 @@ button.ui.icon.button {
   width: calc(25% - 2rem);
   margin-top: 2rem;
   position: relative;
+
+  &:hover {
+    .recipe-card__image {
+      transform: scale(1.02);
+    }
+  }
 }
 
 .recipe-card--large ~ .like-container {
@@ -490,6 +496,7 @@ button.ui.icon.button {
     height: 27.5rem;
     overflow: hidden;
     margin: 0;
+    transition: $transition;
 
     @media (min-width: $desktop) {
       width: 100%;
