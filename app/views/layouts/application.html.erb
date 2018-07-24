@@ -69,7 +69,7 @@
           <%= form_tag(recipes_search_path, :method => "get", id: "search-form", class: "m-hidden") do %>
             <div class="ui large icon input">
               <i class="search icon"></i>
-              <%= text_field_tag :term, params[:term], placeholder: "Search for an ingredient or name" %>
+              <%= text_field_tag :term, params[:term], placeholder: "Search for an ingredient or recipe" %>
             </div>
           <% end %>
         </div>
