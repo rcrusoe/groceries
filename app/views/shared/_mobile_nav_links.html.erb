@@ -1,0 +1,10 @@
+<%= link_to "Search Recipes", recipes_search_path, class: "simple-link simple-link--background simple-link--uppercase" %>
+<%= link_to "Import A Recipe", new_recipe_path, class: "simple-link simple-link--background simple-link--uppercase" %>
+<% if current_user %>
+  <%= link_to "Groceries(#{@ingredient_count})", groceries_path, class: "simple-link simple-link--background simple-link--uppercase" %>
+  <%= link_to "My Recipes", my_recipes_favorites_path, class: "simple-link simple-link--uppercase" %>
+  <%= link_to "My Collections", my_recipes_collections_path, class: "simple-link simple-link--uppercase" %>
+  <%= link_to "Logout", auth_logout_path, class: "simple-link simple-link--uppercase" %>
+<% else %>
+  <%= link_to "Sign In", {controller: "auth0", action: "login", redirect_url: request.original_url }, class: "simple-link simple-link--background simple-link--uppercase" %>
+<% end %>
