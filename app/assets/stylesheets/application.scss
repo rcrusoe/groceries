@@ -24,6 +24,19 @@
 @import "semantic-ui/modules/modal";
 @import "semantic-ui/modules/dropdown";
 
+.sidebar {
+  margin-right: 2rem;
+}
+
+#feedback-request {
+  background-color: $gray-2;
+  padding: 2rem;
+
+  & > h4 {
+    margin-top: 0;
+  }
+}
+
 html {
   font-size: 62.5%;
 }
