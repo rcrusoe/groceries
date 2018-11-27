@@ -1,6 +1,6 @@
 class RecipeSourcesController < ApplicationController
   before_action :set_recipe_source, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin?, except: [:show]
+  before_action :is_admin?, except: [:show, :index]
   before_action :likes, only: [:show]
 
   # GET /recipe_sources
